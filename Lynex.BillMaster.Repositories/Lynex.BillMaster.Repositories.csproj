@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{11081FED-34B2-4709-9F93-019E0F92E6D0}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WCC.Repositories</RootNamespace>
+    <AssemblyName>WCC.Repositories</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="FluentNHibernate, Version=2.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentNHibernate.2.0.1.0\lib\net40\FluentNHibernate.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Iesi.Collections, Version=4.0.0.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Iesi.Collections.4.0.0.4000\lib\net40\Iesi.Collections.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NHibernate, Version=4.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <HintPath>..\packages\NHibernate.4.0.0.4000\lib\net40\NHibernate.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BackendService\DatabaseService.cs" />
+    <Compile Include="Interface\Repositories\IWCCMainRepository.cs" />
+    <Compile Include="TestResultRepositories\GetCurrentTestResultByUser.cs" />
+    <Compile Include="WCCMainRepository.cs" />
+    <Compile Include="DefaultDataFactory\DefaultDataFactoryBase.cs" />
+    <Compile Include="DefaultDataFactory\PermissionRoleFactory.cs" />
+    <Compile Include="DefaultDataFactory\SettingFactory.cs" />
+    <Compile Include="Interface\Repositories\IBaseRepository.cs" />
+    <Compile Include="FluentNHibernate\NHibernateHelper.cs" />
+    <Compile Include="FluentNHibernate\SqlStatementInterceptor.cs" />
+    <Compile Include="BackendService\IDatabaseService.cs" />
+    <Compile Include="Helpers\StringHelper.cs" />
+    <Compile Include="Interface\Repositories\ITestResultRepository.cs" />
+    <Compile Include="Interface\Repositories\IDosageRepository.cs" />
+    <Compile Include="Interface\IQuery.cs" />
+    <Compile Include="Interface\Repositories\ISystemRepository.cs" />
+    <Compile Include="Interface\Repositories\IUserRepository.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="DosageRepositories\GetCurrentDosageByUser.cs" />
+    <Compile Include="TestResultRepositories\GetTestResultsByUser.cs" />
+    <Compile Include="UserRepositories\GetUserByMedWayId.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WCC.Model\WCC.Model.csproj">
+      <Project>{618ef8c4-376f-4d94-ac92-d336c2041c58}</Project>
+      <Name>WCC.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
