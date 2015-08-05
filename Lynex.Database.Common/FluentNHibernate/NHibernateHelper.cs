@@ -37,7 +37,7 @@ namespace Lynex.Database.Common.FluentNHibernate
                     MsSqlConfiguration.MsSql2012
                         .ConnectionString(q => q.FromConnectionStringWithKey(connectionStringKey)))
                 .Mappings(m =>
-                    m.FluentMappings.AddFromAssembly(assembly/*Assembly.Load("WCC.Model")*/));
+                    m.FluentMappings.AddFromAssembly(assembly));
 #if DEBUG || TRACE
             configuration.ExposeConfiguration(SetInterceptors);
 #endif

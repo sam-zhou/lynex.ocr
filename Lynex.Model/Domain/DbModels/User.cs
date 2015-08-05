@@ -15,7 +15,9 @@ namespace Lynex.Model.Domain.DbModels
 
         public virtual bool Active { get; set; }
 
-        public virtual List<User> Users { get; set; } 
+        public virtual Address BillingAddress { get; set; }
+
+        public virtual Address PostalAddress { get; set; }
 
         public virtual DateTime CreatedAt { get; set; }
 

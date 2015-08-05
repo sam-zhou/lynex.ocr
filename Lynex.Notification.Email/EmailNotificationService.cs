@@ -18,14 +18,14 @@ namespace Lynex.Notification.Email
     {
         private readonly IEmailNotificationSettings _setting;
 
-        public EmailNotificationService(IWCCSettings setting)
+        public EmailNotificationService(ILynexSettings setting)
             : base(setting.EmailFormatType)
         {
             _setting = setting;
         }
 
 
-        public override bool SendNotification(TestResult testResult, User receiver)
+        public override bool SendNotification(User receiver)
         {
             var item = FormatProvider.GetFormattedModel(testResult, receiver);
 

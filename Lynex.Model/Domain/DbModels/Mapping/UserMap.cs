@@ -15,7 +15,9 @@ namespace Lynex.Model.Domain.DbModels.Mapping
             //HasMany(q => q.Notifications).KeyColumn("UserId").ForeignKeyConstraintName("Notification_User_Id");
             HasOne(q => q.UserChallenge).ForeignKey("User_UserChallenge_Id").Cascade.All();
             References(q => q.PermissionRole).Column("PermissionRoleId").ForeignKey("User_Permission_Id");
-            HasManyToMany(m => m.Users).ParentKeyColumn("UserId").ForeignKeyConstraintNames("User_Patient_Id", "Patient_User_Id").ChildKeyColumn("PatientId").Table("UserPatient").Cascade.SaveUpdate();
+            References(q => q.BillingAddress).Column("BillingAddressId").ForeignKey("User_BillingAddress_Id");
+            References(q => q.PostalAddress).Column("PostalAddressId").ForeignKey("User_PostalAddress_Id");
+            //HasManyToMany(m => m.Users).ParentKeyColumn("UserId").ForeignKeyConstraintNames("User_Patient_Id", "Patient_User_Id").ChildKeyColumn("PatientId").Table("UserPatient").Cascade.SaveUpdate();
         }
     }
 }

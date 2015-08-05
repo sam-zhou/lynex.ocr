@@ -52,12 +52,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Domain\DbModels\Address.cs" />
     <Compile Include="Domain\DbModels\BaseEntity.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Domain\DbModels\Billing.cs" />
+    <Compile Include="Domain\DbModels\Bill.cs" />
     <Compile Include="Domain\DbModels\BillingCompany.cs" />
+    <Compile Include="Domain\DbModels\EnumTable.cs" />
+    <Compile Include="Domain\DbModels\Mapping\BillTypeMap.cs" />
+    <Compile Include="Domain\DbModels\Mapping\BillMap.cs" />
     <Compile Include="Domain\DbModels\Mapping\BillingCompanyMap.cs" />
+    <Compile Include="Domain\DbModels\Mapping\AddressMap.cs" />
     <Compile Include="Domain\DbModels\Setting.cs" />
     <Compile Include="Domain\SystemSetting.cs" />
     <Compile Include="Domain\DbModels\Interface\IBaseEntity.cs" />
@@ -65,6 +70,7 @@
     <Compile Include="Domain\DbModels\UserChallenge.cs" />
     <Compile Include="Domain\DbModels\User.cs" />
     <Compile Include="Domain\DbModels\Notification.cs" />
+    <Compile Include="Enum\Mapable\BillType.cs" />
     <Compile Include="Enum\FormatType.cs" />
     <Compile Include="Enum\NotificationType.cs" />
     <Compile Include="Enum\DaysOfWeek.cs" />
@@ -80,7 +86,7 @@
     <Compile Include="Settings\Interface\INotificationSettings.cs" />
     <Compile Include="Settings\Interface\ISMSNotificationSettings.cs" />
     <Compile Include="Settings\Interface\IEmailNotificationSettings.cs" />
-    <Compile Include="Settings\Interface\IWCCSettings.cs" />
+    <Compile Include="Settings\Interface\ILynexSettings.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
