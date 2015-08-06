@@ -1,4 +1,5 @@
-﻿using NHibernate.Type;
+﻿using Lynex.Common.Model.DbModel.Mapping;
+using NHibernate.Type;
 
 namespace Lynex.BillMaster.Model.Domain.DbModels.Mapping
 {
@@ -6,7 +7,7 @@ namespace Lynex.BillMaster.Model.Domain.DbModels.Mapping
     {
         public UserChallengeMap()
         {
-            //References(x => x.User).Unique().Column("UserId");
+            References(x => x.User).ForeignKey("UserChallenge_User_Id").Unique().Column("UserId").Cascade.All();
             Map(q => q.TryCount).Not.Nullable().Default("0");
             Map(q => q.Challenge).Length(64).Not.Nullable();
             Map(q => q.CreatedAt).CustomType<UtcDateTimeType>().Not.Nullable().Default("getDate()");

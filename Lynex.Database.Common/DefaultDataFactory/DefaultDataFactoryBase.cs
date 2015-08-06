@@ -2,7 +2,7 @@
 using System.Reflection;
 using NHibernate;
 
-namespace Lynex.Database.Common.DefaultDataFactory
+namespace Lynex.Common.Database.DefaultDataFactory
 {
     public interface IDefaultDataFactory
     {

@@ -2,12 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Reflection.Emit;
-using System.Text;
-using System.Threading.Tasks;
-using Lynex.Common.Model;
 
-namespace Lynex.Common
+namespace Lynex.Common.Extension
 {
     public static class AssemblyHelper
     {

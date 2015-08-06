@@ -1,4 +1,6 @@
-﻿namespace Lynex.BillMaster.Model.Domain.DbModels.Mapping
+﻿using Lynex.Common.Model.DbModel.Mapping;
+
+namespace Lynex.BillMaster.Model.Domain.DbModels.Mapping
 {
     public class AddressMap : BaseMap<Address>
     {

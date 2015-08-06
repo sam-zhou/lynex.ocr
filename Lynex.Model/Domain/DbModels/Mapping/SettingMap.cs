@@ -1,4 +1,5 @@
 ﻿using System;
+using Lynex.Common.Model.DbModel.Mapping;
 
 namespace Lynex.BillMaster.Model.Domain.DbModels.Mapping
 {

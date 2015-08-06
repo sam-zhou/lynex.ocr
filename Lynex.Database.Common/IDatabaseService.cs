@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Lynex.BillMaster.Model.Domain.DbModels.Interface;
+using Lynex.Common.Model.DbModel.Interface;
 
-namespace Lynex.Database.Common
+namespace Lynex.Common.Database
 {
     public interface IDatabaseService
     {

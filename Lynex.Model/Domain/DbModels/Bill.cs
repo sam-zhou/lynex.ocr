@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using Lynex.BillMaster.Model.Enum.Mapable;
+using Lynex.Common.Model.DbModel;
 
 namespace Lynex.BillMaster.Model.Domain.DbModels
 {

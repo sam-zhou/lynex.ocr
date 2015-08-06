@@ -1,4 +1,5 @@
-﻿using NHibernate.Type;
+﻿using Lynex.Common.Model.DbModel.Mapping;
+using NHibernate.Type;
 
 namespace Lynex.BillMaster.Model.Domain.DbModels.Mapping
 {

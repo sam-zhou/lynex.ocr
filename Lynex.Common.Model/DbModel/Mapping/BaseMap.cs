@@ -1,7 +1,7 @@
 ﻿using FluentNHibernate.Mapping;
-using Lynex.BillMaster.Model.Domain.DbModels.Interface;
+using Lynex.Common.Model.DbModel.Interface;
 
-namespace Lynex.BillMaster.Model.Domain.DbModels.Mapping
+namespace Lynex.Common.Model.DbModel.Mapping
 {
     public class BaseMap<TEntity> : ClassMap<TEntity> where TEntity: class, IBaseEntity
     {

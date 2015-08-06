@@ -1,7 +1,7 @@
 ﻿using System;
-using Lynex.BillMaster.Model.Domain.DbModels.Interface;
+using Lynex.Common.Model.DbModel.Interface;
 
-namespace Lynex.BillMaster.Model.Domain.DbModels
+namespace Lynex.Common.Model.DbModel
 {
     public class EnumTable<T> : IBaseEntity<T> where T: struct ,IConvertible
     {

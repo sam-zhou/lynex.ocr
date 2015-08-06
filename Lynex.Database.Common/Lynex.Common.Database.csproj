@@ -71,9 +71,9 @@
       <Project>{b57351ec-8147-4fc7-b57d-708da025d692}</Project>
       <Name>Lynex.Common.Model</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Lynex.Common\Lynex.Common.csproj">
+    <ProjectReference Include="..\Lynex.Common\Lynex.Common.Extension.csproj">
       <Project>{dc5a98a7-e6de-41dc-aaf8-ff08e24827b1}</Project>
-      <Name>Lynex.Common</Name>
+      <Name>Lynex.Common.Extension</Name>
     </ProjectReference>
     <ProjectReference Include="..\Lynex.Model\Lynex.BillMaster.Model.csproj">
       <Project>{618ef8c4-376f-4d94-ac92-d336c2041c58}</Project>

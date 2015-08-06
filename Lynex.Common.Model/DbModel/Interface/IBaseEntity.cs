@@ -1,4 +1,4 @@
-﻿namespace Lynex.BillMaster.Model.Domain.DbModels.Interface
+﻿namespace Lynex.Common.Model.DbModel.Interface
 {
     public interface IBaseEntity
     {

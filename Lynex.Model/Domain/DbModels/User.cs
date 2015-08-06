@@ -1,4 +1,5 @@
 ﻿using System;
+using Lynex.Common.Model.DbModel;
 
 namespace Lynex.BillMaster.Model.Domain.DbModels
 {
@@ -10,6 +11,10 @@ namespace Lynex.BillMaster.Model.Domain.DbModels
 
         public virtual string Mobile { get; set; }
 
+        public virtual string Salt { get; set; }
+
+        public virtual string Hash { get; set; }
+
         public virtual bool IsVerified { get; set; }
 
         public virtual bool Active { get; set; }
@@ -17,6 +22,8 @@ namespace Lynex.BillMaster.Model.Domain.DbModels
         public virtual Address BillingAddress { get; set; }
 
         public virtual Address PostalAddress { get; set; }
+
+        public virtual Wallet Wallet { get; set; }
 
         public virtual DateTime CreatedAt { get; set; }
 

@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using NHibernate;
 
-namespace Lynex.Database.Common.FluentNHibernate
+namespace Lynex.Common.Database.FluentNHibernate
 {
     internal class SqlStatementInterceptor : EmptyInterceptor
     {

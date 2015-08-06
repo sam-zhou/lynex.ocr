@@ -7,8 +7,8 @@
     <ProjectGuid>{DC5A98A7-E6DE-41DC-AAF8-FF08E24827B1}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Lynex.Common</RootNamespace>
-    <AssemblyName>Lynex.Common</AssemblyName>
+    <RootNamespace>Lynex.Common.Extension</RootNamespace>
+    <AssemblyName>Lynex.Common.Extension</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

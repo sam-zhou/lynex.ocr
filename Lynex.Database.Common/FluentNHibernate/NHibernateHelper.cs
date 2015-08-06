@@ -4,15 +4,15 @@ using System.Linq;
 using System.Reflection;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
-using Lynex.BillMaster.Model.Domain.DbModels.Mapping;
-using Lynex.Common;
+using Lynex.Common.Database.DefaultDataFactory;
+using Lynex.Common.Extension;
 using Lynex.Common.Model;
-using Lynex.Database.Common.DefaultDataFactory;
+using Lynex.Common.Model.DbModel.Mapping;
 using NHibernate;
 using NHibernate.Cfg;
 using NHibernate.Tool.hbm2ddl;
 
-namespace Lynex.Database.Common.FluentNHibernate
+namespace Lynex.Common.Database.FluentNHibernate
 {
     internal static class NHibernateHelper
     {

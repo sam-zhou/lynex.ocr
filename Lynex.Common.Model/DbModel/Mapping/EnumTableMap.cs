@@ -1,7 +1,7 @@
 ﻿using System;
 using FluentNHibernate.Mapping;
 
-namespace Lynex.BillMaster.Model.Domain.DbModels.Mapping
+namespace Lynex.Common.Model.DbModel.Mapping
 {
     public abstract class EnumTableMap<T> : ClassMap<EnumTable<T>> where T: struct , IConvertible
     {

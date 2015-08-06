@@ -3,7 +3,7 @@ using System.Reflection;
 using Lynex.BillMaster.Model.Domain.DbModels;
 using NHibernate;
 
-namespace Lynex.Database.Common.DefaultDataFactory
+namespace Lynex.Common.Database.DefaultDataFactory
 {
     internal class SettingFactory : DefaultDataFactoryBase<Setting>
     {

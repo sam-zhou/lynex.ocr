@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using NHibernate;
 
-namespace Lynex.Database.Common
+namespace Lynex.Common.Database
 {
     public interface IGetQuery<out TEntity> where TEntity : class
     {

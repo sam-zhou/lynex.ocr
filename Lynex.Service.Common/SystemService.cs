@@ -1,5 +1,5 @@
-﻿using Lynex.Common.Service.Interface;
-using Lynex.Database.Common;
+﻿using Lynex.Common.Database;
+using Lynex.Common.Service.Interface;
 
 namespace Lynex.Common.Service
 {

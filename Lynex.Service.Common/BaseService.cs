@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Lynex.Database.Common;
+using Lynex.Common.Database;
 
 namespace Lynex.Common.Service
 {

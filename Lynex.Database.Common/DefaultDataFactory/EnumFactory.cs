@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using Lynex.BillMaster.Model.Domain.DbModels;
-using Lynex.BillMaster.Model.Domain.DbModels.Interface;
-using Lynex.Common;
+using Lynex.Common.Extension;
+using Lynex.Common.Model.DbModel;
+using Lynex.Common.Model.DbModel.Interface;
 using NHibernate;
 
-namespace Lynex.Database.Common.DefaultDataFactory
+namespace Lynex.Common.Database.DefaultDataFactory
 {
     internal class EnumFactory : DefaultDataFactoryBase<IBaseEntity>
     {

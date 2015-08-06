@@ -1,5 +1,6 @@
 ﻿using FluentNHibernate.Mapping;
 using Lynex.BillMaster.Model.Enum;
+using Lynex.Common.Model.DbModel.Mapping;
 using NHibernate.Type;
 
 namespace Lynex.BillMaster.Model.Domain.DbModels.Mapping

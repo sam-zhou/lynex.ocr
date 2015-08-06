@@ -4,8 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Lynex.BillMaster.Model.Domain.DbModels;
+using Lynex.BillMaster.Repository.BillRepo;
+using Lynex.BillMaster.Service.Interface;
+using Lynex.Common.Database;
 using Lynex.Common.Service;
-using Lynex.Database.Common;
 
 namespace Lynex.BillMaster.Service
 {
@@ -17,7 +19,7 @@ namespace Lynex.BillMaster.Service
 
         public IEnumerable<Bill> GetBillsForUser(User user)
         {
-            return DatabaseService.GetAll<Bill>();
+            return DatabaseService.Get(new GetBillsByUser(user.Id));
         }
 
         public Bill CreateBill(Bill bill, BillingCompany company, User user)

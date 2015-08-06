@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Lynex.BillMaster.Model.Domain.DbModels.Interface;
+using Lynex.Common.Model.DbModel.Interface;
 
-namespace Lynex.BillMaster.Model.Domain.DbModels
+namespace Lynex.Common.Model.DbModel
 {
     public abstract class BaseEntity : IBaseEntity
     {
@@ -12,9 +12,9 @@ namespace Lynex.BillMaster.Model.Domain.DbModels
         {
             foreach (var property in GetType().GetProperties())
             {
-                if (property.PropertyType.IsGenericType)
+                if (property.SetMethod != null)
                 {
-                    if (property.PropertyType.GetInterface(typeof(IEnumerable<>).FullName) != null)
+                    if (property.PropertyType.IsGenericType && property.PropertyType.GetInterface(typeof(IEnumerable<>).FullName) != null)
                     {
                         property.SetValue(this, Activator.CreateInstance(property.PropertyType));
                     }
@@ -23,6 +23,7 @@ namespace Lynex.BillMaster.Model.Domain.DbModels
                         property.SetValue(this, DateTime.UtcNow);
                     }
                 }
+                
             }
 
             CallInit();

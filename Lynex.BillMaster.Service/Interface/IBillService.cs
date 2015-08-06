@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Lynex.BillMaster.Model.Domain.DbModels;
 
-namespace Lynex.BillMaster.Service
+namespace Lynex.BillMaster.Service.Interface
 {
     public interface IBillService
     {
