@@ -3,12 +3,12 @@ using NHibernate;
 
 namespace Lynex.Common.Database
 {
-    public interface IGetQuery<out TEntity> where TEntity : class
+    public interface IGetItemQuery<out TEntity>
     {
         TEntity Execute(ISession session);
     }
 
-    public interface IGetItemsQuery<out TEntity> where TEntity : class
+    public interface IGetItemsQuery<out TEntity>
     {
         IEnumerable<TEntity> Execute(ISession session);
     }

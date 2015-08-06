@@ -5,7 +5,7 @@ namespace Lynex.BillMaster.Service.Interface
 {
     public interface IBillService
     {
-        IEnumerable<Bill> GetBillsForUser(User user);
+        IEnumerable<Bill> GetBillsForUser(long id);
         Bill CreateBill(Bill bill, BillingCompany company, User user);
     }
 }

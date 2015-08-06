@@ -11,8 +11,8 @@ namespace Lynex.Common.Database
         void CommitTransaction();
         void RollBackTransaction();
 
-        TEntity Get<TEntity>(IGetQuery<TEntity> query) where TEntity : class;
-        IEnumerable<TEntity> Get<TEntity>(IGetItemsQuery<TEntity> query) where TEntity : class;
+        TEntity Get<TEntity>(IGetItemQuery<TEntity> itemQuery);
+        IEnumerable<TEntity> Get<TEntity>(IGetItemsQuery<TEntity> query);
         void ExecuteQuery(IExecuteQuery query);
 
 

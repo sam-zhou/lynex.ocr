@@ -1,8 +1,9 @@
 ﻿using Lynex.BillMaster.Model.Enum;
+using Lynex.Common.Exception;
 
-namespace Lynex.BillMaster.Model.Exception
+namespace Lynex.BillMaster.Exception.UserException
 {
-    public class VerifyUserFailedException : System.Exception
+    public class VerifyUserFailedException : LynexException
     {
         public VerifyUserFailedException(UserChallengeStatus status)
         {

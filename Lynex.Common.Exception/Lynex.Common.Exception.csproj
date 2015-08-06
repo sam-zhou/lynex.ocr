@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{7666726F-E1ED-417A-A1C7-1EC6DC067C2D}</ProjectGuid>
+    <ProjectGuid>{7A8862DA-1520-4D76-9149-5AF87277394E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Lynex.BillMaster.Extension</RootNamespace>
-    <AssemblyName>Lynex.BillMaster.Extension</AssemblyName>
+    <RootNamespace>Lynex.Common.Exception</RootNamespace>
+    <AssemblyName>Lynex.Common.Exception</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -40,17 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LynexException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Lynex.Common.Model\Lynex.Common.Model.csproj">
-      <Project>{b57351ec-8147-4fc7-b57d-708da025d692}</Project>
-      <Name>Lynex.Common.Model</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Lynex.Model\Lynex.BillMaster.Model.csproj">
-      <Project>{618ef8c4-376f-4d94-ac92-d336c2041c58}</Project>
-      <Name>Lynex.BillMaster.Model</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

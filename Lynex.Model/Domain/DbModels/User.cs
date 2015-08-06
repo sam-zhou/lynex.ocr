@@ -5,7 +5,11 @@ namespace Lynex.BillMaster.Model.Domain.DbModels
 {
     public class User : BaseEntity
     {
-        public virtual long MedWayUserId { get; set; }
+        public virtual string LastName { get; set; }
+
+        public virtual string FirstName { get; set; }
+
+        public virtual string Title { get; set; }
 
         public virtual string Email { get; set; }
 
@@ -14,6 +18,8 @@ namespace Lynex.BillMaster.Model.Domain.DbModels
         public virtual string Salt { get; set; }
 
         public virtual string Hash { get; set; }
+
+        public virtual int LoginAttempt { get; set; }
 
         public virtual bool IsVerified { get; set; }
 
@@ -32,6 +38,13 @@ namespace Lynex.BillMaster.Model.Domain.DbModels
         public virtual PermissionRole PermissionRole { get; set; }
 
         public virtual DateTime? LastLogin { get; set; }
+
+        public virtual DateTime? LastFailedLogin { get; set; }
+
+        public virtual DateTime? LocalLastFailedLogin
+        {
+            get { return LastFailedLogin != null ? (DateTime?)LastFailedLogin.Value.ToLocalTime() : null; }
+        }
 
         public virtual DateTime? LocalLastLogin
         {

@@ -71,8 +71,8 @@
     <Compile Include="Enum\FormatType.cs" />
     <Compile Include="Enum\DaysOfWeek.cs" />
     <Compile Include="Enum\NotificationType.cs" />
+    <Compile Include="Enum\UserLoginStatus.cs" />
     <Compile Include="Enum\UserChallengeStatus.cs" />
-    <Compile Include="Exception\VerifyUserFailedException.cs" />
     <Compile Include="Domain\DbModels\Mapping\SettingMap.cs" />
     <Compile Include="Domain\DbModels\Mapping\PermissionRoleMap.cs" />
     <Compile Include="Domain\DbModels\Mapping\UserChallengeMap.cs" />

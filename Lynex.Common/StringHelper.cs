@@ -1,47 +1,48 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace Lynex.BillMaster.Extension
+namespace Lynex.Common.Extension
 {
-    public static class PasswordHelper
+    public static class StringHelper
     {
         private const int SaltValueSize = 4;
 
-        public static string GenerateSalt()
+        public static string ToTitleCase(this string input)
         {
-            //UnicodeEncoding utf16 = new UnicodeEncoding();
-            //Random random = new Random(unchecked((int)DateTime.Now.Ticks));
+            var textInfo = new CultureInfo("en-US", false).TextInfo;
+            return textInfo.ToTitleCase(input);
+        }
 
-            //// Create an array of random values.
+        public static string GetRandomString(int maxSize = SaltValueSize)
+        {
+            var chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890".ToCharArray();
+            var data = new byte[1];
+            using (var crypto = new RNGCryptoServiceProvider())
+            {
+                crypto.GetNonZeroBytes(data);
+                data = new byte[maxSize];
+                crypto.GetNonZeroBytes(data);
+            }
+            var result = new StringBuilder(maxSize);
+            foreach (byte b in data)
+            {
+                result.Append(chars[b % (chars.Length)]);
+            }
+            return result.ToString();
+        }
 
-            //byte[] saltValue = new byte[SaltValueSize];
-
-            //random.NextBytes(saltValue);
-
-            //// Convert the salt value to a string. Note that the resulting string
-            //// will still be an array of binary values and not a printable string. 
-            //// Also it does not convert each byte to a double byte.
-
-            //string saltValueString = utf16.GetString(saltValue);
-
-            //// Return the salt value as a string.
-
-            //return saltValueString;
-
-
+        public static string GenerateSalt(int length = SaltValueSize)
+        {
             var salt = string.Empty;
             using (var rng = new RNGCryptoServiceProvider())
             {
                 // Buffer storage.
-                byte[] data = new byte[1];
+                var data = new byte[1];
 
                 // Ten iterations.
-                for (int i = 0; i < SaltValueSize; i++)
+                for (var i = 0; i < length; i++)
                 {
                     // Fill buffer.
                     rng.GetBytes(data);

@@ -79,12 +79,12 @@ namespace Lynex.Common.Database
         }
 
 
-        public TEntity Get<TEntity>(IGetQuery<TEntity> query) where TEntity : class
+        public TEntity Get<TEntity>(IGetItemQuery<TEntity> itemQuery) 
         {
-            return query.Execute(Session);
+            return itemQuery.Execute(Session);
         }
 
-        public IEnumerable<TEntity> Get<TEntity>(IGetItemsQuery<TEntity> query) where TEntity : class
+        public IEnumerable<TEntity> Get<TEntity>(IGetItemsQuery<TEntity> query) 
         {
             return query.Execute(Session);
         }

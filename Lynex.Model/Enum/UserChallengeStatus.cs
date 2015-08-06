@@ -2,11 +2,13 @@
 {
     public enum UserChallengeStatus
     {
-        Created = 1,
-        Mismatch = 2,
-        Expired = 3,
-        OverLimit = 4,
-        NotFound = 5,
-        Successed = 6
+        Mismatch = 1,
+        Expired = 2,
+        OverLimit = 3,
+        NotFound = 4,
+        Successed = 5,
+        AlreadyVerified = 6,
+        TryAgain = 7,
+        UnknownException = 0,
     }
 }

@@ -17,9 +17,9 @@ namespace Lynex.BillMaster.Service
         {
         }
 
-        public IEnumerable<Bill> GetBillsForUser(User user)
+        public IEnumerable<Bill> GetBillsForUser(long id)
         {
-            return DatabaseService.Get(new GetBillsByUser(user.Id));
+            return DatabaseService.Get(new GetBillsByUser(id));
         }
 
         public Bill CreateBill(Bill bill, BillingCompany company, User user)

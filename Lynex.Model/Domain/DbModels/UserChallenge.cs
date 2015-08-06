@@ -9,6 +9,8 @@ namespace Lynex.BillMaster.Model.Domain.DbModels
 
         public virtual DateTime CreatedAt { get; set; }
 
+        public virtual DateTime? VerifiedAt { get; set; }
+
         public virtual int TryCount { get; set; }
 
         public virtual User User { get; set; }
