@@ -1,4 +1,4 @@
-﻿namespace Lynex.Model.Enum.Mapable
+﻿namespace Lynex.BillMaster.Model.Enum.Mapable
 {
     public enum BillType
     {

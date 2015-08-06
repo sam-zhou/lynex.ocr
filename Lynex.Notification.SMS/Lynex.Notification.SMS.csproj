@@ -52,9 +52,9 @@
     <EmbeddedResource Include="Template\Simplified.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Lynex.Model\Lynex.Model.csproj">
+    <ProjectReference Include="..\Lynex.Model\Lynex.BillMaster.Model.csproj">
       <Project>{618ef8c4-376f-4d94-ac92-d336c2041c58}</Project>
-      <Name>Lynex.Model</Name>
+      <Name>Lynex.BillMaster.Model</Name>
     </ProjectReference>
     <ProjectReference Include="..\Lynex.Notification.Common\Lynex.Notification.Common.csproj">
       <Project>{e9bae4d8-fcbd-43b0-a4be-5dd762fbb659}</Project>

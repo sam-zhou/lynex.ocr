@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Lynex.Model.Domain.DbModels.Interface;
+using Lynex.BillMaster.Model.Domain.DbModels.Interface;
 
 namespace Lynex.Database.Common
 {

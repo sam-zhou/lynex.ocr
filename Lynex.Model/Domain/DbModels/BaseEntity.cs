@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using Lynex.Model.Domain.DbModels.Interface;
+using Lynex.BillMaster.Model.Domain.DbModels.Interface;
 
-namespace Lynex.Model.Domain.DbModels
+namespace Lynex.BillMaster.Model.Domain.DbModels
 {
     public abstract class BaseEntity : IBaseEntity
     {

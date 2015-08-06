@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Lynex.Model.Domain.DbModels.Mapping
+namespace Lynex.BillMaster.Model.Domain.DbModels.Mapping
 {
     public class SettingMap : BaseMap<Setting>
     {

@@ -1,6 +1,6 @@
-﻿using Lynex.Model.Enum;
+﻿using Lynex.BillMaster.Model.Enum;
 
-namespace Lynex.Model.Settings.Interface
+namespace Lynex.BillMaster.Model.Settings.Interface
 {
     public interface IEmailNotificationSettings : INotificationSettings
     {

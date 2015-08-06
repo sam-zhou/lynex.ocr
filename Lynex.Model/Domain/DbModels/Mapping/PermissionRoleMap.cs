@@ -1,9 +1,12 @@
-﻿namespace Lynex.Model.Domain.DbModels.Mapping
+﻿using FluentNHibernate.Mapping;
+
+namespace Lynex.BillMaster.Model.Domain.DbModels.Mapping
 {
-    public class PermissionRoleMap : BaseMap<PermissionRole>
+    public class PermissionRoleMap : ClassMap<PermissionRole>
     {
         public PermissionRoleMap()
         {
+            Id(q => q.Id).GeneratedBy.Assigned();
             Map(q => q.Name).Length(10).Not.Nullable();
             Map(q => q.AccessMyDosage).Not.Nullable().Default("0");
             Map(q => q.AccessMyHistory).Not.Nullable().Default("0");

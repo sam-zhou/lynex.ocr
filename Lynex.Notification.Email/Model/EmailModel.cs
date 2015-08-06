@@ -1,4 +1,4 @@
-﻿using Lynex.Model.Domain.DbModels;
+﻿using Lynex.BillMaster.Model.Domain.DbModels;
 using Lynex.Notification.Common.Model;
 
 namespace Lynex.Notification.Email.Model

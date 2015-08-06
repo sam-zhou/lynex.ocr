@@ -1,4 +1,4 @@
-﻿using Lynex.Model.Domain.DbModels;
+﻿using Lynex.BillMaster.Model.Domain.DbModels;
 
 namespace Lynex.Notification.Common.Model
 {

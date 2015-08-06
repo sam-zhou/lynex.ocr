@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Lynex.Common.Service")]
+[assembly: AssemblyTitle("Lynex.Common")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Lynex")]
-[assembly: AssemblyProduct("Lynex.Common.Service")]
+[assembly: AssemblyCompany("DDI Health")]
+[assembly: AssemblyProduct("Lynex.Common")]
 [assembly: AssemblyCopyright("Copyright © DDI Health 2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("4bbea9bc-0a40-4e3a-bbd6-a0718fca9d18")]
+[assembly: Guid("dc5a98a7-e6de-41dc-aaf8-ff08e24827b1")]
 
 // Version information for an assembly consists of the following four values:
 //

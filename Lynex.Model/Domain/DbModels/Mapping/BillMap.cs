@@ -1,8 +1,6 @@
-﻿using FluentNHibernate.Mapping;
-using NHibernate.Type;
-using Lynex.Model.Enum;
+﻿using NHibernate.Type;
 
-namespace Lynex.Model.Domain.DbModels.Mapping
+namespace Lynex.BillMaster.Model.Domain.DbModels.Mapping
 {
     public class BillMap : BaseMap<Bill>
     {

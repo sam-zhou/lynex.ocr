@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
-using Lynex.Model.Domain.DbModels;
+using Lynex.BillMaster.Model.Domain.DbModels;
 
-namespace Lynex.Model.Domain
+namespace Lynex.BillMaster.Model.Domain
 {
     public class SystemSetting
     {

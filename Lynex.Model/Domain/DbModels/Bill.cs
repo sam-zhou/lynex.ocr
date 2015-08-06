@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Lynex.Model.Enum;
-using Lynex.Model.Enum.Mapable;
+using System.Data;
+using Lynex.BillMaster.Model.Enum.Mapable;
 
-namespace Lynex.Model.Domain.DbModels
+namespace Lynex.BillMaster.Model.Domain.DbModels
 {
     public class Bill : BaseEntity
     {
@@ -15,6 +11,12 @@ namespace Lynex.Model.Domain.DbModels
         public virtual DateTime? DueDate { get; set; }
 
         public virtual DateTime? IssueDate { get; set; }
+
+        public virtual bool IsPaid { get; set; }
+
+        public virtual DateTime? PaidAt { get; set; }
+
+        public virtual PaymentMethod PaymentMethod { get; set; }
 
         public virtual BillingCompany Company { get; set; }
 

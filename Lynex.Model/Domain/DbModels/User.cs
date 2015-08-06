@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 
-namespace Lynex.Model.Domain.DbModels
+namespace Lynex.BillMaster.Model.Domain.DbModels
 {
     public class User : BaseEntity
     {

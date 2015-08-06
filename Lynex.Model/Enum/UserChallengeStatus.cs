@@ -1,4 +1,4 @@
-﻿namespace Lynex.Model.Enum
+﻿namespace Lynex.BillMaster.Model.Enum
 {
     public enum UserChallengeStatus
     {

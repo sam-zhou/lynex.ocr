@@ -1,7 +1,7 @@
 ﻿using System;
-using Lynex.Model.Enum;
+using Lynex.BillMaster.Model.Enum;
 
-namespace Lynex.Model.Domain.DbModels
+namespace Lynex.BillMaster.Model.Domain.DbModels
 {
     public class Notification : BaseEntity
     {

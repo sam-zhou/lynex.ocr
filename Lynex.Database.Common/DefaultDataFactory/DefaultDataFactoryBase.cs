@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Reflection;
 using NHibernate;
 
 namespace Lynex.Database.Common.DefaultDataFactory
@@ -12,17 +13,19 @@ namespace Lynex.Database.Common.DefaultDataFactory
     public abstract class DefaultDataFactoryBase<TEntity> : IDefaultDataFactory where TEntity : class
     {
         private readonly ISession _session;
+        private readonly Assembly _assembly;
 
-        protected DefaultDataFactoryBase(ISession session)
+        protected DefaultDataFactoryBase(ISession session, Assembly assembly)
         {
             _session = session;
+            _assembly = assembly;
         }
 
-        protected abstract IEnumerable<TEntity> GetData();
+        protected abstract IEnumerable<TEntity> GetData(Assembly assembly = null);
 
         public void Populate()
         {
-            var items = GetData();
+            var items = GetData(_assembly);
 
             foreach (var entity in items)
             {

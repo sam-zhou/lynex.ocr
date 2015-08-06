@@ -4,17 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{CBB544EB-7F8F-4220-8B1E-27833E7F2499}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{4BBEA9BC-0A40-4E3A-BBD6-A0718FCA9D18}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Lynex.Common.Test</RootNamespace>
-    <AssemblyName>Lynex.Common.Test</AssemblyName>
+    <RootNamespace>Lynex.Common.Service</RootNamespace>
+    <AssemblyName>Lynex.Common.Service</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -24,7 +22,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -43,20 +40,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="BaseService.cs" />
+    <Compile Include="Interface\ISystemService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
+    <Compile Include="SystemService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Lynex.Database.Common\Lynex.Common.Database.csproj">
       <Project>{54371d7e-5d3a-4a58-91cf-2d497f891fc1}</Project>
       <Name>Lynex.Common.Database</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Lynex.Service.Common\Lynex.Common.Service.csproj">
-      <Project>{4bbea9bc-0a40-4e3a-bbd6-a0718fca9d18}</Project>
-      <Name>Lynex.Common.Service</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

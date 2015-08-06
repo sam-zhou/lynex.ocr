@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Lynex.Model.Domain.DbModels
+namespace Lynex.BillMaster.Model.Domain.DbModels
 {
     public class Setting : BaseEntity
     {

@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Lynex.Service.Common")]
+[assembly: AssemblyTitle("Lynex.Common.Database")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("DDI Health")]
-[assembly: AssemblyProduct("Lynex.Service.Common")]
-[assembly: AssemblyCopyright("Copyright © DDI Health 2015")]
+[assembly: AssemblyCompany("Lynex")]
+[assembly: AssemblyProduct("Lynex.Common.Database")]
+[assembly: AssemblyCopyright("Copyright © Lynex 2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

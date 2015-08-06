@@ -7,8 +7,8 @@
     <ProjectGuid>{618EF8C4-376F-4D94-AC92-D336C2041C58}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Lynex.Model</RootNamespace>
-    <AssemblyName>Lynex.Model</AssemblyName>
+    <RootNamespace>Lynex.BillMaster.Model</RootNamespace>
+    <AssemblyName>Lynex.BillMaster.Model</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -59,7 +59,7 @@
     <Compile Include="Domain\DbModels\Bill.cs" />
     <Compile Include="Domain\DbModels\BillingCompany.cs" />
     <Compile Include="Domain\DbModels\EnumTable.cs" />
-    <Compile Include="Domain\DbModels\Mapping\BillTypeMap.cs" />
+    <Compile Include="Domain\DbModels\Mapping\EnumTableMap.cs" />
     <Compile Include="Domain\DbModels\Mapping\BillMap.cs" />
     <Compile Include="Domain\DbModels\Mapping\BillingCompanyMap.cs" />
     <Compile Include="Domain\DbModels\Mapping\AddressMap.cs" />
@@ -70,10 +70,11 @@
     <Compile Include="Domain\DbModels\UserChallenge.cs" />
     <Compile Include="Domain\DbModels\User.cs" />
     <Compile Include="Domain\DbModels\Notification.cs" />
+    <Compile Include="Enum\Mapable\PaymentMethod.cs" />
     <Compile Include="Enum\Mapable\BillType.cs" />
     <Compile Include="Enum\FormatType.cs" />
-    <Compile Include="Enum\NotificationType.cs" />
     <Compile Include="Enum\DaysOfWeek.cs" />
+    <Compile Include="Enum\NotificationType.cs" />
     <Compile Include="Enum\UserChallengeStatus.cs" />
     <Compile Include="Exception\VerifyUserFailedException.cs" />
     <Compile Include="Domain\DbModels\Mapping\BaseMap.cs" />

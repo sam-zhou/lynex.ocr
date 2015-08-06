@@ -1,8 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
+using Lynex.BillMaster.Model.Domain.DbModels.Mapping;
+using Lynex.Common;
+using Lynex.Common.Model;
 using Lynex.Database.Common.DefaultDataFactory;
 using NHibernate;
 using NHibernate.Cfg;
@@ -24,7 +28,7 @@ namespace Lynex.Database.Common.FluentNHibernate
 
             if (createNew)
             {
-                PopulateDefaultData(sessionFactory);
+                PopulateDefaultData(sessionFactory, assembly);
             }
 
             return sessionFactory;
@@ -37,12 +41,26 @@ namespace Lynex.Database.Common.FluentNHibernate
                     MsSqlConfiguration.MsSql2012
                         .ConnectionString(q => q.FromConnectionStringWithKey(connectionStringKey)))
                 .Mappings(m =>
-                    m.FluentMappings.AddFromAssembly(assembly));
+                    m.FluentMappings.AddFromAssembly(assembly).AddFromAssembly(CreateGenericClassMappingAssembly(assembly)));
 #if DEBUG || TRACE
             configuration.ExposeConfiguration(SetInterceptors);
 #endif
 
             return configuration;
+        }
+
+        private static Assembly CreateGenericClassMappingAssembly(Assembly assembly)
+        {
+            var types = new List<DynamicTypeInfo>();
+            var enumTypes = assembly.GetMapableEnumTypes();
+            foreach (var enumType in enumTypes)
+            {
+                var parentBase = typeof (EnumTableMap<>);
+                var parent = parentBase.MakeGenericType(enumType);
+                types.Add(new DynamicTypeInfo(enumType.Name + "Map", parent));
+            }
+
+            return DynamicClassHelper.CreateDynamicAssembly(assembly.GetName().Name + ".Dynamic", types);
         }
 
         private static void SetInterceptors(Configuration cfg)
@@ -56,7 +74,7 @@ namespace Lynex.Database.Common.FluentNHibernate
             schemaExport.Create(true, true);
         }
 
-        private static void PopulateDefaultData(ISessionFactory sessionFactory)
+        private static void PopulateDefaultData(ISessionFactory sessionFactory, Assembly assembly)
         {
             using (var session = sessionFactory.OpenSession())
             {
@@ -65,7 +83,7 @@ namespace Lynex.Database.Common.FluentNHibernate
 
                 foreach (var type in types)
                 {
-                    var instance = Activator.CreateInstance(type, session) as IDefaultDataFactory;
+                    var instance = Activator.CreateInstance(type, session, assembly) as IDefaultDataFactory;
                     if (instance != null)
                     {
                         instance.Populate();

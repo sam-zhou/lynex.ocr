@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Lynex.Model.Domain.DbModels.Interface;
+using Lynex.BillMaster.Model.Domain.DbModels.Interface;
 
-namespace Lynex.Model.Domain.DbModels
+namespace Lynex.BillMaster.Model.Domain.DbModels
 {
-    public class EnumTable<T> : IBaseEntity<T> 
+    public class EnumTable<T> : IBaseEntity<T> where T: struct ,IConvertible
     {
         public virtual long Id { get; set; }
 

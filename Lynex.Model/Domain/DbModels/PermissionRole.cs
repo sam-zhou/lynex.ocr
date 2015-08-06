@@ -1,4 +1,4 @@
-﻿namespace Lynex.Model.Domain.DbModels
+﻿namespace Lynex.BillMaster.Model.Domain.DbModels
 {
     public class PermissionRole: BaseEntity
     {
@@ -14,9 +14,10 @@
 
         public virtual bool AlterPreRequisites { get; set; }
 
-        public static PermissionRole Patient = new PermissionRole
+        public static PermissionRole User = new PermissionRole
         {
-            Name = "Patient",
+            Id = 2,
+            Name = "User",
             AccessMyDosage = true,
             AccessMyHistory = true,
             ManageMyAccount = true,
@@ -24,6 +25,7 @@
 
         public static PermissionRole Admin = new PermissionRole
         {
+            Id = 1,
             Name = "Admin",
             //AccessMyDosage = true,
             //AccessMyHistory = true,

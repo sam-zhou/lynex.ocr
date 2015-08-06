@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
-using Lynex.Model.Enum;
+using Lynex.BillMaster.Model.Enum;
 
 namespace Lynex.Notification.Common
 {

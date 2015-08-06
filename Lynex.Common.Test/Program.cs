@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Lynex.Common.Service;
 using Lynex.Database.Common;
-using Lynex.Service.Common;
 
 namespace Lynex.Common.Test
 {
@@ -12,7 +12,7 @@ namespace Lynex.Common.Test
     {
         static void Main(string[] args)
         {
-            var db = new DatabaseService("DefaultConnectionString", "Lynex.Model");
+            var db = new DatabaseService("DefaultConnectionString", "Lynex.BillMaster.Model");
 
             var service = new SystemService(db);
 

@@ -1,6 +1,6 @@
-﻿using Lynex.Model.Enum;
+﻿using Lynex.BillMaster.Model.Enum;
 
-namespace Lynex.Model.Exception
+namespace Lynex.BillMaster.Model.Exception
 {
     public class VerifyUserFailedException : System.Exception
     {

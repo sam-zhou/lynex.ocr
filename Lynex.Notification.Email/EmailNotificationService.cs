@@ -2,8 +2,8 @@
 using System.Net;
 using System.Net.Mail;
 using System.Text;
-using Lynex.Model.Domain.DbModels;
-using Lynex.Model.Settings.Interface;
+using Lynex.BillMaster.Model.Domain.DbModels;
+using Lynex.BillMaster.Model.Settings.Interface;
 using Lynex.Notification.Common;
 using Lynex.Notification.Email.Model;
 

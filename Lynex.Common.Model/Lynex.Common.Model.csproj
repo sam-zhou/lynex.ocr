@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{4BBEA9BC-0A40-4E3A-BBD6-A0718FCA9D18}</ProjectGuid>
+    <ProjectGuid>{B57351EC-8147-4FC7-B57D-708DA025D692}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Lynex.Service.Common</RootNamespace>
-    <AssemblyName>Lynex.Service.Common</AssemblyName>
+    <RootNamespace>Lynex.Common.Model</RootNamespace>
+    <AssemblyName>Lynex.Common.Model</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -40,15 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Interface\ISystemService.cs" />
+    <Compile Include="DynamicTypeInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SystemService.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Lynex.Database.Common\Lynex.Database.Common.csproj">
-      <Project>{54371d7e-5d3a-4a58-91cf-2d497f891fc1}</Project>
-      <Name>Lynex.Database.Common</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

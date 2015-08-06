@@ -1,8 +1,8 @@
 ﻿using FluentNHibernate.Mapping;
+using Lynex.BillMaster.Model.Enum;
 using NHibernate.Type;
-using Lynex.Model.Enum;
 
-namespace Lynex.Model.Domain.DbModels.Mapping
+namespace Lynex.BillMaster.Model.Domain.DbModels.Mapping
 {
     public class NotificationMap : BaseMap<Notification>
     {

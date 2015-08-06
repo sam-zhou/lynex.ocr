@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Lynex.BillMaster.Model.Domain.DbModels.Interface;
 using Lynex.Database.Common.FluentNHibernate;
-using Lynex.Model.Domain.DbModels.Interface;
 using NHibernate;
 
 namespace Lynex.Database.Common

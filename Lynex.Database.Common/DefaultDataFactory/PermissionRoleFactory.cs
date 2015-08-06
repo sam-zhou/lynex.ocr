@@ -1,19 +1,20 @@
 ﻿using System.Collections.Generic;
-using Lynex.Model.Domain.DbModels;
+using System.Reflection;
+using Lynex.BillMaster.Model.Domain.DbModels;
 using NHibernate;
 
 namespace Lynex.Database.Common.DefaultDataFactory
 {
     internal class PermissionRoleFactory : DefaultDataFactoryBase<PermissionRole>
     {
-        public PermissionRoleFactory(ISession session) : base(session)
+        public PermissionRoleFactory(ISession session, Assembly assembly) : base(session, assembly)
         {
         }
 
-        protected override IEnumerable<PermissionRole> GetData()
+        protected override IEnumerable<PermissionRole> GetData(Assembly assembly = null)
         {
             yield return PermissionRole.Admin;
-            yield return PermissionRole.Patient;
+            yield return PermissionRole.User;
         }
     }
 }

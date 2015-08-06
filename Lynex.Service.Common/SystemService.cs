@@ -1,20 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Lynex.Common.Service.Interface;
 using Lynex.Database.Common;
-using Lynex.Service.Common.Interface;
 
-namespace Lynex.Service.Common
+namespace Lynex.Common.Service
 {
-    public class SystemService: ISystemService
+    public class SystemService: BaseService, ISystemService
     {
-        public SystemService(IDatabaseService dbService)
+        public SystemService(IDatabaseService dbService) : base(dbService)
         {
-            DatabaseService = dbService;
         }
-        private IDatabaseService DatabaseService { get; }
+
         public void ResetDatabase()
         {
             DatabaseService.ResetDatabase();
