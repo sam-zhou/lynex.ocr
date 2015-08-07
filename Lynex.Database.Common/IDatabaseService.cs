@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Lynex.Common.Model.DbModel.Interface;
 
 namespace Lynex.Common.Database
 {
-    public interface IDatabaseService
+    public interface IDatabaseService: IDisposable
     {
         void ResetDatabase();
 

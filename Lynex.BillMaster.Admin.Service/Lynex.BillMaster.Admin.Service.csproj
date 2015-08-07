@@ -40,7 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="AdminBillService.cs" />
+    <Compile Include="Interface\IAdminBillService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -55,6 +56,10 @@
     <ProjectReference Include="..\Lynex.BillMaster.Repository\Lynex.BillMaster.Repository.csproj">
       <Project>{c21179cb-f4e9-4401-adc3-45751de80e67}</Project>
       <Name>Lynex.BillMaster.Repository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lynex.BillMaster.Service\Lynex.BillMaster.Service.csproj">
+      <Project>{cff938c4-4b9c-459e-b659-c9505deeaba4}</Project>
+      <Name>Lynex.BillMaster.Service</Name>
     </ProjectReference>
     <ProjectReference Include="..\Lynex.Common.Exception\Lynex.Common.Exception.csproj">
       <Project>{7a8862da-1520-4d76-9149-5af87277394e}</Project>
@@ -77,6 +82,7 @@
       <Name>Lynex.Common.Service</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

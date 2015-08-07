@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddressService.cs" />
+    <Compile Include="Interface\IAddressService.cs" />
     <Compile Include="Interface\IUserService.cs" />
     <Compile Include="UserService.cs" />
     <Compile Include="BillService.cs" />

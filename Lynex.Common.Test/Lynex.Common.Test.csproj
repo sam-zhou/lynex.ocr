@@ -50,6 +50,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Lynex.BillMaster.Admin.Service\Lynex.BillMaster.Admin.Service.csproj">
+      <Project>{8f8ecd46-b8f1-42e4-bf9d-2041100b2936}</Project>
+      <Name>Lynex.BillMaster.Admin.Service</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lynex.BillMaster.Service\Lynex.BillMaster.Service.csproj">
       <Project>{cff938c4-4b9c-459e-b659-c9505deeaba4}</Project>
       <Name>Lynex.BillMaster.Service</Name>

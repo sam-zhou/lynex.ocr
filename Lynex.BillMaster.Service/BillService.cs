@@ -22,8 +22,16 @@ namespace Lynex.BillMaster.Service
             return DatabaseService.Get(new GetBillsByUser(id));
         }
 
-        public Bill CreateBill(Bill bill, BillingCompany company, User user)
+
+
+        Bill IBillService.CreateBill(Bill bill)
         {
+            return SingleTransactionOperation(CreateBill, bill);
+        }
+
+        public Bill CreateBill(Bill bill)
+        {
+            DatabaseService.Save(bill);
             return bill;
         }
     }

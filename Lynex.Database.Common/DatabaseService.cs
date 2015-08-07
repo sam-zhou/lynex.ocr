@@ -8,7 +8,7 @@ using NHibernate;
 
 namespace Lynex.Common.Database
 {
-    public class DatabaseService : IDatabaseService, IDisposable
+    public class DatabaseService : IDatabaseService
     {
         private readonly string _connectionStringKey;
         private readonly string _assemblyName;

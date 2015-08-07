@@ -29,7 +29,7 @@ namespace Lynex.BillMaster.Service
 
             if (!IsEmailUnique(email))
             {
-                throw new EmailNotUniqueException(email);
+                throw new PropertyNotUniqueException("Email",email);
             }
 
             try

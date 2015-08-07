@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Threading.Tasks;
 using Lynex.Common.Database;
@@ -14,5 +15,71 @@ namespace Lynex.Common.Service
             DatabaseService = dbService;
         }
         protected IDatabaseService DatabaseService { get; }
+
+        public void BeginTransaction()
+        {
+            DatabaseService.BeginTransaction();
+        }
+
+        public void CommitTransaction()
+        {
+            DatabaseService.CommitTransaction();
+        }
+
+        public void RollBackTransaction()
+        {
+            DatabaseService.RollBackTransaction();
+        }
+
+        
+
+        protected TResult SingleTransactionOperation<TArg1, TResult>(Func<TArg1, TResult> method, TArg1 arg1)
+        {
+            try
+            {
+                BeginTransaction();
+                var result = method(arg1);
+                CommitTransaction();
+                return result;
+            }
+            catch (Exception)
+            {
+                RollBackTransaction();
+                throw;
+            }
+        }
+
+        protected TResult SingleTransactionOperation<TArg1, TArg2, TResult>(Func<TArg1, TArg2, TResult> method, TArg1 arg1, TArg2 arg2)
+        {
+            try
+            {
+                BeginTransaction();
+                var result = method(arg1, arg2);
+                CommitTransaction();
+                return result;
+            }
+            catch (Exception)
+            {
+                RollBackTransaction();
+                throw;
+            }
+        }
+
+        protected TResult SingleTransactionOperation<TArg1, TArg2, TArg3, TResult>(Func<TArg1, TArg2, TArg3, TResult> method, TArg1 arg1, TArg2 arg2, TArg3 arg3)
+        {
+            try
+            {
+                BeginTransaction();
+                var result = method(arg1, arg2, arg3);
+                CommitTransaction();
+                return result;
+            }
+            catch (Exception)
+            {
+                RollBackTransaction();
+                throw;
+            }
+        }
+
     }
 }

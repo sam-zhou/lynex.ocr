@@ -3,9 +3,8 @@ using Lynex.BillMaster.Model.Domain.DbModels;
 
 namespace Lynex.BillMaster.Service.Interface
 {
-    public interface IBillService
+    public interface IAddressService
     {
-        IEnumerable<Bill> GetBillsForUser(long id);
-        Bill CreateBill(Bill bill);
+        Address CreateAddress(Address newaddress);
     }
 }
