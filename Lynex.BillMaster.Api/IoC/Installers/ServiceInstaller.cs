@@ -1,16 +1,22 @@
 ﻿using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
+using Lynex.BillMaster.Service;
+using Lynex.BillMaster.Service.Interface;
+using Lynex.Common.Database;
 
-namespace WCC.UI.IoC.Installers
+namespace Lynex.BillMaster.Api.IoC.Installers
 {
     public class ServiceInstaller : IWindsorInstaller
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
-            //container.Register(Component.For<IWCCMainRepository>().ImplementedBy<WCCMainRepository>().LifestylePerWebRequest());
+            container.Register(Component.For<IDatabaseService>().ImplementedBy<DatabaseService>().LifestylePerWebRequest());
+            container.Register(Component.For<IAddressService>().ImplementedBy<AddressService>().LifestylePerWebRequest());
+            container.Register(Component.For<IUserService>().ImplementedBy<UserService>().LifestylePerWebRequest());
+            
 
-            //container.Register(Component.For<ISystemService>().ImplementedBy<SystemService>().LifestylePerWebRequest());
+            
             //container.Register(Component.For<IDosageService>().ImplementedBy<DosageService>().LifestylePerWebRequest());
             //container.Register(Component.For<IUserService>().ImplementedBy<UserService>().LifestylePerWebRequest());
             //container.Register(Component.For<ITestResultService>().ImplementedBy<TestResultService>().LifestylePerWebRequest());

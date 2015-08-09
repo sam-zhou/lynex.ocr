@@ -5,7 +5,7 @@ using System.Web.Http.Dependencies;
 using Castle.MicroKernel.Lifestyle;
 using Castle.Windsor;
 
-namespace WCC.UI.IoC.Factory
+namespace Lynex.BillMaster.Api.IoC.Factory
 {
     internal sealed class WindsorDependencyScope : IDependencyScope
     {

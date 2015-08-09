@@ -1,5 +1,6 @@
 using System.Web.Http;
 using System.Web.Mvc;
+using Lynex.BillMaster.Api.Areas.HelpPage.App_Start;
 
 namespace Lynex.BillMaster.Api.Areas.HelpPage
 {

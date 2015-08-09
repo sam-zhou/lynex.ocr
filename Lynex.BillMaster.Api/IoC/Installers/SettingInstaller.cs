@@ -2,8 +2,7 @@
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 
-
-namespace WCC.UI.IoC.Installers
+namespace Lynex.BillMaster.Api.IoC.Installers
 {
     public class SettingInstaller : IWindsorInstaller
     {

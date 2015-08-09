@@ -31,7 +31,50 @@ namespace Lynex.Common.Service
             DatabaseService.RollBackTransaction();
         }
 
-        
+        protected void SingleTransactionAction<TArg1>(Action<TArg1> method, TArg1 arg1)
+        {
+            try
+            {
+                BeginTransaction();
+                method(arg1);
+                CommitTransaction();
+            }
+            catch (Exception)
+            {
+                RollBackTransaction();
+                throw;
+            }
+        }
+
+        protected void SingleTransactionAction<TArg1, TArg2>(Action<TArg1, TArg2> method, TArg1 arg1, TArg2 arg2)
+        {
+            try
+            {
+                BeginTransaction();
+                method(arg1, arg2);
+                CommitTransaction();
+            }
+            catch (Exception)
+            {
+                RollBackTransaction();
+                throw;
+            }
+        }
+
+        protected void SingleTransactionAction<TArg1, TArg2, TArg3>(Action<TArg1, TArg2, TArg3> method, TArg1 arg1, TArg2 arg2, TArg3 arg3)
+        {
+            try
+            {
+                BeginTransaction();
+                method(arg1, arg2, arg3);
+                CommitTransaction();
+            }
+            catch (Exception)
+            {
+                RollBackTransaction();
+                throw;
+            }
+        }
 
         protected TResult SingleTransactionOperation<TArg1, TResult>(Func<TArg1, TResult> method, TArg1 arg1)
         {

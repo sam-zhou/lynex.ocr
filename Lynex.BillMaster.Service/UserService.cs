@@ -19,8 +19,11 @@ namespace Lynex.BillMaster.Service
 {
     public class UserService : BaseService, IUserService
     {
-        public UserService(IDatabaseService dbService) : base(dbService)
+        private readonly IAddressService _addressService;
+
+        public UserService(IDatabaseService dbService, IAddressService addressService) : base(dbService)
         {
+            _addressService = addressService;
         }
 
         public User RegisterUser(string email, string password, string mobile, string lastName, string firstName)
@@ -47,7 +50,8 @@ namespace Lynex.BillMaster.Service
                     Mobile = mobile,
                     Salt = salt,
                     Hash = hash,
-                    Active = true
+                    Active = true,
+                    PermissionRole = PermissionRole.User
                 };
 
                 var challenge = new UserChallenge(StringHelper.GenerateSalt(64)) { User = user };
@@ -224,6 +228,31 @@ namespace Lynex.BillMaster.Service
                 status = UserChallengeStatus.NotFound;
             }
             return status;
+        }
+
+        void IUserService.CreateAddress(User user, Address newAddress)
+        {
+            SingleTransactionAction(CreateAddress, user, newAddress);
+        }
+
+        public void CreateAddress(User user, Address newAddress)
+        {
+            var theUser = DatabaseService.Get<User>(user.Id);
+            if (theUser != null)
+            {
+                theUser.Address = ((AddressService) _addressService).CreateAddress(newAddress);
+                DatabaseService.Save(theUser);
+            }
+            else
+            {
+                throw new EntityNotFoundException<User>(user);
+            }
+
+        }
+
+        public User GetUser(long id)
+        {
+            return DatabaseService.Get<User>(id);
         }
     }
 }

@@ -24,7 +24,7 @@ namespace Lynex.Common.Database
             {
                 if (_sessionFactory == null || _sessionFactory.IsClosed)
                 {
-                    _sessionFactory = NHibernateHelper.CreateSessionFactory(_connectionStringKey, Assembly.Load(_assemblyName),false);
+                    _sessionFactory = NHibernateHelper.CreateSessionFactory(_connectionStringKey, _assemblyName, false);
                 }
                 return _sessionFactory;
             }
@@ -48,9 +48,15 @@ namespace Lynex.Common.Database
             _assemblyName = assemblyName;
         }
 
+        public DatabaseService()
+        {
+            _connectionStringKey = "DefaultConnectionString";
+            _assemblyName = "Lynex.BillMaster";
+        }
+
         public void ResetDatabase()
         {
-            _sessionFactory = NHibernateHelper.CreateSessionFactory(_connectionStringKey, Assembly.Load(_assemblyName), true);
+            _sessionFactory = NHibernateHelper.CreateSessionFactory(_connectionStringKey, _assemblyName, true);
         }
 
         public void BeginTransaction()

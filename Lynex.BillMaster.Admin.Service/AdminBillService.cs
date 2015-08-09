@@ -7,6 +7,7 @@ using Lynex.BillMaster.Admin.Repository.BillRepo;
 using Lynex.BillMaster.Admin.Service.Interface;
 using Lynex.BillMaster.Exception.UserException;
 using Lynex.BillMaster.Model.Domain.DbModels;
+using Lynex.BillMaster.Model.Enum.Mapable;
 using Lynex.BillMaster.Repository.BillRepo;
 using Lynex.BillMaster.Service;
 using Lynex.BillMaster.Service.Interface;
@@ -24,26 +25,32 @@ namespace Lynex.BillMaster.Admin.Service
             _addressService = addressService;
         }
 
-        BillingCompany IAdminBillService.CreateBillCompany(string name, Address newAddress)
+        BillingCompany IAdminBillService.CreateBillCompany(string name, BillType billTypes, Address newAddress)
         {
             if (IsBillCompanyUnique(name))
             {
-                return SingleTransactionOperation(CreateBillCompany, name, newAddress);
+                return SingleTransactionOperation(CreateBillCompany, name, billTypes, newAddress);
             }
             throw new PropertyNotUniqueException("Name", name);
         }
 
-        public BillingCompany CreateBillCompany(string name, Address newAddress)
+        public BillingCompany CreateBillCompany(string name, BillType billTypes, Address newAddress)
         {
             var address = ((AddressService)_addressService).CreateAddress(newAddress);
             var billCompany = new BillingCompany
             {
                 Name = name,
-                Address = address
+                Address = address,
+                BillTypes = billTypes
             };
 
             DatabaseService.Save(billCompany);
             return billCompany;
+        }
+
+        void IAdminBillService.UpdateBillCompany(BillingCompany billCompany)
+        {
+            SingleTransactionAction(UpdateBillCompany, billCompany);
         }
 
         public void UpdateBillCompany(BillingCompany billCompany)
@@ -54,26 +61,34 @@ namespace Lynex.BillMaster.Admin.Service
                 theBillCompany.Name = billCompany.Name;
                 DatabaseService.Save(theBillCompany);
             }
-            throw new EntityNotFoundException<BillingCompany>(billCompany);
+            else
+            {
+                throw new EntityNotFoundException<BillingCompany>(billCompany);
+            }
+        }
+
+        void IAdminBillService.DeleteBillCompany(BillingCompany billCompany)
+        {
+           SingleTransactionAction(DeleteBillCompany, billCompany);
         }
 
         public void DeleteBillCompany(BillingCompany billCompany)
         {
-            try
+            var theBillCompany = DatabaseService.Get<BillingCompany>(billCompany.Id);
+            if (theBillCompany != null)
             {
-                var theBillCompany = DatabaseService.Get<BillingCompany>(billCompany.Id);
-                if (theBillCompany != null)
+                if (!DatabaseService.Get(new IsBillCompanyHasBill(theBillCompany)))
                 {
-                    if (DatabaseService.Get(new IsBillCompanyHasBill(theBillCompany)))
-                    {
-                        
-                    }
+                    DatabaseService.Delete(theBillCompany);
+                }
+                else
+                {
+                    throw new ForeignKeyException("BillingCompany", "Bill");
                 }
             }
-            catch (System.Exception)
+            else
             {
-                
-                throw;
+                throw new EntityNotFoundException<BillingCompany>(billCompany);
             }
         }
 

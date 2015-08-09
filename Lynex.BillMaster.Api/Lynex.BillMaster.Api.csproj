@@ -309,6 +309,36 @@
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Lynex.BillMaster.Database\Lynex.BillMaster.Database.csproj">
+      <Project>{3508b0a7-dcea-4a9c-9bf7-07ff92c7c160}</Project>
+      <Name>Lynex.BillMaster.Database</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lynex.BillMaster.Exception\Lynex.BillMaster.Exception.csproj">
+      <Project>{9a45d4ac-c923-4d0f-82e9-d8eb40fdf916}</Project>
+      <Name>Lynex.BillMaster.Exception</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lynex.BillMaster.Service\Lynex.BillMaster.Service.csproj">
+      <Project>{cff938c4-4b9c-459e-b659-c9505deeaba4}</Project>
+      <Name>Lynex.BillMaster.Service</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lynex.Common.Model\Lynex.Common.Model.csproj">
+      <Project>{b57351ec-8147-4fc7-b57d-708da025d692}</Project>
+      <Name>Lynex.Common.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lynex.Database.Common\Lynex.Common.Database.csproj">
+      <Project>{54371d7e-5d3a-4a58-91cf-2d497f891fc1}</Project>
+      <Name>Lynex.Common.Database</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lynex.Model\Lynex.BillMaster.Model.csproj">
+      <Project>{618ef8c4-376f-4d94-ac92-d336c2041c58}</Project>
+      <Name>Lynex.BillMaster.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lynex.Service.Common\Lynex.Common.Service.csproj">
+      <Project>{4bbea9bc-0a40-4e3a-bbd6-a0718fca9d18}</Project>
+      <Name>Lynex.Common.Service</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

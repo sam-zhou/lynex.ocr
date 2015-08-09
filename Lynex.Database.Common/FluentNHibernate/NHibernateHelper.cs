@@ -16,9 +16,20 @@ namespace Lynex.Common.Database.FluentNHibernate
 {
     internal static class NHibernateHelper
     {
-        public static ISessionFactory CreateSessionFactory(string connectionStringKey, Assembly assembly, bool createNew)
+        public static ISessionFactory CreateSessionFactory(string connectionStringKey, string assemblyNameSpace, bool createNew)
         {
-            var configuration = BuildConfiguration(connectionStringKey, assembly);
+            var modelAssembly = Assembly.Load(assemblyNameSpace + ".Model");
+            Assembly databaseAssembly = null;
+            try
+            {
+                databaseAssembly = Assembly.Load(assemblyNameSpace + ".Database");
+            }
+            catch (Exception)
+            {
+
+            }
+
+            var configuration = BuildConfiguration(connectionStringKey, modelAssembly);
             if (createNew)
             {
                 configuration.ExposeConfiguration(CreateSchemaExport);
@@ -28,7 +39,7 @@ namespace Lynex.Common.Database.FluentNHibernate
 
             if (createNew)
             {
-                PopulateDefaultData(sessionFactory, assembly);
+                PopulateDefaultData(sessionFactory, modelAssembly, databaseAssembly);
             }
 
             return sessionFactory;
@@ -49,10 +60,10 @@ namespace Lynex.Common.Database.FluentNHibernate
             return configuration;
         }
 
-        private static Assembly CreateGenericClassMappingAssembly(Assembly assembly)
+        private static Assembly CreateGenericClassMappingAssembly(Assembly modelAssembly)
         {
             var types = new List<DynamicTypeInfo>();
-            var enumTypes = assembly.GetMapableEnumTypes();
+            var enumTypes = modelAssembly.GetMapableEnumTypes();
             foreach (var enumType in enumTypes)
             {
                 var parentBase = typeof (EnumTableMap<>);
@@ -60,7 +71,7 @@ namespace Lynex.Common.Database.FluentNHibernate
                 types.Add(new DynamicTypeInfo(enumType.Name + "Map", parent));
             }
 
-            return DynamicClassHelper.CreateDynamicAssembly(assembly.GetName().Name + ".Dynamic", types);
+            return DynamicClassHelper.CreateDynamicAssembly(modelAssembly.GetName().Name + ".Dynamic", types);
         }
 
         private static void SetInterceptors(Configuration cfg)
@@ -74,16 +85,22 @@ namespace Lynex.Common.Database.FluentNHibernate
             schemaExport.Create(true, true);
         }
 
-        private static void PopulateDefaultData(ISessionFactory sessionFactory, Assembly assembly)
+        private static void PopulateDefaultData(ISessionFactory sessionFactory, Assembly modelAssembly, Assembly databaseAssembly = null)
         {
             using (var session = sessionFactory.OpenSession())
             {
                 var types =
-                    Assembly.GetExecutingAssembly().GetTypes().Where(type => typeof(IDefaultDataFactory).IsAssignableFrom(type) && !type.IsAbstract);
+                    Assembly.GetExecutingAssembly().GetTypes().Where(type => typeof(IDefaultDataFactory).IsAssignableFrom(type) && !type.IsAbstract).ToList();
+
+                if (databaseAssembly != null)
+                {
+                    types.AddRange(databaseAssembly.GetTypes().Where(type => typeof(IDefaultDataFactory).IsAssignableFrom(type) && !type.IsAbstract).ToList());
+                }
+                
 
                 foreach (var type in types)
                 {
-                    var instance = Activator.CreateInstance(type, session, assembly) as IDefaultDataFactory;
+                    var instance = Activator.CreateInstance(type, session, modelAssembly) as IDefaultDataFactory;
                     if (instance != null)
                     {
                         instance.Populate();

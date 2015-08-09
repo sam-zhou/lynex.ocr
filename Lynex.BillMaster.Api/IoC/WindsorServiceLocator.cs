@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using Castle.Windsor;
 using Microsoft.Practices.ServiceLocation;
 
-namespace ASP.NET.UI.IoC
+namespace Lynex.BillMaster.Api.IoC
 {
     public class WindsorServiceLocator : ServiceLocatorImplBase
     {

@@ -9,9 +9,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: global::Android.Runtime.ResourceDesignerAttribute("Lynex.OCR.Portable.App.Droid.Resource", IsApplication=true)]
+[assembly: global::Android.Runtime.ResourceDesignerAttribute("Lynex.BillMaster.Mobile.Portable.App.Droid.Resource", IsApplication=true)]
 
-namespace Lynex.OCR.Portable.App.Droid
+namespace Lynex.BillMaster.Mobile.Portable.App.Droid
 {
 	
 	

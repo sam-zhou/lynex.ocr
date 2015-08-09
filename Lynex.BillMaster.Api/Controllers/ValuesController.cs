@@ -4,22 +4,31 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using Lynex.BillMaster.Service.Interface;
 
 namespace Lynex.BillMaster.Api.Controllers
 {
     [Authorize]
     public class ValuesController : ApiController
     {
+        private readonly IUserService _userService;
+
+        public ValuesController(IUserService userService)
+        {
+            _userService = userService;
+        }
+
         // GET api/values
         public IEnumerable<string> Get()
         {
             return new string[] { "value1", "value2" };
         }
 
+        [AllowAnonymous]
         // GET api/values/5
         public string Get(int id)
         {
-            return "value";
+            return _userService.GetUser(1).FirstName;
         }
 
         // POST api/values
@@ -36,5 +45,7 @@ namespace Lynex.BillMaster.Api.Controllers
         public void Delete(int id)
         {
         }
+
+
     }
 }

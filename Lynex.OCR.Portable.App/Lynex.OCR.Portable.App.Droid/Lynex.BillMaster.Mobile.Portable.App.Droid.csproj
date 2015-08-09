@@ -9,8 +9,8 @@
     <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Lynex.OCR.Portable.App.Droid</RootNamespace>
-    <AssemblyName>Lynex.OCR.Portable.App.Droid</AssemblyName>
+    <RootNamespace>Lynex.BillMaster.Mobile.Portable.App.Droid</RootNamespace>
+    <AssemblyName>Lynex.BillMaster.Mobile.Portable.App.Droid</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <AndroidApplication>true</AndroidApplication>
     <AndroidResgenFile>Resources\Resource.Designer.cs</AndroidResgenFile>
@@ -22,7 +22,7 @@
     <MandroidI18n />
     <JavaMaximumHeapSize />
     <JavaOptions />
-    <TargetFrameworkVersion>v5.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v5.0</TargetFrameworkVersion>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
   </PropertyGroup>
@@ -95,8 +95,9 @@
     <Content Include="Properties\AndroidManifest.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Lynex.OCR.Portable.App\Lynex.OCR.Portable.App.csproj">
-      <Name>Lynex.OCR.Portable.App</Name>
+    <ProjectReference Include="..\Lynex.OCR.Portable.App\Lynex.BillMaster.Mobile.Portable.App.csproj">
+      <Name>Lynex.BillMaster.Mobile.Portable.App</Name>
+      <Project>{BA01D1D6-6A95-4548-852E-A48BAEE2DFF3}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />

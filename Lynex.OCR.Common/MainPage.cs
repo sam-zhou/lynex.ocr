@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Xamarin.Forms;
 
-using Xamarin.Forms;
-
-namespace Lynex.OCR.Common
+namespace Lynex.BillMaster.Mobile.View
 {
     public class MainPage : ContentPage
 	{

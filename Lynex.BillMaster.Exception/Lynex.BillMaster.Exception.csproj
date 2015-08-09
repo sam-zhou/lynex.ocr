@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserException\ForeignKeyException.cs" />
     <Compile Include="UserException\EntityNotFoundException.cs" />
     <Compile Include="UserException\PropertyNotUniqueException.cs" />
     <Compile Include="UserException\UserLoginFailedException.cs" />

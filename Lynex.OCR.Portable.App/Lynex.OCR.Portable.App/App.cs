@@ -1,30 +1,46 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
+﻿using Lynex.BillMaster.Mobile.View;
+using Lynex.BillMaster.Mobile.ViewModel;
 using Xamarin.Forms;
 
-namespace Lynex.OCR.Portable.App
+namespace Lynex.BillMaster.Mobile.Portable.App
 {
     public class App : Application
     {
         public App()
         {
+
+
             // The root page of your application
-            MainPage = new ContentPage
+            MainPage = new HomePage
             {
-                Content = new StackLayout
-                {
-                    VerticalOptions = LayoutOptions.Center,
-                    Children = {
-                        new Label {
-                            XAlign = TextAlignment.Center,
-                            Text = "Welcome to Xamarin Forms!"
-                        }
-                    }
-                }
+                //Content = new StackLayout
+                //{
+                //    VerticalOptions = LayoutOptions.Center,
+                //    Children = {
+                //        new Label {
+                //            XAlign = TextAlignment.Center,
+                //            Text = "Welcome to Lynex BillMaster"
+                //        },
+                //        new Label {
+                //            XAlign = TextAlignment.Center,
+                //            Text = "Author: Sam Zhou"
+                //        }
+                //    }
+                //}
             };
+
+            var loginViewModel = new LoginViewModel
+            {
+                IsLoginButtonEnabled = true,
+            };
+
+            loginViewModel.LoginClicked = new Command(LoginClicked);
+            MainPage.BindingContext = loginViewModel;
+        }
+
+        private void LoginClicked(object obj)
+        {
+            Xamarin.Forms.MessagingCenter.Send(this, "Hahahah");
         }
 
         protected override void OnStart()

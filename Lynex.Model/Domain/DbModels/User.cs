@@ -1,9 +1,10 @@
 ﻿using System;
+using Lynex.BillMaster.Model.Domain.DbModels.Interface;
 using Lynex.Common.Model.DbModel;
 
 namespace Lynex.BillMaster.Model.Domain.DbModels
 {
-    public class User : BaseEntity
+    public class User : BaseEntity, IAddressable
     {
         public virtual string LastName { get; set; }
 
@@ -25,9 +26,7 @@ namespace Lynex.BillMaster.Model.Domain.DbModels
 
         public virtual bool Active { get; set; }
 
-        public virtual Address BillingAddress { get; set; }
-
-        public virtual Address PostalAddress { get; set; }
+        public virtual Address Address { get; set; }
 
         public virtual Wallet Wallet { get; set; }
 
@@ -55,5 +54,7 @@ namespace Lynex.BillMaster.Model.Domain.DbModels
         {
             get { return CreatedAt.ToLocalTime(); }
         }
+
+        
     }
 }

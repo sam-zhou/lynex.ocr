@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Lynex.OCR.Portable.App.iOS")]
+[assembly: AssemblyTitle("Lynex.BillMaster.Mobile.Portable.App.iOS")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Lynex.OCR.Portable.App.iOS")]
-[assembly: AssemblyCopyright("Copyright ©  2014")]
+[assembly: AssemblyCompany("Lynex")]
+[assembly: AssemblyProduct("Lynex.BillMaster.Mobile.Portable.App.iOS")]
+[assembly: AssemblyCopyright("Copyright © Lynex 2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

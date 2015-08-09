@@ -4,7 +4,7 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using Castle.MicroKernel;
 
-namespace WCC.UI.IoC.Factory
+namespace Lynex.BillMaster.Api.IoC.Factory
 {
     public class WindsorControllerFactory : DefaultControllerFactory
     {

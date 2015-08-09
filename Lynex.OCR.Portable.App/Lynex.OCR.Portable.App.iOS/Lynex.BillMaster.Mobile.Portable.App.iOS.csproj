@@ -8,9 +8,9 @@
     <ProjectGuid>{0DA5EED7-BD8F-4801-9E90-49C2C0D6473A}</ProjectGuid>
     <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Lynex.OCR.Portable.App.iOS</RootNamespace>
+    <RootNamespace>Lynex.BillMaster.Mobile.Portable.App.iOS</RootNamespace>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
-    <AssemblyName>LynexOCRPortableAppiOS</AssemblyName>
+    <AssemblyName>LynexBillMasterMobilePortableAppiOS</AssemblyName>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
   </PropertyGroup>
@@ -98,8 +98,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Lynex.OCR.Portable.App\Lynex.OCR.Portable.App.csproj">
-      <Name>Lynex.OCR.Portable.App</Name>
+    <ProjectReference Include="..\Lynex.OCR.Portable.App\Lynex.BillMaster.Mobile.Portable.App.csproj">
+      <Name>Lynex.BillMaster.Mobile.Portable.App</Name>
+      <Project>{BA01D1D6-6A95-4548-852E-A48BAEE2DFF3}</Project>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

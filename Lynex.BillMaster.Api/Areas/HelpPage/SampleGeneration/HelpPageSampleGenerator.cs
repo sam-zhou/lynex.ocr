@@ -13,7 +13,7 @@ using System.Web.Http.Description;
 using System.Xml.Linq;
 using Newtonsoft.Json;
 
-namespace Lynex.BillMaster.Api.Areas.HelpPage
+namespace Lynex.BillMaster.Api.Areas.HelpPage.SampleGeneration
 {
     /// <summary>
     /// This class will generate the samples for the help page.
@@ -330,7 +330,7 @@ namespace Lynex.BillMaster.Api.Areas.HelpPage
                         type.Name));
                 }
             }
-            catch (Exception e)
+            catch (System.Exception e)
             {
                 sample = new InvalidSample(String.Format(
                     CultureInfo.CurrentCulture,
@@ -354,7 +354,7 @@ namespace Lynex.BillMaster.Api.Areas.HelpPage
             return sample;
         }
 
-        internal static Exception UnwrapException(Exception exception)
+        internal static System.Exception UnwrapException(System.Exception exception)
         {
             AggregateException aggregateException = exception as AggregateException;
             if (aggregateException != null)

@@ -2,9 +2,9 @@
 using System.Web.Mvc;
 using Castle.Windsor;
 using Castle.Windsor.Installer;
-using WCC.UI.IoC.Factory;
+using Lynex.BillMaster.Api.IoC.Factory;
 
-namespace WCC.UI.IoC
+namespace Lynex.BillMaster.Api.IoC
 {
     public static class IoCContainer
     {

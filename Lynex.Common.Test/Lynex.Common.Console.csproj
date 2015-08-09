@@ -7,8 +7,8 @@
     <ProjectGuid>{CBB544EB-7F8F-4220-8B1E-27833E7F2499}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Lynex.Common.Test</RootNamespace>
-    <AssemblyName>Lynex.Common.Test</AssemblyName>
+    <RootNamespace>Lynex.Common.Console</RootNamespace>
+    <AssemblyName>Lynex.Common.Console</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -53,6 +53,10 @@
     <ProjectReference Include="..\Lynex.BillMaster.Admin.Service\Lynex.BillMaster.Admin.Service.csproj">
       <Project>{8f8ecd46-b8f1-42e4-bf9d-2041100b2936}</Project>
       <Name>Lynex.BillMaster.Admin.Service</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lynex.BillMaster.Database\Lynex.BillMaster.Database.csproj">
+      <Project>{3508b0a7-dcea-4a9c-9bf7-07ff92c7c160}</Project>
+      <Name>Lynex.BillMaster.Database</Name>
     </ProjectReference>
     <ProjectReference Include="..\Lynex.BillMaster.Service\Lynex.BillMaster.Service.csproj">
       <Project>{cff938c4-4b9c-459e-b659-c9505deeaba4}</Project>

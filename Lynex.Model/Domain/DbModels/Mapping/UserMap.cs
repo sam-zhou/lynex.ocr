@@ -24,8 +24,7 @@ namespace Lynex.BillMaster.Model.Domain.DbModels.Mapping
             HasOne(q => q.Wallet).LazyLoad().ForeignKey("User_Wallet_Id");
             HasOne(q => q.UserChallenge).LazyLoad().ForeignKey("User_UserChallenge_Id");
             References(q => q.PermissionRole).Column("PermissionRoleId").ForeignKey("User_Permission_Id");
-            References(q => q.BillingAddress).Column("BillingAddressId").ForeignKey("User_BillingAddress_Id").LazyLoad();
-            References(q => q.PostalAddress).Column("PostalAddressId").ForeignKey("User_PostalAddress_Id").LazyLoad();
+            References(q => q.Address).Column("AddressId").ForeignKey("User_Address_Id").LazyLoad();
             //HasManyToMany(m => m.Users).ParentKeyColumn("UserId").ForeignKeyConstraintNames("User_Patient_Id", "Patient_User_Id").ChildKeyColumn("PatientId").Table("UserPatient").Cascade.SaveUpdate();
         }
     }

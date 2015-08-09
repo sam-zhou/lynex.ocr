@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web.Http.Dependencies;
 using Castle.Windsor;
 
-namespace WCC.UI.IoC.Factory
+namespace Lynex.BillMaster.Api.IoC.Factory
 {
     internal sealed class WindsorDependencyResolver : IDependencyResolver
     {

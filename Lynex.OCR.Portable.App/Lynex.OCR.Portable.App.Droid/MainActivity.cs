@@ -1,13 +1,8 @@
-﻿using System;
-
-using Android.App;
+﻿using Android.App;
 using Android.Content.PM;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 using Android.OS;
 
-namespace Lynex.OCR.Portable.App.Droid
+namespace Lynex.BillMaster.Mobile.Portable.App.Droid
 {
     [Activity(Label = "Lynex.OCR.Portable.App", Icon = "@drawable/icon", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsApplicationActivity

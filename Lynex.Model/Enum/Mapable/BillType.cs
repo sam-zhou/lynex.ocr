@@ -1,16 +1,19 @@
-﻿namespace Lynex.BillMaster.Model.Enum.Mapable
+﻿using System;
+
+namespace Lynex.BillMaster.Model.Enum.Mapable
 {
+    [Flags]
     public enum BillType
     {
         Unknown = 0,
         Electricity = 1,
         Gas = 2,
-        Solar = 3,
-        Water = 4,
-        LandLine = 5,
-        Mobile = 6,
-        Internet = 7,
-        CouncilRate = 8,
-        Mortgage = 9,
+        Solar = 4,
+        Water = 8,
+        LandLine = 16,
+        Mobile = 32,
+        Internet = 64,
+        CouncilRate = 128,
+        Mortgage = 256,
     }
 }

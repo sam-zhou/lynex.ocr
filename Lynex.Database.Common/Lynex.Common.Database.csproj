@@ -54,8 +54,6 @@
   <ItemGroup>
     <Compile Include="DefaultDataFactory\DefaultDataFactoryBase.cs" />
     <Compile Include="DefaultDataFactory\EnumFactory.cs" />
-    <Compile Include="DefaultDataFactory\PermissionRoleFactory.cs" />
-    <Compile Include="DefaultDataFactory\SettingFactory.cs" />
     <Compile Include="IDatabaseService.cs" />
     <Compile Include="DatabaseService.cs" />
     <Compile Include="IQuery.cs" />

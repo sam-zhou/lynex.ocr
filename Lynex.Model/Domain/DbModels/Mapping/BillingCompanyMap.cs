@@ -8,6 +8,7 @@ namespace Lynex.BillMaster.Model.Domain.DbModels.Mapping
         {
             Map(q => q.Name).Length(100).Not.Nullable();
             References(q => q.Address).Column("AddressId").ForeignKey("BillingCompany_Address_Id");
+            Map(q => q.BillTypes).Not.Nullable().CustomType<int>();
         }
     }
 }
