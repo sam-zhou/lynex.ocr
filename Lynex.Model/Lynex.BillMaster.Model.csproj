@@ -56,6 +56,7 @@
     <Compile Include="Domain\DbModels\Bill.cs" />
     <Compile Include="Domain\DbModels\BillingCompany.cs" />
     <Compile Include="Domain\DbModels\Interface\IAddressable.cs" />
+    <Compile Include="Domain\DbModels\Interface\IUser.cs" />
     <Compile Include="Domain\DbModels\Mapping\BillMap.cs" />
     <Compile Include="Domain\DbModels\Mapping\BillingCompanyMap.cs" />
     <Compile Include="Domain\DbModels\Mapping\AddressMap.cs" />

@@ -1,9 +1,11 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
+
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Lynex.BillMaster.Api.Models;
+using NHibernate;
+using NHibernate.AspNet.Identity;
 
 namespace Lynex.BillMaster.Api
 {
@@ -18,7 +20,7 @@ namespace Lynex.BillMaster.Api
 
         public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context)
         {
-            var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(context.Get<ApplicationDbContext>()));
+            var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(context.Get<ISession>()));
             // Configure validation logic for usernames
             manager.UserValidator = new UserValidator<ApplicationUser>(manager)
             {

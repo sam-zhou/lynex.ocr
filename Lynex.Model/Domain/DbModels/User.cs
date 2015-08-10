@@ -4,7 +4,7 @@ using Lynex.Common.Model.DbModel;
 
 namespace Lynex.BillMaster.Model.Domain.DbModels
 {
-    public class User : BaseEntity, IAddressable
+    public class User : BaseEntity, IUser
     {
         public virtual string LastName { get; set; }
 

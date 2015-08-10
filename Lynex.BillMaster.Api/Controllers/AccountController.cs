@@ -8,7 +8,6 @@ using System.Web;
 using System.Web.Http;
 using System.Web.Http.ModelBinding;
 using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
@@ -16,6 +15,7 @@ using Microsoft.Owin.Security.OAuth;
 using Lynex.BillMaster.Api.Models;
 using Lynex.BillMaster.Api.Providers;
 using Lynex.BillMaster.Api.Results;
+using NHibernate.AspNet.Identity;
 
 namespace Lynex.BillMaster.Api.Controllers
 {
