@@ -1,9 +1,9 @@
 ﻿using System.Security.Claims;
 using System.Threading.Tasks;
 using Lynex.BillMaster.Model.Domain.DbModels;
+using Lynex.Common.Model;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
-using NHibernate.AspNet.Identity;
 
 
 namespace Lynex.BillMaster.Api.Models

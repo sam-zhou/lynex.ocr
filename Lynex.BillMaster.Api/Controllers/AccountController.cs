@@ -15,7 +15,7 @@ using Microsoft.Owin.Security.OAuth;
 using Lynex.BillMaster.Api.Models;
 using Lynex.BillMaster.Api.Providers;
 using Lynex.BillMaster.Api.Results;
-using NHibernate.AspNet.Identity;
+using Lynex.Common.Model;
 
 namespace Lynex.BillMaster.Api.Controllers
 {

@@ -39,8 +39,16 @@
       <HintPath>..\packages\Iesi.Collections.4.0.0.4000\lib\net40\Iesi.Collections.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.0\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="NHibernate, Version=4.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <HintPath>..\packages\NHibernate.4.0.3.4000\lib\net40\NHibernate.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NHibernate.Identity, Version=0.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NHibernate.Identity.0.5.0\lib\net\NHibernate.Identity.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -56,7 +64,6 @@
     <Compile Include="Domain\DbModels\Bill.cs" />
     <Compile Include="Domain\DbModels\BillingCompany.cs" />
     <Compile Include="Domain\DbModels\Interface\IAddressable.cs" />
-    <Compile Include="Domain\DbModels\Interface\IUser.cs" />
     <Compile Include="Domain\DbModels\Mapping\BillMap.cs" />
     <Compile Include="Domain\DbModels\Mapping\BillingCompanyMap.cs" />
     <Compile Include="Domain\DbModels\Mapping\AddressMap.cs" />
@@ -87,6 +94,7 @@
     <Compile Include="Settings\Interface\ILynexSettings.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />
