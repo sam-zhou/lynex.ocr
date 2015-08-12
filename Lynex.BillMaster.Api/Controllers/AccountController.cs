@@ -16,6 +16,7 @@ using Lynex.BillMaster.Api.Models;
 using Lynex.BillMaster.Api.Providers;
 using Lynex.BillMaster.Api.Results;
 using Lynex.Common.Model;
+using Lynex.Common.Model.AspNet.Identity;
 
 namespace Lynex.BillMaster.Api.Controllers
 {
@@ -328,7 +329,7 @@ namespace Lynex.BillMaster.Api.Controllers
                 return BadRequest(ModelState);
             }
 
-            var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
+            var user = new ApplicationUser() { UserName = model.Email };
 
             IdentityResult result = await UserManager.CreateAsync(user, model.Password);
 
@@ -357,7 +358,7 @@ namespace Lynex.BillMaster.Api.Controllers
                 return InternalServerError();
             }
 
-            var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
+            var user = new ApplicationUser() { UserName = model.Email };
 
             IdentityResult result = await UserManager.CreateAsync(user);
             if (!result.Succeeded)

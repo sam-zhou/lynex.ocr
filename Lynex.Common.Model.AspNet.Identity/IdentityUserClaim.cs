@@ -1,29 +1,38 @@
-﻿using NHibernate.AspNet.Identity.DomainModel;
-using NHibernate.Mapping.ByCode;
-using NHibernate.Mapping.ByCode.Conformist;
+using System;
+using System.ComponentModel.DataAnnotations;
 
-namespace NHibernate.AspNet.Identity
+namespace Lynex.Common.Model.AspNet.Identity
 {
-    public class IdentityUserClaim : EntityWithTypedId<int>
-    {
-        public virtual string ClaimType { get; set; }
+	public class IdentityUserClaim
+	{
+		public virtual string ClaimType
+		{
+			get;
+			set;
+		}
 
-        public virtual string ClaimValue { get; set; }
+		public virtual string ClaimValue
+		{
+			get;
+			set;
+		}
 
-        public virtual IdentityUser User { get; set; }
-    }
+		[Key]
+		public virtual string Id
+		{
+			get;
+			set;
+		}
 
-    public class IdentityUserClaimMap : ClassMapping<IdentityUserClaim>
-    {
-        public IdentityUserClaimMap()
-        {
-            Table("AspNetUserClaims");
-            Id(x => x.Id, m => m.Generator(Generators.Identity));
-            Property(x => x.ClaimType);
-            Property(x => x.ClaimValue);
+		public virtual IdentityUser User
+		{
+			get;
+			set;
+		}
 
-            ManyToOne(x => x.User, m => m.Column("UserId"));
-        }
-    }
-
+		public IdentityUserClaim()
+		{
+			this.Id = Guid.NewGuid().ToString();
+		}
+	}
 }

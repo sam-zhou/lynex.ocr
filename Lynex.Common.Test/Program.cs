@@ -36,13 +36,13 @@ namespace Lynex.Common.Console
                 var addressService = new AddressService(db);
                 var userService = new UserService(db, addressService);
                 //userService.RegisterUser("samzhou.it@gmail.com", "jukfrg", "0430501022", "zhou", "sam");
-                var user = db.Get<User>(1);
+                var user = db.Get<User>("cb55dd1f-f6d4-4ccc-bc3e-50a73e94b825");
 
 
                 
 
                 var adminBillService = new AdminBillService(db, addressService);
-                var billCompany = db.Get<BillingCompany>(1);
+                var billCompany = db.Get<BillingCompany>(1L);
                 //userService.CreateAddress(user, new Address
                 //{
                 //    AddressLine1 = "8 Arklow Glen",
@@ -87,13 +87,13 @@ namespace Lynex.Common.Console
 
                 //userService.CreateNewChallenge(1);
 
-                var challengeStatus = userService.ChallengeUser(1, "51BC9AD3F3C69A3511AC930BA6493587E3A738EEBF207A14912463286FAF06540D4F620E085AFB975B7FCDD7D1436E75C69FBBC7B6E444D2BD5F6CBA2A9B979A");
+                var challengeStatus = userService.ChallengeUser("cb55dd1f-f6d4-4ccc-bc3e-50a73e94b825", "51BC9AD3F3C69A3511AC930BA6493587E3A738EEBF207A14912463286FAF06540D4F620E085AFB975B7FCDD7D1436E75C69FBBC7B6E444D2BD5F6CBA2A9B979A");
                 System.Console.WriteLine("Challenge 1:" + challengeStatus);
 
-                challengeStatus = userService.ChallengeUser(1, "849749A7F94C35401EE233757095201B150998DF7A49A8335653B533E7A0A87EBA80260831391E754A67AE4058A4274D9A2837ADD22646535D5ACDFA0FC72070");
+                challengeStatus = userService.ChallengeUser("cb55dd1f-f6d4-4ccc-bc3e-50a73e94b825", "849749A7F94C35401EE233757095201B150998DF7A49A8335653B533E7A0A87EBA80260831391E754A67AE4058A4274D9A2837ADD22646535D5ACDFA0FC72070");
                 System.Console.WriteLine("Challenge 2:" + challengeStatus);
 
-                challengeStatus = userService.ChallengeUser(1, "30A44230602E1E0EFC31493E1E480B10A432C327D3E92FE903986D3EA45B4DC6C8601563AB1013EE8C4369152064656B96E5074F8100AD1B94B7AF7DE4C5AB53");
+                challengeStatus = userService.ChallengeUser("cb55dd1f-f6d4-4ccc-bc3e-50a73e94b825", "30A44230602E1E0EFC31493E1E480B10A432C327D3E92FE903986D3EA45B4DC6C8601563AB1013EE8C4369152064656B96E5074F8100AD1B94B7AF7DE4C5AB53");
                 System.Console.WriteLine("Challenge 3:" + challengeStatus);
 
                 //challengeStatus = userService.ChallengeUser(1, "jukfrg");

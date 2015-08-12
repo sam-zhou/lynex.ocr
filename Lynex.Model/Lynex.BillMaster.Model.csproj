@@ -47,10 +47,6 @@
       <HintPath>..\packages\NHibernate.4.0.3.4000\lib\net40\NHibernate.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="NHibernate.Identity, Version=0.5.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\NHibernate.Identity.0.5.0\lib\net\NHibernate.Identity.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -71,7 +67,6 @@
     <Compile Include="Domain\DbModels\Setting.cs" />
     <Compile Include="Domain\DbModels\Wallet.cs" />
     <Compile Include="Domain\SystemSetting.cs" />
-    <Compile Include="Domain\DbModels\PermissionRole.cs" />
     <Compile Include="Domain\DbModels\UserChallenge.cs" />
     <Compile Include="Domain\DbModels\User.cs" />
     <Compile Include="Domain\DbModels\Notification.cs" />
@@ -83,7 +78,6 @@
     <Compile Include="Enum\UserLoginStatus.cs" />
     <Compile Include="Enum\UserChallengeStatus.cs" />
     <Compile Include="Domain\DbModels\Mapping\SettingMap.cs" />
-    <Compile Include="Domain\DbModels\Mapping\PermissionRoleMap.cs" />
     <Compile Include="Domain\DbModels\Mapping\UserChallengeMap.cs" />
     <Compile Include="Domain\DbModels\Mapping\UserMap.cs" />
     <Compile Include="Domain\DbModels\Mapping\NotificationMap.cs" />
@@ -99,6 +93,10 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <ProjectReference Include="..\Lynex.Common.Model.AspNet.Identity\Lynex.Common.Model.AspNet.Identity.csproj">
+      <Project>{3de566d9-f5bb-40ca-be01-9722016ad0c7}</Project>
+      <Name>Lynex.Common.Model.AspNet.Identity</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lynex.Common.Model\Lynex.Common.Model.csproj">
       <Project>{b57351ec-8147-4fc7-b57d-708da025d692}</Project>
       <Name>Lynex.Common.Model</Name>

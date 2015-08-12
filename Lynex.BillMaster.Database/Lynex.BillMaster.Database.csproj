@@ -46,10 +46,6 @@
       <HintPath>..\packages\NHibernate.4.0.3.4000\lib\net40\NHibernate.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="NHibernate.Identity, Version=0.5.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\NHibernate.Identity.0.5.0\lib\net\NHibernate.Identity.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -61,11 +57,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DefaultDataFactory\DevelopmentDataFactory.cs" />
-    <Compile Include="DefaultDataFactory\PermissionRoleFactory.cs" />
-    <Compile Include="DefaultDataFactory\SettingFactory.cs" />
+    <Compile Include="DefaultDataFactory\IdentityRoleFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Lynex.Common.Model.AspNet.Identity\Lynex.Common.Model.AspNet.Identity.csproj">
+      <Project>{3de566d9-f5bb-40ca-be01-9722016ad0c7}</Project>
+      <Name>Lynex.Common.Model.AspNet.Identity</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lynex.Common.Model\Lynex.Common.Model.csproj">
       <Project>{b57351ec-8147-4fc7-b57d-708da025d692}</Project>
       <Name>Lynex.Common.Model</Name>

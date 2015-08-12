@@ -52,7 +52,10 @@ namespace Lynex.Common.Database.FluentNHibernate
                     MsSqlConfiguration.MsSql2012
                         .ConnectionString(q => q.FromConnectionStringWithKey(connectionStringKey)))
                 .Mappings(m =>
-                    m.FluentMappings.AddFromAssembly(assembly).AddFromAssembly(CreateGenericClassMappingAssembly(assembly)));
+                    m.FluentMappings
+                    .AddFromAssembly(assembly)
+                    .AddFromAssembly(Assembly.Load("Lynex.Common.Model.AspNet.Identity"))
+                    .AddFromAssembly(CreateGenericClassMappingAssembly(assembly)));
 #if DEBUG || TRACE
             configuration.ExposeConfiguration(SetInterceptors);
 #endif

@@ -7,7 +7,7 @@ namespace Lynex.BillMaster.Model.Domain.DbModels.Mapping
     {
         public UserChallengeMap()
         {
-            References(x => x.User).ForeignKey("UserChallenge_User_Id").Unique().Column("UserId").Cascade.All();
+            //References(x => x.User).ForeignKey("UserChallenge_User_Id").Unique().Column("UserId").Cascade.All();
             Map(q => q.TryCount).Not.Nullable().Default("0");
             Map(q => q.Challenge).Length(128).Not.Nullable();
             Map(q => q.CreatedAt).CustomType<UtcDateTimeType>().Not.Nullable().Default("getDate()");

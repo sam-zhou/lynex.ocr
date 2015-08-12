@@ -17,10 +17,10 @@ namespace Lynex.Common.Database
         void ExecuteQuery(IExecuteQuery query);
 
 
-        TEntity Get<TEntity>(long entityId) where TEntity : class, IBaseEntity;
+        TEntity Get<TEntity>(object entityId) where TEntity : class, IDbModel;
         TEntity Get<TEntity>() where TEntity : class;
         IEnumerable<TEntity> GetAll<TEntity>() where TEntity : class;
-        void Save<TEntity>(TEntity entity) where TEntity : class, IBaseEntity;
-        void Delete<TEntity>(TEntity entity) where TEntity : class, IBaseEntity;
+        void Save<TEntity>(TEntity entity) where TEntity : class, IDbModel;
+        void Delete<TEntity>(TEntity entity) where TEntity : class, IDbModel;
     }
 }

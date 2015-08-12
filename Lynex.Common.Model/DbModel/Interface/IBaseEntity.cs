@@ -1,6 +1,11 @@
 ﻿namespace Lynex.Common.Model.DbModel.Interface
 {
-    public interface IBaseEntity
+    public interface IDbModel
+    {
+
+    }
+
+    public interface IBaseEntity: IDbModel
     {
         long Id { get; set; }
     }

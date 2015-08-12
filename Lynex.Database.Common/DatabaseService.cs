@@ -100,7 +100,7 @@ namespace Lynex.Common.Database
             query.Execute(Session);
         }
 
-        public TEntity Get<TEntity>(long entityId) where TEntity : class, IBaseEntity
+        public TEntity Get<TEntity>(object entityId) where TEntity : class, IDbModel
         {
             return Session.Get<TEntity>(entityId);
         }
@@ -115,12 +115,12 @@ namespace Lynex.Common.Database
             return Session.QueryOver<TEntity>().List();
         }
 
-        public void Save<TEntity>(TEntity entity) where TEntity : class, IBaseEntity
+        public void Save<TEntity>(TEntity entity) where TEntity : class, IDbModel
         {
             Session.Save(entity);
         }
 
-        public void Delete<TEntity>(TEntity entity) where TEntity : class, IBaseEntity
+        public void Delete<TEntity>(TEntity entity) where TEntity : class, IDbModel
         {
             Session.Delete(entity);
         }

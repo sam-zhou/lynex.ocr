@@ -5,18 +5,19 @@ using Lynex.BillMaster.Model.Domain.DbModels;
 using Lynex.BillMaster.Model.Enum.Mapable;
 using Lynex.Common.Database.DefaultDataFactory;
 using Lynex.Common.Extension;
+using Lynex.Common.Model.AspNet.Identity;
 using Lynex.Common.Model.DbModel.Interface;
 using NHibernate;
 
 namespace Lynex.BillMaster.Database.DefaultDataFactory
 {
-    internal class DevelopmentDataFactory : DefaultDataFactoryBase<IBaseEntity>
+    internal class DevelopmentDataFactory : DefaultDataFactoryBase<IDbModel>
     {
         public DevelopmentDataFactory(ISession session, Assembly assembly) : base(session, assembly)
         {
         }
 
-        protected override IEnumerable<IBaseEntity> GetData(Assembly assembly = null)
+        protected override IEnumerable<IDbModel> GetData(Assembly assembly = null)
         {
             var salt = StringHelper.GenerateSalt();
             var hash = StringHelper.GetHash("jukfrg", salt, MD5.Create());
@@ -30,20 +31,20 @@ namespace Lynex.BillMaster.Database.DefaultDataFactory
                 Salt = salt,
                 Hash = hash,
                 Active = true,
-                PermissionRole = PermissionRole.User
+                Id= "cb55dd1f-f6d4-4ccc-bc3e-50a73e94b825"
             };
 
             
 
-            var challenge = new UserChallenge(StringHelper.GenerateSalt(64)) { User = user };
+            var challenge = new UserChallenge(StringHelper.GenerateSalt(64));
             user.UserChallenge = challenge;
 
-            var wallet = new Wallet { User = user };
+            var wallet = new Wallet();
             user.Wallet = wallet;
 
             yield return user;
-            yield return challenge;
-            yield return wallet;
+            //yield return challenge;
+            //yield return wallet;
 
 
 

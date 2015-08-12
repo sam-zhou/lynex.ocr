@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Lynex.BillMaster.Model.Domain.DbModels;
 using Lynex.Common.Model;
+using Lynex.Common.Model.AspNet.Identity;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 

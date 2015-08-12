@@ -1,12 +1,38 @@
-﻿using NHibernate.AspNet.Identity.DomainModel;
+using System;
+using System.ComponentModel.DataAnnotations;
 
-namespace NHibernate.AspNet.Identity
+namespace Lynex.Common.Model.AspNet.Identity
 {
-    public class IdentityUserLogin : ValueObject
-    {
-        public virtual string LoginProvider { get; set; }
+	public class IdentityUserLogin
+	{
+		[Key]
+		public virtual string Id
+		{
+			get;
+			set;
+		}
 
-        public virtual string ProviderKey { get; set; }
+		public virtual string LoginProvider
+		{
+			get;
+			set;
+		}
 
-    }
+		public virtual string ProviderKey
+		{
+			get;
+			set;
+		}
+
+		public virtual IdentityUser User
+		{
+			get;
+			set;
+		}
+
+		public IdentityUserLogin()
+		{
+			this.Id = Guid.NewGuid().ToString();
+		}
+	}
 }
