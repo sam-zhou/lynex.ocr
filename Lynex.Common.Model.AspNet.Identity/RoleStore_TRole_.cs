@@ -26,12 +26,12 @@ namespace Lynex.Common.Model.AspNet.Identity
 			{
 				throw new ArgumentNullException("session");
 			}
-			this.Session = session;
+			Session = session;
 		}
 
 		internal RoleStore(IEntityStore<TRole> roleStore)
 		{
-			this._roleStore = roleStore;
+			_roleStore = roleStore;
 		}
 
 		public async Task CreateAsync(TRole role)
