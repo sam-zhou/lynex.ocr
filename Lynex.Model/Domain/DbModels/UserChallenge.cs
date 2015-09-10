@@ -13,8 +13,6 @@ namespace Lynex.BillMaster.Model.Domain.DbModels
 
         public virtual int TryCount { get; set; }
 
-        public virtual User User { get; set; }
-
         public virtual DateTime LocalCreatedAt
         {
             get { return CreatedAt.ToLocalTime(); }

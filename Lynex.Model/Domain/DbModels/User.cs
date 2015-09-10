@@ -1,11 +1,34 @@
 ﻿using System;
+using System.Collections.Generic;
 using Lynex.BillMaster.Model.Domain.DbModels.Interface;
+using Lynex.Common.Model.AspNet.Identity;
 using Lynex.Common.Model.DbModel;
+using Lynex.Common.Model.DbModel.Interface;
+using Microsoft.AspNet.Identity;
 
 namespace Lynex.BillMaster.Model.Domain.DbModels
 {
-    public class User : BaseEntity, IUser
+    public class User : IdentityUser, IAddressable, IDbModel
     {
+        public User()
+        {
+            foreach (var property in GetType().GetProperties())
+            {
+                if (property.SetMethod != null)
+                {
+                    if (property.PropertyType.IsGenericType && property.PropertyType.GetInterface(typeof(IEnumerable<>).FullName) != null && !property.PropertyType.IsInterface)
+                    {
+                        property.SetValue(this, Activator.CreateInstance(property.PropertyType));
+                    }
+                    else if (property.PropertyType == typeof(DateTime))
+                    {
+                        property.SetValue(this, DateTime.UtcNow);
+                    }
+                }
+
+            }
+        }
+
         public virtual string LastName { get; set; }
 
         public virtual string FirstName { get; set; }
@@ -34,7 +57,6 @@ namespace Lynex.BillMaster.Model.Domain.DbModels
 
         public virtual UserChallenge UserChallenge { get; set; }
 
-        public virtual PermissionRole PermissionRole { get; set; }
 
         public virtual DateTime? LastLogin { get; set; }
 

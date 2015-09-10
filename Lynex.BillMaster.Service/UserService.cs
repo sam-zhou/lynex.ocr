@@ -51,18 +51,15 @@ namespace Lynex.BillMaster.Service
                     Salt = salt,
                     Hash = hash,
                     Active = true,
-                    PermissionRole = PermissionRole.User
                 };
 
-                var challenge = new UserChallenge(StringHelper.GenerateSalt(64)) { User = user };
+                var challenge = new UserChallenge(StringHelper.GenerateSalt(64));
                 user.UserChallenge = challenge;
 
-                var wallet = new Wallet { User = user };
+                var wallet = new Wallet();
                 user.Wallet = wallet;
 
                 DatabaseService.Save(user);
-                DatabaseService.Save(challenge);
-                DatabaseService.Save(wallet);
                 DatabaseService.CommitTransaction();
                 return user;
             }
@@ -73,7 +70,7 @@ namespace Lynex.BillMaster.Service
             }
         }
 
-        public void CreateNewChallenge(long id)
+        public void CreateNewChallenge(string id)
         {
             var user = DatabaseService.Get<User>(id);
             try
@@ -162,7 +159,7 @@ namespace Lynex.BillMaster.Service
             return status;
         }
 
-        public UserChallengeStatus ChallengeUser(long id, string challenge)
+        public UserChallengeStatus ChallengeUser(string id, string challenge)
         {
             UserChallengeStatus status;
 
@@ -213,8 +210,8 @@ namespace Lynex.BillMaster.Service
                     else
                     {
                         var userChallenge = new UserChallenge(StringHelper.GenerateSalt(64));
-                        userChallenge.User = user;
-                        DatabaseService.Save(userChallenge);
+                        user.UserChallenge = userChallenge;
+                        DatabaseService.Save(user);
                         status = UserChallengeStatus.TryAgain;
                     }
                 }
@@ -237,20 +234,20 @@ namespace Lynex.BillMaster.Service
 
         public void CreateAddress(User user, Address newAddress)
         {
-            var theUser = DatabaseService.Get<User>(user.Id);
-            if (theUser != null)
-            {
-                theUser.Address = ((AddressService) _addressService).CreateAddress(newAddress);
-                DatabaseService.Save(theUser);
-            }
-            else
-            {
-                throw new EntityNotFoundException<User>(user);
-            }
+            //var theUser = DatabaseService.Get<User>(user.Id);
+            //if (theUser != null)
+            //{
+            //    theUser.Address = ((AddressService) _addressService).CreateAddress(newAddress);
+            //    DatabaseService.Save(theUser);
+            //}
+            //else
+            //{
+            //    throw new EntityNotFoundException<User>(user);
+            //}
 
         }
 
-        public User GetUser(long id)
+        public User GetUser(string id)
         {
             return DatabaseService.Get<User>(id);
         }

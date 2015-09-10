@@ -1,11 +1,12 @@
 ﻿using System.Threading.Tasks;
-using Microsoft.AspNet.Identity;
-
-using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Lynex.BillMaster.Api.Models;
+using Lynex.Common.Model;
+using Lynex.Common.Model.AspNet.Identity;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 using NHibernate;
-using NHibernate.AspNet.Identity;
+
 
 namespace Lynex.BillMaster.Api
 {
