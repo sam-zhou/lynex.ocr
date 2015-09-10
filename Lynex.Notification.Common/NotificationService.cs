@@ -1,4 +1,5 @@
 ﻿using Lynex.BillMaster.Model.Domain.DbModels;
+using Lynex.BillMaster.Model.Domain.DbModels.Interface;
 using Lynex.BillMaster.Model.Enum;
 using Lynex.Notification.Common.Model;
 
@@ -6,7 +7,7 @@ namespace Lynex.Notification.Common
 {
     public interface INotificationService
     {
-        bool SendNotification(TestResult dosage, User receiver);
+        bool SendNotification(IUser receiver);
     }
 
     public abstract class NotificationService<TModel>: INotificationService where TModel: class, INotificationModel
@@ -18,6 +19,6 @@ namespace Lynex.Notification.Common
             FormatProvider = new NotificationFormatProvider<TModel>(type);
         }
 
-        public abstract bool SendNotification(TestResult dosage, User receiver);
+        public abstract bool SendNotification(IUser receiver);
     }
 }

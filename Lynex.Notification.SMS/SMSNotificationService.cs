@@ -1,4 +1,5 @@
 ﻿using Lynex.BillMaster.Model.Domain.DbModels;
+using Lynex.BillMaster.Model.Domain.DbModels.Interface;
 using Lynex.BillMaster.Model.Settings.Interface;
 using Lynex.Notification.Common;
 using Lynex.Notification.SMS.Model;
@@ -21,9 +22,9 @@ namespace Lynex.Notification.SMS
         }
 
 
-        public override bool SendNotification(TestResult testResult, User receiver)
+        public override bool SendNotification(IUser receiver)
         {
-            var item = FormatProvider.GetFormattedModel(testResult, receiver);
+            var item = FormatProvider.GetFormattedModel(receiver);
             
             return true;
         }

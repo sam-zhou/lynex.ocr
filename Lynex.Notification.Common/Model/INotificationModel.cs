@@ -1,15 +1,18 @@
-﻿using Lynex.BillMaster.Model.Domain.DbModels;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Lynex.BillMaster.Model.Domain.DbModels.Interface;
 
 namespace Lynex.Notification.Common.Model
 {
     public interface INotificationModel
     {
-        User Receiver { get; }
+        string Template { get;  }
 
         string Body { get;  }
 
-        TestResult TestResult { get; }
-
-        User User { get; }
+        IUser Receiver { get;  }
     }
 }

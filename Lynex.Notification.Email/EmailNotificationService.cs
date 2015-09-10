@@ -3,6 +3,7 @@ using System.Net;
 using System.Net.Mail;
 using System.Text;
 using Lynex.BillMaster.Model.Domain.DbModels;
+using Lynex.BillMaster.Model.Domain.DbModels.Interface;
 using Lynex.BillMaster.Model.Settings.Interface;
 using Lynex.Notification.Common;
 using Lynex.Notification.Email.Model;
@@ -25,9 +26,9 @@ namespace Lynex.Notification.Email
         }
 
 
-        public override bool SendNotification(User receiver)
+        public override bool SendNotification(IUser receiver)
         {
-            var item = FormatProvider.GetFormattedModel(testResult, receiver);
+            var item = FormatProvider.GetFormattedModel(receiver);
 
             try
             {

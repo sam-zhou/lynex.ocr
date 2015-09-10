@@ -1,4 +1,5 @@
 ﻿using Lynex.BillMaster.Model.Domain.DbModels;
+using Lynex.BillMaster.Model.Domain.DbModels.Interface;
 using Lynex.Notification.Common.Model;
 
 namespace Lynex.Notification.Email.Model
@@ -13,10 +14,9 @@ namespace Lynex.Notification.Email.Model
 
         public bool IsHtml { get; set; }
 
-        public EmailModel(TestResult testResult, User receiver, string template)
-            : base(testResult, receiver, template)
+        public EmailModel(IUser receiver, string template)
+            : base(receiver, template)
         {
-            Subject = string.Format("You TestResult {0:dd/MM/yyyy} is availavle for view", testResult.LocalCreatedAt);
             Body = template;
         }
     }
