@@ -8,13 +8,13 @@ namespace Lynex.BillMaster.Api.IoC
 {
     public static class IoCContainer
     {
-        private static IWindsorContainer _container;
+        public static IWindsorContainer Container;
 
         public static void Setup()
         {
-            _container = new WindsorContainer().Install(FromAssembly.This());
-            GlobalConfiguration.Configuration.DependencyResolver = new WindsorDependencyResolver(_container);
-            var controllerFactory = new WindsorControllerFactory(_container.Kernel);
+            Container = new WindsorContainer().Install(FromAssembly.This());
+            GlobalConfiguration.Configuration.DependencyResolver = new WindsorDependencyResolver(Container);
+            var controllerFactory = new WindsorControllerFactory(Container.Kernel);
             ControllerBuilder.Current.SetControllerFactory(controllerFactory);
         }
     }

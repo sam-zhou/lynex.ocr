@@ -30,7 +30,7 @@ namespace Lynex.Common.Database
             }
         }
 
-        protected ISession Session
+        public ISession Session
         {
             get
             {

@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using Lynex.Common.Model.DbModel.Interface;
+using NHibernate;
 
 namespace Lynex.Common.Database
 {
     public interface IDatabaseService: IDisposable
     {
+        ISession Session { get; }
         void ResetDatabase();
 
         void BeginTransaction();
