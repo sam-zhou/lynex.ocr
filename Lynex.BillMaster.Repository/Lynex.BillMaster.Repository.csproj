@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BillRepo\GetBillsByUser.cs" />
+    <Compile Include="GetItems.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserRepo\GetUserByEmail.cs" />
     <Compile Include="UserRepo\IsEmailUnique.cs" />
@@ -69,6 +70,10 @@
     <ProjectReference Include="..\Lynex.Common.Model\Lynex.Common.Model.csproj">
       <Project>{b57351ec-8147-4fc7-b57d-708da025d692}</Project>
       <Name>Lynex.Common.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lynex.Common\Lynex.Common.Extension.csproj">
+      <Project>{dc5a98a7-e6de-41dc-aaf8-ff08e24827b1}</Project>
+      <Name>Lynex.Common.Extension</Name>
     </ProjectReference>
     <ProjectReference Include="..\Lynex.Database.Common\Lynex.Common.Database.csproj">
       <Project>{54371d7e-5d3a-4a58-91cf-2d497f891fc1}</Project>

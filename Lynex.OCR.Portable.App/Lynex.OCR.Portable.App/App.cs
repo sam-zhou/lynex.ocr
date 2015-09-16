@@ -1,5 +1,7 @@
 ﻿using Lynex.BillMaster.Mobile.View;
+using Lynex.BillMaster.Mobile.View.UserViews;
 using Lynex.BillMaster.Mobile.ViewModel;
+using Lynex.BillMaster.Mobile.ViewModel.UserViewModels;
 using Xamarin.Forms;
 
 namespace Lynex.BillMaster.Mobile.Portable.App
@@ -11,30 +13,14 @@ namespace Lynex.BillMaster.Mobile.Portable.App
 
 
             // The root page of your application
-            MainPage = new HomePage
+            MainPage = new RegistrationView();
+
+            var loginViewModel = new RegistrationViewModel
             {
-                //Content = new StackLayout
-                //{
-                //    VerticalOptions = LayoutOptions.Center,
-                //    Children = {
-                //        new Label {
-                //            XAlign = TextAlignment.Center,
-                //            Text = "Welcome to Lynex BillMaster"
-                //        },
-                //        new Label {
-                //            XAlign = TextAlignment.Center,
-                //            Text = "Author: Sam Zhou"
-                //        }
-                //    }
-                //}
+                IsRegisterButtonEnabled = true,
             };
 
-            var loginViewModel = new LoginViewModel
-            {
-                IsLoginButtonEnabled = true,
-            };
-
-            loginViewModel.LoginClicked = new Command(LoginClicked);
+            loginViewModel.RegisterClicked = new Command(LoginClicked);
             MainPage.BindingContext = loginViewModel;
         }
 

@@ -1,7 +1,6 @@
-﻿using System.Xml.Serialization;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 
-namespace Lynex.BillMaster.Mobile.ViewModel
+namespace Lynex.BillMaster.Mobile.ViewModel.UserViewModels
 {
     public class LoginViewModel
     {

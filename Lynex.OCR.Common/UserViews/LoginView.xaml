@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms"
+             x:Class="Lynex.BillMaster.Mobile.View.UserViews.LoginView" BackgroundColor="White">
+  <ContentPage.Resources>
+    <ResourceDictionary>
+      <Style TargetType="Label">
+        <Setter Property="TextColor" Value="Black" />
+        <Setter Property="FontSize">
+          <OnPlatform x:TypeArguments="x:Double"
+      iOS="14"
+      Android="18" />
+        </Setter>
+      </Style>
+    </ResourceDictionary>
+  </ContentPage.Resources>
+
+  <Grid RowSpacing="20">
+    <Grid.Padding>
+      <OnPlatform x:TypeArguments="Thickness"
+      iOS="30, 40, 20, 10"
+      Android="30, 40, 30, 10"
+                  WinPhone="30, 40, 30, 10" />
+    </Grid.Padding>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="*" />
+      <ColumnDefinition Width="*" />
+    </Grid.ColumnDefinitions>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="*" />
+    </Grid.RowDefinitions>
+    <Label Grid.Row="0" Grid.ColumnSpan="2" XAlign="Center" FontAttributes="Bold" TextColor="Black" Text="Welcome to BillMaster!">
+      <Label.FontSize>
+        <OnPlatform x:TypeArguments="x:Double"
+      iOS="20"
+      Android="26"
+      WinPhone="26" />
+      </Label.FontSize>
+    </Label>
+    <StackLayout Grid.Row="1" Grid.ColumnSpan="2" VerticalOptions="Start">
+      <controls:ExtendedEntry Placeholder="Email/Mobile" Text="{Binding UserName}" Keyboard="Email"
+   HorizontalOptions="FillAndExpand" VerticalOptions="Center" TextColor="Black">
+        <controls:ExtendedEntry.Triggers>
+          <Trigger TargetType="Entry" Property="IsEnabled" Value="False">
+            <Setter Property="TextColor" Value="Gray" />
+          </Trigger>
+        </controls:ExtendedEntry.Triggers>
+      </controls:ExtendedEntry>
+
+      <controls:ExtendedEntry Placeholder="Password" Text="{Binding Password}" Keyboard="Text"
+   HorizontalOptions="FillAndExpand" VerticalOptions="Center" TextColor="Black" IsPassword="True">
+        <controls:ExtendedEntry.Triggers>
+          <Trigger TargetType="Entry" Property="IsEnabled" Value="False">
+            <Setter Property="TextColor" Value="Gray" />
+          </Trigger>
+        </controls:ExtendedEntry.Triggers>
+      </controls:ExtendedEntry>
+
+      <Button Text="Login" Command="{Binding LoginClicked}" IsEnabled="{Binding IsLoginButtonEnabled}" />
+
+    </StackLayout>
+
+    <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" FontAttributes="Bold" Text="What?" />
+    <StackLayout Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" VerticalOptions="Start">
+      <Label Text="This application works together with the Xamarin Forms Player extension for Visual Studio." />
+
+    </StackLayout>
+  </Grid>
+</ContentPage>

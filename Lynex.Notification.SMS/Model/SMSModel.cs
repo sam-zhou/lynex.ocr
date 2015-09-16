@@ -6,8 +6,8 @@ namespace Lynex.Notification.SMS.Model
 {
     public class SMSModel : NotificationModel, ISMSModel
     {
-        public SMSModel(IUser sender, IUser receiver, string template)
-            : base(sender, receiver, template)
+        public SMSModel(IUser receiver, string template)
+            : base(receiver, template)
         {
             
         }

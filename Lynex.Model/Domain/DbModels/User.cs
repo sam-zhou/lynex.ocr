@@ -8,7 +8,7 @@ using Microsoft.AspNet.Identity;
 
 namespace Lynex.BillMaster.Model.Domain.DbModels
 {
-    public class User : IdentityUser, IAddressable, IDbModel
+    public class User : IdentityUser, IAddressable, IDbModel, Interface.IUser
     {
         public User()
         {
