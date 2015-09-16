@@ -228,6 +228,7 @@
     <Compile Include="IoC\Factory\WindsorDependencyScope.cs" />
     <Compile Include="IoC\Installers\ApiControllerInstaller.cs" />
     <Compile Include="IoC\Installers\ControllerInstaller.cs" />
+    <Compile Include="IoC\Installers\AuthInstaller.cs" />
     <Compile Include="IoC\Installers\ServiceInstaller.cs" />
     <Compile Include="IoC\Installers\SettingInstaller.cs" />
     <Compile Include="IoC\IoCContainer.cs" />

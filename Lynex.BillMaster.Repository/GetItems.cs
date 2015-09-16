@@ -91,12 +91,29 @@ namespace Lynex.BillMaster.Repository
 
             var firstFilter = filter.Filters[0];
             filter.Filters.RemoveAt(0);
+            var lhs = GetCriterion(firstFilter);
+            var rhs = GetCriterion(filter);
 
-            if (filter is OrFilter)
+
+            if (lhs != null)
             {
-                return Restrictions.Or(GetCriterion(firstFilter), GetCriterion(filter));
+                if (rhs != null)
+                {
+                    if (filter is OrFilter)
+                    {
+                        return Restrictions.Or(lhs, rhs);
+                    }
+                    return Restrictions.And(lhs, rhs);
+                }
+                else
+                {
+                    return lhs;
+                }
             }
-            return Restrictions.And(GetCriterion(firstFilter), GetCriterion(filter));
+            else
+            {
+                return rhs;
+            }
         }
 
     }
