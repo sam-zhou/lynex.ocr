@@ -10,7 +10,7 @@ using NHibernate.Linq;
 
 namespace Lynex.BillMaster.Repository.UserRepo
 {
-    public class GetUserByEmail : IGetItemQuery<User>
+    public class GetUserByEmail : IGetItemQuery<ApplicationUser>
     {
         private readonly string _email;
 
@@ -19,9 +19,9 @@ namespace Lynex.BillMaster.Repository.UserRepo
             _email = email;
         }
 
-        public User Execute(ISession session)
+        public ApplicationUser Execute(ISession session)
         {
-            return session.Query<User>().FirstOrDefault(x => x.Email == _email);
+            return session.Query<ApplicationUser>().FirstOrDefault(x => x.UserName == _email);
         }
     }
 }

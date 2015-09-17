@@ -28,7 +28,7 @@ namespace Lynex.BillMaster.Api.Controllers
         // GET api/values/5
         public string Get(string id)
         {
-            return _userService.GetUser(id).FirstName;
+            return _userService.GetUser(id).UserName;
         }
 
         // POST api/values

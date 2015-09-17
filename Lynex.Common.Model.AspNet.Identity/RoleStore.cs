@@ -7,7 +7,7 @@ using NHibernate;
 
 namespace Lynex.Common.Model.AspNet.Identity
 {
-	public class RoleStore<TRole> : IRoleStore<TRole>, IDisposable
+	public class RoleStore<TRole> : IRoleStore<TRole>
 	where TRole : IdentityRole
 	{
 		private IEntityStore<TRole> _roleStore;
@@ -24,7 +24,7 @@ namespace Lynex.Common.Model.AspNet.Identity
 		{
 			if (session == null)
 			{
-				throw new ArgumentNullException("session");
+				throw new ArgumentNullException(nameof(session));
 			}
 			Session = session;
 		}
@@ -36,67 +36,67 @@ namespace Lynex.Common.Model.AspNet.Identity
 
 		public async Task CreateAsync(TRole role)
 		{
-			this.ThrowIfDisposed();
+			ThrowIfDisposed();
 			if (role == null)
 			{
-				throw new ArgumentNullException("role");
+				throw new ArgumentNullException(nameof(role));
 			}
-			await this._roleStore.Save(role);
+			await _roleStore.Save(role);
 		}
 
 		public async Task DeleteAsync(TRole role)
 		{
-			this.ThrowIfDisposed();
+			ThrowIfDisposed();
 			if (role == null)
 			{
-				throw new ArgumentNullException("role");
+				throw new ArgumentNullException(nameof(role));
 			}
-			await this._roleStore.Delete(role);
+			await _roleStore.Delete(role);
 		}
 
 		public void Dispose()
 		{
-			this._disposed = true;
-			if (this.Session != null)
+			_disposed = true;
+			if (Session != null)
 			{
-				this.Session.Dispose();
-				this.Session = null;
+				Session.Dispose();
+				Session = null;
 			}
-			this._roleStore = null;
+			_roleStore = null;
 		}
 
 		public async Task<TRole> FindByIdAsync(string roleId)
 		{
-			this.ThrowIfDisposed();
-			IQueryable<TRole> tRoles = await this._roleStore.Records();
-			TRole tRole = tRoles.SingleOrDefault<TRole>((TRole w) => w.Id == roleId);
+			ThrowIfDisposed();
+			var tRoles = await _roleStore.Records();
+			var tRole = tRoles.SingleOrDefault(w => w.Id == roleId);
 			return tRole;
 		}
 
 		public async Task<TRole> FindByNameAsync(string roleName)
 		{
-			this.ThrowIfDisposed();
-			IQueryable<TRole> tRoles = await this._roleStore.Records();
-			TRole tRole = tRoles.SingleOrDefault<TRole>((TRole w) => string.Equals(w.Name, roleName, StringComparison.CurrentCultureIgnoreCase));
+			ThrowIfDisposed();
+			var tRoles = await _roleStore.Records();
+			var tRole = tRoles.SingleOrDefault(w => string.Equals(w.Name, roleName, StringComparison.CurrentCultureIgnoreCase));
 			return tRole;
 		}
 
 		private void ThrowIfDisposed()
 		{
-			if (this._disposed)
+			if (_disposed)
 			{
-				throw new ObjectDisposedException(this.GetType().Name);
+				throw new ObjectDisposedException(GetType().Name);
 			}
 		}
 
 		public async Task UpdateAsync(TRole role)
 		{
-			this.ThrowIfDisposed();
+			ThrowIfDisposed();
 			if (role == null)
 			{
-				throw new ArgumentNullException("role");
+				throw new ArgumentNullException(nameof(role));
 			}
-			await this._roleStore.Save(role);
+			await _roleStore.Save(role);
 		}
 	}
 }

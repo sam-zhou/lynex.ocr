@@ -23,6 +23,6 @@ namespace Lynex.BillMaster.Model.Domain.DbModels
 
         public virtual BillType BillType { get; set; }
 
-        public virtual User User { get; set; }
+        public virtual ApplicationUser User { get; set; }
     }
 }

@@ -49,7 +49,7 @@ namespace Lynex.Common.Model.AspNet.Identity.Internal
 			}
 		}
 
-		internal static string ValueCannotBeNullOrEmpty
+        internal static string ValueCannotBeNullOrEmpty
 		{
 			get
 			{

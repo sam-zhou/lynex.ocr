@@ -21,7 +21,7 @@ namespace Lynex.BillMaster.Repository.UserRepo
 
         public bool Execute(ISession session)
         {
-            return !session.Query<User>().Any(x => x.Email == _email);
+            return !session.Query<ApplicationUser>().Any(x => x.UserName == _email);
         }
     }
 }

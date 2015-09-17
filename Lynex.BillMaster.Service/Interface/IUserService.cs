@@ -6,9 +6,9 @@ namespace Lynex.BillMaster.Service.Interface
 {
     public interface IUserService
     {
-        User GetUser(string id);
+        ApplicationUser GetUser(string id);
 
-        User RegisterUser(string email, string password, string mobile, string lastName, string firstName);
+        ApplicationUser RegisterUser(string email, string password, string mobile, string lastName, string firstName);
 
         bool IsEmailUnique(string email);
 
@@ -18,6 +18,6 @@ namespace Lynex.BillMaster.Service.Interface
 
         void CreateNewChallenge(string id);
 
-        void CreateAddress(User user, Address newAddress);
+        void CreateAddress(ApplicationUser user, Address newAddress);
     }
 }

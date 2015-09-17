@@ -2,6 +2,7 @@
 using Lynex.BillMaster.Api.IoC;
 using Microsoft.Owin;
 using Lynex.BillMaster.Api.Models;
+using Lynex.BillMaster.Model.Domain.DbModels;
 using Lynex.Common.Database;
 using Lynex.Common.Model;
 using Lynex.Common.Model.AspNet.Identity;

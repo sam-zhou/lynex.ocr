@@ -38,12 +38,16 @@
       <HintPath>..\packages\Iesi.Collections.4.0.0.4000\lib\net40\Iesi.Collections.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.AspNet.Identity.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.1.0.0\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="NHibernate, Version=4.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
-      <HintPath>..\packages\NHibernate.4.0.0.4000\lib\net40\NHibernate.dll</HintPath>
+      <HintPath>..\packages\NHibernate.4.0.4.4000\lib\net40\NHibernate.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="NHibernate.Identity, Version=0.5.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -67,6 +71,10 @@
     <Compile Include="UserRepo\IsEmailUnique.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Lynex.Common.Model.AspNet.Identity\Lynex.Common.Model.AspNet.Identity.csproj">
+      <Project>{3de566d9-f5bb-40ca-be01-9722016ad0c7}</Project>
+      <Name>Lynex.Common.Model.AspNet.Identity</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lynex.Common.Model\Lynex.Common.Model.csproj">
       <Project>{b57351ec-8147-4fc7-b57d-708da025d692}</Project>
       <Name>Lynex.Common.Model</Name>

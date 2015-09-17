@@ -26,7 +26,7 @@ namespace Lynex.BillMaster.Service
             _addressService = addressService;
         }
 
-        public User RegisterUser(string email, string password, string mobile, string lastName, string firstName)
+        public ApplicationUser RegisterUser(string email, string password, string mobile, string lastName, string firstName)
         {
             email = email.ToLower();
 
@@ -42,14 +42,14 @@ namespace Lynex.BillMaster.Service
                 var salt = StringHelper.GenerateSalt();
                 var hash = StringHelper.GetHash(password, salt, MD5.Create());
 
-                var user = new User
+                var user = new ApplicationUser
                 {
-                    Email = email,
-                    LastName = lastName.ToTitleCase(),
-                    FirstName = firstName.ToTitleCase(),
-                    Mobile = mobile,
-                    Salt = salt,
-                    Hash = hash,
+                    UserName = email,
+                    //LastName = lastName.ToTitleCase(),
+                    //FirstName = firstName.ToTitleCase(),
+                    //Mobile = mobile,
+                    //Salt = salt,
+                    //Hash = hash,
                     Active = true,
                 };
 
@@ -72,7 +72,7 @@ namespace Lynex.BillMaster.Service
 
         public void CreateNewChallenge(string id)
         {
-            var user = DatabaseService.Get<User>(id);
+            var user = DatabaseService.Get<ApplicationUser>(id);
             try
             {
                 DatabaseService.BeginTransaction();
@@ -105,51 +105,51 @@ namespace Lynex.BillMaster.Service
             var user = DatabaseService.Get(new GetUserByEmail(email));
             if (user != null)
             {
-                if (user.LoginAttempt >= 5 && user.LastFailedLogin.HasValue && user.LastFailedLogin.Value.AddHours(1) >= DateTime.UtcNow)
-                {
-                    status = UserLoginStatus.OverTryLimit;
-                }
-                else
-                {
-                    try
-                    {
-                        DatabaseService.BeginTransaction();
-                        if (user.LoginAttempt >= 5)
-                        {
-                            user.LoginAttempt = 0;
-                        }
+                //if (user.LoginAttempt >= 5 && user.LastFailedLogin.HasValue && user.LastFailedLogin.Value.AddHours(1) >= DateTime.UtcNow)
+                //{
+                //    status = UserLoginStatus.OverTryLimit;
+                //}
+                //else
+                //{
+                //    try
+                //    {
+                //        DatabaseService.BeginTransaction();
+                //        if (user.LoginAttempt >= 5)
+                //        {
+                //            user.LoginAttempt = 0;
+                //        }
 
-                        var hash = StringHelper.GetHash(password, user.Salt, MD5.Create());
-                        if (hash != user.Hash)
-                        {
-                            status = UserLoginStatus.PasswordMismatch;
-                            user.LoginAttempt++;
-                            user.LastFailedLogin = DateTime.UtcNow;
-                        }
-                        else if (!user.IsVerified)
-                        {
-                            status = UserLoginStatus.Unverified;
-                            user.LastFailedLogin = DateTime.UtcNow;
-                        }
-                        else if (!user.Active)
-                        {
-                            status = UserLoginStatus.UserDisabled;
-                            user.LastFailedLogin = DateTime.UtcNow;
-                        }
-                        else
-                        {
-                            user.LastLogin = DateTime.UtcNow;
-                        }
-                        DatabaseService.Save(user);
-                        DatabaseService.CommitTransaction();
-                    }
-                    catch (System.Exception)
-                    {
-                        DatabaseService.RollBackTransaction();
-                        status = UserLoginStatus.UnknownException;
-                    }
+                //        var hash = StringHelper.GetHash(password, user.Salt, MD5.Create());
+                //        if (hash != user.Hash)
+                //        {
+                //            status = UserLoginStatus.PasswordMismatch;
+                //            user.LoginAttempt++;
+                //            user.LastFailedLogin = DateTime.UtcNow;
+                //        }
+                //        else if (!user.IsVerified)
+                //        {
+                //            status = UserLoginStatus.Unverified;
+                //            user.LastFailedLogin = DateTime.UtcNow;
+                //        }
+                //        else if (!user.Active)
+                //        {
+                //            status = UserLoginStatus.UserDisabled;
+                //            user.LastFailedLogin = DateTime.UtcNow;
+                //        }
+                //        else
+                //        {
+                //            user.LastLogin = DateTime.UtcNow;
+                //        }
+                //        DatabaseService.Save(user);
+                //        DatabaseService.CommitTransaction();
+                //    }
+                //    catch (System.Exception)
+                //    {
+                //        DatabaseService.RollBackTransaction();
+                //        status = UserLoginStatus.UnknownException;
+                //    }
                     
-                }
+                //}
                 
             }
             else
@@ -163,7 +163,7 @@ namespace Lynex.BillMaster.Service
         {
             UserChallengeStatus status;
 
-            var user = DatabaseService.Get<User>(id);
+            var user = DatabaseService.Get<ApplicationUser>(id);
             if (user != null)
             {
                 if (!user.IsVerified)
@@ -227,12 +227,12 @@ namespace Lynex.BillMaster.Service
             return status;
         }
 
-        void IUserService.CreateAddress(User user, Address newAddress)
+        void IUserService.CreateAddress(ApplicationUser user, Address newAddress)
         {
             SingleTransactionAction(CreateAddress, user, newAddress);
         }
 
-        public void CreateAddress(User user, Address newAddress)
+        public void CreateAddress(ApplicationUser user, Address newAddress)
         {
             //var theUser = DatabaseService.Get<User>(user.Id);
             //if (theUser != null)
@@ -247,9 +247,9 @@ namespace Lynex.BillMaster.Service
 
         }
 
-        public User GetUser(string id)
+        public ApplicationUser GetUser(string id)
         {
-            return DatabaseService.Get<User>(id);
+            return DatabaseService.Get<ApplicationUser>(id);
         }
     }
 }

@@ -42,7 +42,7 @@ namespace Lynex.Notification.Email
                     client.UseDefaultCredentials = false;
                     client.Credentials = new NetworkCredential(_setting.EmailUser, _setting.EmailPassword);
 
-                    var message = new MailMessage(_setting.EmailSenderEmail, receiver.Email, item.Subject, item.Body)
+                    var message = new MailMessage(_setting.EmailSenderEmail, "", item.Subject, item.Body)
                     {
                         IsBodyHtml = item.IsHtml,
                         BodyEncoding = Encoding.UTF8,
