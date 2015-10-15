@@ -6,10 +6,10 @@ namespace Lynex.Common.Model.AspNet.Identity.Internal.Mapping
 	{
 		public IdentityUserClaimMap()
 		{
-			base.Id((IdentityUserClaim x) => x.Id);
-			base.Map((IdentityUserClaim x) => x.ClaimType);
-			base.Map((IdentityUserClaim x) => x.ClaimValue);
-			base.References<IdentityUser>((IdentityUserClaim x) => x.User).Column("UserId");
+			base.Id(x => x.Id);
+			base.Map(x => x.ClaimType);
+			base.Map(x => x.ClaimValue);
+			base.References(x => x.User).Column("UserId");
 			base.Table("UserClaims");
 		}
 	}

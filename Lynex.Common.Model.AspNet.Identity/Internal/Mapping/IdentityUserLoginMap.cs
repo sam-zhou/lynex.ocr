@@ -6,11 +6,11 @@ namespace Lynex.Common.Model.AspNet.Identity.Internal.Mapping
 	{
 		public IdentityUserLoginMap()
 		{
-			base.Id((IdentityUserLogin x) => x.Id);
-			base.Map((IdentityUserLogin x) => x.LoginProvider);
-			base.Map((IdentityUserLogin x) => x.ProviderKey);
-			base.References<IdentityUser>((IdentityUserLogin x) => x.User).Column("UserId");
-			base.Table("UserLogins");
+			Id(x => x.Id);
+			Map(x => x.LoginProvider);
+			Map(x => x.ProviderKey);
+			References(x => x.User).Column("UserId");
+			Table("UserLogins");
 		}
 	}
 }

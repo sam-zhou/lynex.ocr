@@ -1,43 +1,49 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Net.Http;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
-using System.Web.Http.ModelBinding;
+using System.Web.Http.Filters;
 using System.Web.Http.Results;
-using System.Web.UI.WebControls;
+using Lynex.BillMaster.Api.Filters;
+using Lynex.BillMaster.Api.Models;
+using Lynex.BillMaster.Api.Providers;
+using Lynex.BillMaster.Api.Results;
+using Lynex.BillMaster.Exception.UserException;
+using Lynex.BillMaster.Model.Domain.DbModels;
+using Lynex.Common.Exception;
+using Lynex.Common.Model.AspNet.Identity;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
-using Lynex.BillMaster.Api.Models;
-using Lynex.BillMaster.Api.Providers;
-using Lynex.BillMaster.Api.Results;
-using Lynex.BillMaster.Model.Domain.DbModels;
-using Lynex.Common.Model;
-using Lynex.Common.Model.AspNet.Identity;
+using NHibernate.Util;
 
 namespace Lynex.BillMaster.Api.Controllers
 {
-    [System.Web.Http.Authorize]
-    [System.Web.Http.RoutePrefix("Account")]
+    [Authorize]
+    [ExceptionHandlingFilter]
+    [RoutePrefix("Account")]
     public class AccountController : ApiController
     {
         private const string LocalLoginProvider = "Local";
         private ApplicationUserManager _userManager;
+        private UserRoleManager _userRoleManager;
 
         public AccountController()
         {
         }
 
-        public AccountController(ApplicationUserManager userManager,
+        public AccountController(ApplicationUserManager userManager, UserRoleManager userRoleManager,
             ISecureDataFormat<AuthenticationTicket> accessTokenFormat)
         {
             UserManager = userManager;
+            UserRoleManager = userRoleManager;
             AccessTokenFormat = accessTokenFormat;
         }
 
@@ -53,14 +59,26 @@ namespace Lynex.BillMaster.Api.Controllers
             }
         }
 
-        public ISecureDataFormat<AuthenticationTicket> AccessTokenFormat { get; private set; }
+        public UserRoleManager UserRoleManager
+        {
+            get
+            {
+                return _userRoleManager ?? Request.GetOwinContext().GetUserManager<UserRoleManager>();
+            }
+            private set
+            {
+                _userRoleManager = value;
+            }
+        }
+
+        public ISecureDataFormat<AuthenticationTicket> AccessTokenFormat { get; }
 
         // GET api/Account/UserInfo
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
-        [System.Web.Http.Route("UserInfo")]
+        [Route("UserInfo")]
         public UserInfoViewModel GetUserInfo()
         {
-            ExternalLoginData externalLogin = ExternalLoginData.FromIdentity(User.Identity as ClaimsIdentity);
+            var externalLogin = ExternalLoginData.FromIdentity(User.Identity as ClaimsIdentity);
 
             return new UserInfoViewModel
             {
@@ -71,7 +89,7 @@ namespace Lynex.BillMaster.Api.Controllers
         }
 
         // POST api/Account/Logout
-        [System.Web.Http.Route("Logout")]
+        [Route("Logout")]
         public IHttpActionResult Logout()
         {
             Authentication.SignOut(CookieAuthenticationDefaults.AuthenticationType);
@@ -79,19 +97,19 @@ namespace Lynex.BillMaster.Api.Controllers
         }
 
         // GET api/Account/ManageInfo?returnUrl=%2F&generateState=true
-        [System.Web.Http.Route("ManageInfo")]
+        [Route("ManageInfo")]
         public async Task<ManageInfoViewModel> GetManageInfo(string returnUrl, bool generateState = false)
         {
-            IdentityUser user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+            var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
 
             if (user == null)
             {
                 return null;
             }
 
-            List<UserLoginInfoViewModel> logins = new List<UserLoginInfoViewModel>();
+            var logins = new List<UserLoginInfoViewModel>();
 
-            foreach (IdentityUserLogin linkedAccount in user.Logins)
+            foreach (var linkedAccount in user.Logins)
             {
                 logins.Add(new UserLoginInfoViewModel
                 {
@@ -119,7 +137,7 @@ namespace Lynex.BillMaster.Api.Controllers
         }
 
         // POST api/Account/ChangePassword
-        [System.Web.Http.Route("ChangePassword")]
+        [Route("ChangePassword")]
         public async Task<IHttpActionResult> ChangePassword(ChangePasswordBindingModel model)
         {
             if (!ModelState.IsValid)
@@ -127,7 +145,7 @@ namespace Lynex.BillMaster.Api.Controllers
                 return BadRequest(ModelState);
             }
 
-            IdentityResult result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword,
+            var result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword,
                 model.NewPassword);
             
             if (!result.Succeeded)
@@ -141,8 +159,8 @@ namespace Lynex.BillMaster.Api.Controllers
 
 
         // POST: /Account/Login
-        [System.Web.Http.HttpPost]
-        [System.Web.Http.AllowAnonymous]
+        [HttpPost]
+        [AllowAnonymous]
         public async Task<IHttpActionResult> Login(LoginViewModel model)
         {
             if (ModelState.IsValid)
@@ -151,12 +169,9 @@ namespace Lynex.BillMaster.Api.Controllers
                 if (user != null)
                 {
                     await SignInAsync(user, model.RememberMe);
-                    return Ok();
+                    return Ok(user);
                 }
-                else
-                {
-                    ModelState.AddModelError("", "Invalid username or password.");
-                }
+                ModelState.AddModelError("", "Invalid username or password.");
             }
 
             return Unauthorized();
@@ -166,12 +181,12 @@ namespace Lynex.BillMaster.Api.Controllers
         private async Task SignInAsync(ApplicationUser user, bool isPersistent)
         {
             Authentication.SignOut(DefaultAuthenticationTypes.ExternalCookie);
-            Authentication.SignIn(new AuthenticationProperties() { IsPersistent = isPersistent },
+            Authentication.SignIn(new AuthenticationProperties { IsPersistent = isPersistent },
               await user.GenerateUserIdentityAsync(UserManager, OAuthDefaults.AuthenticationType));
         }
 
         // POST api/Account/SetPassword
-        [System.Web.Http.Route("SetPassword")]
+        [Route("SetPassword")]
         public async Task<IHttpActionResult> SetPassword(SetPasswordBindingModel model)
         {
             if (!ModelState.IsValid)
@@ -179,7 +194,7 @@ namespace Lynex.BillMaster.Api.Controllers
                 return BadRequest(ModelState);
             }
 
-            IdentityResult result = await UserManager.AddPasswordAsync(User.Identity.GetUserId(), model.NewPassword);
+            var result = await UserManager.AddPasswordAsync(User.Identity.GetUserId(), model.NewPassword);
 
             if (!result.Succeeded)
             {
@@ -190,7 +205,7 @@ namespace Lynex.BillMaster.Api.Controllers
         }
 
         // POST api/Account/AddExternalLogin
-        [System.Web.Http.Route("AddExternalLogin")]
+        [Route("AddExternalLogin")]
         public async Task<IHttpActionResult> AddExternalLogin(AddExternalLoginBindingModel model)
         {
             if (!ModelState.IsValid)
@@ -200,7 +215,7 @@ namespace Lynex.BillMaster.Api.Controllers
 
             Authentication.SignOut(DefaultAuthenticationTypes.ExternalCookie);
 
-            AuthenticationTicket ticket = AccessTokenFormat.Unprotect(model.ExternalAccessToken);
+            var ticket = AccessTokenFormat.Unprotect(model.ExternalAccessToken);
 
             if (ticket == null || ticket.Identity == null || (ticket.Properties != null
                 && ticket.Properties.ExpiresUtc.HasValue
@@ -209,14 +224,14 @@ namespace Lynex.BillMaster.Api.Controllers
                 return BadRequest("External login failure.");
             }
 
-            ExternalLoginData externalData = ExternalLoginData.FromIdentity(ticket.Identity);
+            var externalData = ExternalLoginData.FromIdentity(ticket.Identity);
 
             if (externalData == null)
             {
                 return BadRequest("The external login is already associated with an account.");
             }
 
-            IdentityResult result = await UserManager.AddLoginAsync(User.Identity.GetUserId(),
+            var result = await UserManager.AddLoginAsync(User.Identity.GetUserId(),
                 new UserLoginInfo(externalData.LoginProvider, externalData.ProviderKey));
 
             if (!result.Succeeded)
@@ -228,7 +243,7 @@ namespace Lynex.BillMaster.Api.Controllers
         }
 
         // POST api/Account/RemoveLogin
-        [System.Web.Http.Route("RemoveLogin")]
+        [Route("RemoveLogin")]
         public async Task<IHttpActionResult> RemoveLogin(RemoveLoginBindingModel model)
         {
             if (!ModelState.IsValid)
@@ -257,10 +272,10 @@ namespace Lynex.BillMaster.Api.Controllers
         }
 
         // GET api/Account/ExternalLogin
-        [System.Web.Http.OverrideAuthentication]
+        [OverrideAuthentication]
         [HostAuthentication(DefaultAuthenticationTypes.ExternalCookie)]
-        [System.Web.Http.AllowAnonymous]
-        [System.Web.Http.Route("ExternalLogin", Name = "ExternalLogin")]
+        [AllowAnonymous]
+        [Route("ExternalLogin", Name = "ExternalLogin")]
         public async Task<IHttpActionResult> GetExternalLogin(string provider, string error = null)
         {
             if (error != null)
@@ -273,7 +288,7 @@ namespace Lynex.BillMaster.Api.Controllers
                 return new ChallengeResult(provider, this);
             }
 
-            ExternalLoginData externalLogin = ExternalLoginData.FromIdentity(User.Identity as ClaimsIdentity);
+            var externalLogin = ExternalLoginData.FromIdentity(User.Identity as ClaimsIdentity);
 
             if (externalLogin == null)
             {
@@ -286,27 +301,27 @@ namespace Lynex.BillMaster.Api.Controllers
                 return new ChallengeResult(provider, this);
             }
 
-            ApplicationUser user = await UserManager.FindAsync(new UserLoginInfo(externalLogin.LoginProvider,
+            var user = await UserManager.FindAsync(new UserLoginInfo(externalLogin.LoginProvider,
                 externalLogin.ProviderKey));
 
-            bool hasRegistered = user != null;
+            var hasRegistered = user != null;
 
             if (hasRegistered)
             {
                 Authentication.SignOut(DefaultAuthenticationTypes.ExternalCookie);
                 
-                 ClaimsIdentity oAuthIdentity = await user.GenerateUserIdentityAsync(UserManager,
+                var oAuthIdentity = await user.GenerateUserIdentityAsync(UserManager,
                     OAuthDefaults.AuthenticationType);
-                ClaimsIdentity cookieIdentity = await user.GenerateUserIdentityAsync(UserManager,
+                var cookieIdentity = await user.GenerateUserIdentityAsync(UserManager,
                     CookieAuthenticationDefaults.AuthenticationType);
 
-                AuthenticationProperties properties = ApplicationOAuthProvider.CreateProperties(user.UserName);
+                var properties = ApplicationOAuthProvider.CreateProperties(user.UserName);
                 Authentication.SignIn(properties, oAuthIdentity, cookieIdentity);
             }
             else
             {
-                IEnumerable<Claim> claims = externalLogin.GetClaims();
-                ClaimsIdentity identity = new ClaimsIdentity(claims, OAuthDefaults.AuthenticationType);
+                var claims = externalLogin.GetClaims();
+                var identity = new ClaimsIdentity(claims, OAuthDefaults.AuthenticationType);
                 Authentication.SignIn(identity);
             }
 
@@ -314,12 +329,12 @@ namespace Lynex.BillMaster.Api.Controllers
         }
 
         // GET api/Account/ExternalLogins?returnUrl=%2F&generateState=true
-        [System.Web.Http.AllowAnonymous]
-        [System.Web.Http.Route("ExternalLogins")]
+        [AllowAnonymous]
+        [Route("ExternalLogins")]
         public IEnumerable<ExternalLoginViewModel> GetExternalLogins(string returnUrl, bool generateState = false)
         {
-            IEnumerable<AuthenticationDescription> descriptions = Authentication.GetExternalAuthenticationTypes();
-            List<ExternalLoginViewModel> logins = new List<ExternalLoginViewModel>();
+            var descriptions = Authentication.GetExternalAuthenticationTypes();
+            var logins = new List<ExternalLoginViewModel>();
 
             string state;
 
@@ -333,9 +348,9 @@ namespace Lynex.BillMaster.Api.Controllers
                 state = null;
             }
 
-            foreach (AuthenticationDescription description in descriptions)
+            foreach (var description in descriptions)
             {
-                ExternalLoginViewModel login = new ExternalLoginViewModel
+                var login = new ExternalLoginViewModel
                 {
                     Name = description.Caption,
                     Url = Url.Route("ExternalLogin", new
@@ -355,8 +370,8 @@ namespace Lynex.BillMaster.Api.Controllers
         }
 
         // POST api/Account/Register
-        [System.Web.Http.AllowAnonymous]
-        [System.Web.Http.Route("Register")]
+        [AllowAnonymous]
+        [Route("Register")]
         public async Task<IHttpActionResult> Register(RegisterBindingModel model)
         {
             if (!ModelState.IsValid)
@@ -364,29 +379,36 @@ namespace Lynex.BillMaster.Api.Controllers
                 return BadRequest(ModelState);
             }
 
-            var user = new ApplicationUser() { UserName = model.Email };
-            try
+            var user = new ApplicationUser
             {
-                IdentityResult result = await UserManager.CreateAsync(user, model.Password);
+                UserName = model.Email,
+                
+                UserChallenge = new UserChallenge("123123"),
+                Wallet = new Wallet()
+            };
+
+
+                var result = await UserManager.CreateAsync(user, model.Password);
                 if (!result.Succeeded)
                 {
                     return GetErrorResult(result);
                 }
-            }
-            catch (System.Exception ex)
+            var result2 = await UserManager.AddToRoleAsync(user.Id, "User");
+            if (!result2.Succeeded)
             {
-                return new ExceptionResult(ex, this);
+                return GetErrorResult(result2);
             }
-
-            
-
             return Ok();
+
+
+
+
         }
 
         // POST api/Account/RegisterExternal
-        [System.Web.Http.OverrideAuthentication]
+        [OverrideAuthentication]
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
-        [System.Web.Http.Route("RegisterExternal")]
+        [Route("RegisterExternal")]
         public async Task<IHttpActionResult> RegisterExternal(RegisterExternalBindingModel model)
         {
             if (!ModelState.IsValid)
@@ -400,9 +422,9 @@ namespace Lynex.BillMaster.Api.Controllers
                 return InternalServerError();
             }
 
-            var user = new ApplicationUser() { UserName = model.Email };
+            var user = new ApplicationUser { UserName = model.Email };
 
-            IdentityResult result = await UserManager.CreateAsync(user);
+            var result = await UserManager.CreateAsync(user);
             if (!result.Succeeded)
             {
                 return GetErrorResult(result);
@@ -445,7 +467,7 @@ namespace Lynex.BillMaster.Api.Controllers
             {
                 if (result.Errors != null)
                 {
-                    foreach (string error in result.Errors)
+                    foreach (var error in result.Errors)
                     {
                         ModelState.AddModelError("", error);
                     }
@@ -465,14 +487,13 @@ namespace Lynex.BillMaster.Api.Controllers
 
         private class ExternalLoginData
         {
-            public string LoginProvider { get; set; }
-            public string ProviderKey { get; set; }
-            public string UserName { get; set; }
+            public string LoginProvider { get; private set; }
+            public string ProviderKey { get; private set; }
+            private string UserName { get; set; }
 
-            public IList<Claim> GetClaims()
+            public IEnumerable<Claim> GetClaims()
             {
-                IList<Claim> claims = new List<Claim>();
-                claims.Add(new Claim(ClaimTypes.NameIdentifier, ProviderKey, null, LoginProvider));
+                var claims = new List<Claim> {new Claim(ClaimTypes.NameIdentifier, ProviderKey, null, LoginProvider)};
 
                 if (UserName != null)
                 {
@@ -489,10 +510,10 @@ namespace Lynex.BillMaster.Api.Controllers
                     return null;
                 }
 
-                Claim providerKeyClaim = identity.FindFirst(ClaimTypes.NameIdentifier);
+                var providerKeyClaim = identity.FindFirst(ClaimTypes.NameIdentifier);
 
-                if (providerKeyClaim == null || String.IsNullOrEmpty(providerKeyClaim.Issuer)
-                    || String.IsNullOrEmpty(providerKeyClaim.Value))
+                if (providerKeyClaim == null || string.IsNullOrEmpty(providerKeyClaim.Issuer)
+                    || string.IsNullOrEmpty(providerKeyClaim.Value))
                 {
                     return null;
                 }
@@ -513,7 +534,7 @@ namespace Lynex.BillMaster.Api.Controllers
 
         private static class RandomOAuthStateGenerator
         {
-            private static RandomNumberGenerator _random = new RNGCryptoServiceProvider();
+            private static readonly RandomNumberGenerator Random = new RNGCryptoServiceProvider();
 
             public static string Generate(int strengthInBits)
             {
@@ -521,13 +542,13 @@ namespace Lynex.BillMaster.Api.Controllers
 
                 if (strengthInBits % bitsPerByte != 0)
                 {
-                    throw new ArgumentException("strengthInBits must be evenly divisible by 8.", "strengthInBits");
+                    throw new ArgumentException("strengthInBits must be evenly divisible by 8.", nameof(strengthInBits));
                 }
 
-                int strengthInBytes = strengthInBits / bitsPerByte;
+                var strengthInBytes = strengthInBits / bitsPerByte;
 
-                byte[] data = new byte[strengthInBytes];
-                _random.GetBytes(data);
+                var data = new byte[strengthInBytes];
+                Random.GetBytes(data);
                 return HttpServerUtility.UrlTokenEncode(data);
             }
         }

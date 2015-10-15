@@ -15,8 +15,8 @@ namespace Lynex.BillMaster.Database.DefaultDataFactory
 
         protected override IEnumerable<IdentityRole> GetData(Assembly assembly = null)
         {
-            yield return new IdentityRole("User");
-            yield return new IdentityRole("Administrator");
+            yield return IdentityRole.User;
+            yield return IdentityRole.Administrator;
         }
     }
 }

@@ -48,6 +48,7 @@
     <Compile Include="UserException\ForeignKeyException.cs" />
     <Compile Include="UserException\EntityNotFoundException.cs" />
     <Compile Include="UserException\PropertyNotUniqueException.cs" />
+    <Compile Include="UserException\UserExistsException.cs" />
     <Compile Include="UserException\UserLoginFailedException.cs" />
     <Compile Include="UserException\VerifyUserFailedException.cs" />
   </ItemGroup>

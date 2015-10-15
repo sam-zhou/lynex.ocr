@@ -31,7 +31,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lynex.Common.Database", "Ly
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lynex.Common.Service", "Lynex.Service.Common\Lynex.Common.Service.csproj", "{4BBEA9BC-0A40-4E3A-BBD6-A0718FCA9D18}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lynex.Common.Console", "Lynex.Common.Test\Lynex.Common.Console.csproj", "{CBB544EB-7F8F-4220-8B1E-27833E7F2499}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lynex.Common.Console", "Lynex.Common.Console\Lynex.Common.Console.csproj", "{CBB544EB-7F8F-4220-8B1E-27833E7F2499}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lynex.Common.Extension", "Lynex.Common\Lynex.Common.Extension.csproj", "{DC5A98A7-E6DE-41DC-AAF8-FF08E24827B1}"
 EndProject

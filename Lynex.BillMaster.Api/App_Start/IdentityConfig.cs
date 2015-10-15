@@ -48,4 +48,20 @@ namespace Lynex.BillMaster.Api
             return manager;
         }
     }
+
+
+    public class UserRoleManager : RoleManager<IdentityRole>
+    {
+        public UserRoleManager(IRoleStore<IdentityRole, string> store) : base(store)
+        {
+        }
+
+        public static UserRoleManager Create()
+        {
+            var manager = new UserRoleManager(new RoleStore<IdentityRole>(IoCContainer.Container.Resolve<IDatabaseService>().Session));
+            // Configure validation logic for usernames
+            manager.RoleValidator = new RoleValidator<IdentityRole>(manager);
+            return manager;
+        }
+    }
 }

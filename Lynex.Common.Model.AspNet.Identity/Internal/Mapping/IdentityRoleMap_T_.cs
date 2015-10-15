@@ -7,9 +7,9 @@ namespace Lynex.Common.Model.AspNet.Identity.Internal.Mapping
 	{
 		public IdentityRoleMap()
 		{
-			base.Id((T x) => x.Id);
-			base.Map((T x) => x.Name);
-			base.Table("UserRoles");
+			Id(x => x.Id);
+			Map(x => x.Name);
+			Table("IdentityRole");
 		}
 	}
 }
