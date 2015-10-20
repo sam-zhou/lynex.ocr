@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{43F03CBF-ACE3-4A84-9B51-0B3433039377}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <OutputType>Library</OutputType>
+    <AssemblyName>Lynex.AspNet.Identity</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Platform)' == 'AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RootNamespace>Lynex.AspNet.Identity</RootNamespace>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <Optimize>false</Optimize>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System.Core" />
+    <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AsyncHelper.cs" />
+    <Compile Include="ClaimsIdentityFactory.cs" />
+    <Compile Include="Constants.cs" />
+    <Compile Include="Crypto.cs" />
+    <Compile Include="DefaultAuthenticationTypes.cs" />
+    <Compile Include="EmailTokenProvider.cs" />
+    <Compile Include="IClaimsIdentityFactory.cs" />
+    <Compile Include="IdentityExtensions.cs" />
+    <Compile Include="IdentityMessage.cs" />
+    <Compile Include="IdentityResult.cs" />
+    <Compile Include="IIdentityMessageService.cs" />
+    <Compile Include="IIdentityMessageServiceExtensions.cs" />
+    <Compile Include="IIdentityValidator.cs" />
+    <Compile Include="IPasswordHasher.cs" />
+    <Compile Include="IQueryableRoleStore.cs" />
+    <Compile Include="IQueryableUserStore.cs" />
+    <Compile Include="IRole.cs" />
+    <Compile Include="IRoleStore.cs" />
+    <Compile Include="IUser.cs" />
+    <Compile Include="IUserClaimStore.cs" />
+    <Compile Include="IUserEmailStore.cs" />
+    <Compile Include="IUserLockoutStore.cs" />
+    <Compile Include="IUserLoginStore.cs" />
+    <Compile Include="IUserPasswordStore.cs" />
+    <Compile Include="IUserPhoneNumberStore.cs" />
+    <Compile Include="IUserRoleStore.cs" />
+    <Compile Include="IUserSecurityStampStore.cs" />
+    <Compile Include="IUserStore.cs" />
+    <Compile Include="IUserTokenProvider.cs" />
+    <Compile Include="IUserTwoFactorStore.cs" />
+    <Compile Include="MinimumLengthValidator.cs" />
+    <Compile Include="PasswordHasher.cs" />
+    <Compile Include="PasswordValidator.cs" />
+    <Compile Include="PasswordVerificationResult.cs" />
+    <Compile Include="PhoneNumberTokenProvider.cs" />
+    <Compile Include="Resources.cs" />
+    <Compile Include="Rfc6238AuthenticationService.cs" />
+    <Compile Include="RoleManager.cs" />
+    <Compile Include="RoleManagerExtensions.cs" />
+    <Compile Include="RoleValidator.cs" />
+    <Compile Include="SecurityToken.cs" />
+    <Compile Include="TaskExtensions.cs" />
+    <Compile Include="TotpSecurityStampBasedTokenProvider.cs" />
+    <Compile Include="UserLoginInfo.cs" />
+    <Compile Include="UserManager.cs" />
+    <Compile Include="UserManagerExtensions.cs" />
+    <Compile Include="UserValidator.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources.resources" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

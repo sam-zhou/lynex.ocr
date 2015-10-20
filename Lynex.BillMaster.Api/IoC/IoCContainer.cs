@@ -17,5 +17,10 @@ namespace Lynex.BillMaster.Api.IoC
             var controllerFactory = new WindsorControllerFactory(Container.Kernel);
             ControllerBuilder.Current.SetControllerFactory(controllerFactory);
         }
+
+        public static T Resolve<T>()
+        {
+            return Container.Resolve<T>();
+        }
     }
 }

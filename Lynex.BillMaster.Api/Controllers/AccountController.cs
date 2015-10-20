@@ -9,6 +9,9 @@ using System.Web;
 using System.Web.Http;
 using System.Web.Http.Filters;
 using System.Web.Http.Results;
+using log4net;
+using Lynex.AspNet.Identity;
+using Lynex.AspNet.Identity.Owin;
 using Lynex.BillMaster.Api.Filters;
 using Lynex.BillMaster.Api.Models;
 using Lynex.BillMaster.Api.Providers;
@@ -17,8 +20,6 @@ using Lynex.BillMaster.Exception.UserException;
 using Lynex.BillMaster.Model.Domain.DbModels;
 using Lynex.Common.Exception;
 using Lynex.Common.Model.AspNet.Identity;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
@@ -31,6 +32,7 @@ namespace Lynex.BillMaster.Api.Controllers
     [RoutePrefix("Account")]
     public class AccountController : ApiController
     {
+        private readonly ILog _log;
         private const string LocalLoginProvider = "Local";
         private ApplicationUserManager _userManager;
         private UserRoleManager _userRoleManager;
@@ -40,8 +42,10 @@ namespace Lynex.BillMaster.Api.Controllers
         }
 
         public AccountController(ApplicationUserManager userManager, UserRoleManager userRoleManager,
-            ISecureDataFormat<AuthenticationTicket> accessTokenFormat)
+            ISecureDataFormat<AuthenticationTicket> accessTokenFormat,
+            ILog log)
         {
+            _log = log;
             UserManager = userManager;
             UserRoleManager = userRoleManager;
             AccessTokenFormat = accessTokenFormat;
@@ -382,22 +386,21 @@ namespace Lynex.BillMaster.Api.Controllers
             var user = new ApplicationUser
             {
                 UserName = model.Email,
-                
                 UserChallenge = new UserChallenge("123123"),
-                Wallet = new Wallet()
+                Wallet = new Wallet(),
             };
 
 
-                var result = await UserManager.CreateAsync(user, model.Password);
-                if (!result.Succeeded)
-                {
-                    return GetErrorResult(result);
-                }
-            var result2 = await UserManager.AddToRoleAsync(user.Id, "User");
-            if (!result2.Succeeded)
+            var result = await UserManager.CreateAsync(user, model.Password);
+            if (!result.Succeeded)
             {
-                return GetErrorResult(result2);
+                return GetErrorResult(result);
             }
+            //var result2 = await UserManager.AddToRoleAsync(user.Id, "User");
+            //if (!result2.Succeeded)
+            //{
+            //    return GetErrorResult(result2);
+            //}
             return Ok();
 
 

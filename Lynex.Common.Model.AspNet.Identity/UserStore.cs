@@ -6,8 +6,8 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Lynex.AspNet.Identity;
 using Lynex.Common.Model.AspNet.Identity.Internal;
-using Microsoft.AspNet.Identity;
 using NHibernate;
 
 namespace Lynex.Common.Model.AspNet.Identity
@@ -135,7 +135,28 @@ namespace Lynex.Common.Model.AspNet.Identity
 			
 		}
 
-		public async Task DeleteAsync(TUser user)
+        public async Task CreateAsync(TUser user, string password)
+        {
+            ThrowIfDisposed();
+            if (user == null)
+            {
+                throw new ArgumentNullException(nameof(user));
+            }
+            if (await FindByNameAsync(user.UserName) == null)
+            {
+                await _userStore.Save(user);
+
+            }
+            else
+            {
+                throw new InvalidOperationException("Duplicated User Found");
+            }
+
+
+        }
+
+
+        public async Task DeleteAsync(TUser user)
 		{
 			ThrowIfDisposed();
 			if (user == null)

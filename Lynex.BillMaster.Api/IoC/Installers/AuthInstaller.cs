@@ -9,8 +9,6 @@ using Lynex.BillMaster.Service;
 using Lynex.BillMaster.Service.Interface;
 using Lynex.Common.Database;
 using Lynex.Common.Model.AspNet.Identity;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Builder;
 using Microsoft.Owin.Security.Cookies;

@@ -164,9 +164,9 @@ namespace Lynex.Common.Console
                     }
                     
                 }
-                catch (Exception ex)
+                catch (WebException ex)
                 {
-                    System.Console.WriteLine(ex);
+                    System.Console.WriteLine(((HttpWebResponse)ex.Response).StatusDescription);
                 }
 
 

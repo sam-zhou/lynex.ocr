@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNet.Identity;
+using Lynex.AspNet.Identity;
+
 
 namespace Lynex.Common.Model.AspNet.Identity
 {

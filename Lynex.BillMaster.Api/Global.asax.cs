@@ -6,6 +6,7 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using log4net;
 using Lynex.BillMaster.Api.IoC;
 
 namespace Lynex.BillMaster.Api
@@ -14,6 +15,10 @@ namespace Lynex.BillMaster.Api
     {
         protected void Application_Start()
         {
+            log4net.Config.XmlConfigurator.Configure();
+
+            LogManager.GetLogger(typeof(WebApiApplication)).Info("Lynex Api Started");
+
             IoCContainer.Setup();
 
             AreaRegistration.RegisterAllAreas();

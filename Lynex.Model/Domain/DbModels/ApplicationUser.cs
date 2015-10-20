@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Lynex.AspNet.Identity;
 using Lynex.BillMaster.Model.Domain.DbModels.Interface;
 using Lynex.Common.Model.AspNet.Identity;
 using Lynex.Common.Model.DbModel;
 using Lynex.Common.Model.DbModel.Interface;
-using Microsoft.AspNet.Identity;
+
 
 namespace Lynex.BillMaster.Model.Domain.DbModels
 {

@@ -56,6 +56,10 @@
       <HintPath>..\packages\Iesi.Collections.4.0.0.4000\lib\net40\Iesi.Collections.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="log4net, Version=1.2.13.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
@@ -142,12 +146,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.AspNet.Identity.Core">
-      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.AspNet.Identity.Owin">
-      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
-    </Reference>
     <Reference Include="Owin">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
@@ -311,6 +309,14 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Lynex.AspNet.Identity.Owin\Lynex.AspNet.Identity.Owin.csproj">
+      <Project>{10c59bee-97cc-403d-9438-2df54bef0d92}</Project>
+      <Name>Lynex.AspNet.Identity.Owin</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lynex.AspNet.Identity\Lynex.AspNet.Identity.csproj">
+      <Project>{43f03cbf-ace3-4a84-9b51-0b3433039377}</Project>
+      <Name>Lynex.AspNet.Identity</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lynex.BillMaster.Database\Lynex.BillMaster.Database.csproj">
       <Project>{3508b0a7-dcea-4a9c-9bf7-07ff92c7c160}</Project>
       <Name>Lynex.BillMaster.Database</Name>

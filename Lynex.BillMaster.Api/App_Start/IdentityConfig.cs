@@ -1,4 +1,6 @@
 ﻿using System.Threading.Tasks;
+using Lynex.AspNet.Identity;
+using Lynex.AspNet.Identity.Owin;
 using Lynex.BillMaster.Api.IoC;
 using Microsoft.Owin;
 using Lynex.BillMaster.Api.Models;
@@ -6,8 +8,7 @@ using Lynex.BillMaster.Model.Domain.DbModels;
 using Lynex.Common.Database;
 using Lynex.Common.Model;
 using Lynex.Common.Model.AspNet.Identity;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
+
 using NHibernate;
 
 
