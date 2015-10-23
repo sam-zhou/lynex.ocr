@@ -57,6 +57,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataContracts\Identity.cs" />
     <Compile Include="DbModel\BaseEntity.cs" />
     <Compile Include="DbModel\EnumTable.cs" />
     <Compile Include="DbModel\Mapping\BaseMap.cs" />

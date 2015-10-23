@@ -14,11 +14,11 @@ namespace Lynex.AspNet.Identity
 		{
 			get
 			{
-				return this._subject ?? string.Empty;
+				return _subject ?? string.Empty;
 			}
 			set
 			{
-				this._subject = value;
+				_subject = value;
 			}
 		}
 
@@ -26,23 +26,23 @@ namespace Lynex.AspNet.Identity
 		{
 			get
 			{
-				return this._body ?? "{0}";
+				return _body ?? "{0}";
 			}
 			set
 			{
-				this._body = value;
+				_body = value;
 			}
 		}
 
 		public override async Task<bool> IsValidProviderForUserAsync(UserManager<TUser, TKey> manager, TUser user)
 		{
-			string value = await manager.GetEmailAsync(user.Id).WithCurrentCulture<string>();
-			return !string.IsNullOrWhiteSpace(value) && await manager.IsEmailConfirmedAsync(user.Id).WithCurrentCulture<bool>();
+			string value = await manager.GetEmailAsync(user.Id).WithCurrentCulture();
+			return !string.IsNullOrWhiteSpace(value) && await manager.IsEmailConfirmedAsync(user.Id).WithCurrentCulture();
 		}
 
 		public override async Task<string> GetUserModifierAsync(string purpose, UserManager<TUser, TKey> manager, TUser user)
 		{
-			string str = await manager.GetEmailAsync(user.Id).WithCurrentCulture<string>();
+			string str = await manager.GetEmailAsync(user.Id).WithCurrentCulture();
 			return "Email:" + purpose + ":" + str;
 		}
 
@@ -50,12 +50,9 @@ namespace Lynex.AspNet.Identity
 		{
 			if (manager == null)
 			{
-				throw new ArgumentNullException("manager");
+				throw new ArgumentNullException(nameof(manager));
 			}
-			return manager.SendEmailAsync(user.Id, this.Subject, string.Format(CultureInfo.CurrentCulture, this.BodyFormat, new object[]
-			{
-				token
-			}));
+			return manager.SendEmailAsync(user.Id, Subject, string.Format(CultureInfo.CurrentCulture, BodyFormat, token));
 		}
 	}
 	public class EmailTokenProvider<TUser> : EmailTokenProvider<TUser, string> where TUser : class, IUser<string>

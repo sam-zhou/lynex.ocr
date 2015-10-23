@@ -122,38 +122,10 @@ namespace Lynex.Common.Model.AspNet.Identity
 			{
 				throw new ArgumentNullException(nameof(user));
 			}
-		    if (await FindByNameAsync(user.UserName) == null)
-		    {
-		        await _userStore.Save(user);
-
-		    }
-		    else
-		    {
-		        throw new InvalidOperationException("Duplicated User Found");
-            }
-            
-			
-		}
-
-        public async Task CreateAsync(TUser user, string password)
-        {
-            ThrowIfDisposed();
-            if (user == null)
-            {
-                throw new ArgumentNullException(nameof(user));
-            }
-            if (await FindByNameAsync(user.UserName) == null)
-            {
-                await _userStore.Save(user);
-
-            }
-            else
-            {
-                throw new InvalidOperationException("Duplicated User Found");
-            }
-
-
+            await _userStore.Save(user);
         }
+
+
 
 
         public async Task DeleteAsync(TUser user)

@@ -19,7 +19,7 @@ namespace Lynex.AspNet.Identity.Owin
 		{
 			if (manager == null)
 			{
-				throw new ArgumentNullException("manager");
+				throw new ArgumentNullException(nameof(manager));
 			}
 			AsyncHelper.RunSync(() => manager.SignInAsync(user, isPersistent, rememberBrowser));
 		}

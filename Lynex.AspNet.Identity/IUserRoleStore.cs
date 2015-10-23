@@ -1,10 +1,9 @@
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Lynex.AspNet.Identity
 {
-	public interface IUserRoleStore<TUser, in TKey> : IUserStore<TUser, TKey>, IDisposable where TUser : class, IUser<TKey>
+	public interface IUserRoleStore<TUser, in TKey> : IUserStore<TUser, TKey> where TUser : class, IUser<TKey>
 	{
 		Task AddToRoleAsync(TUser user, string roleName);
 
@@ -14,7 +13,7 @@ namespace Lynex.AspNet.Identity
 
 		Task<bool> IsInRoleAsync(TUser user, string roleName);
 	}
-	public interface IUserRoleStore<TUser> : IUserRoleStore<TUser, string>, IUserStore<TUser, string>, IDisposable where TUser : class, IUser<string>
+	public interface IUserRoleStore<TUser> : IUserRoleStore<TUser, string> where TUser : class, IUser<string>
 	{
 	}
 }

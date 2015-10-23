@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace Lynex.AspNet.Identity
 {
-	public interface IUserPhoneNumberStore<TUser, in TKey> : IUserStore<TUser, TKey>, IDisposable where TUser : class, IUser<TKey>
+	public interface IUserPhoneNumberStore<TUser, in TKey> : IUserStore<TUser, TKey> where TUser : class, IUser<TKey>
 	{
 		Task SetPhoneNumberAsync(TUser user, string phoneNumber);
 
@@ -13,7 +13,7 @@ namespace Lynex.AspNet.Identity
 
 		Task SetPhoneNumberConfirmedAsync(TUser user, bool confirmed);
 	}
-	public interface IUserPhoneNumberStore<TUser> : IUserPhoneNumberStore<TUser, string>, IUserStore<TUser, string>, IDisposable where TUser : class, IUser<string>
+	public interface IUserPhoneNumberStore<TUser> : IUserPhoneNumberStore<TUser, string> where TUser : class, IUser<string>
 	{
 	}
 }

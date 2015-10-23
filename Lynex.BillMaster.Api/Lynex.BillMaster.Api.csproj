@@ -181,6 +181,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\AuthenticationController.cs" />
+    <Compile Include="Filters\AuthenticateAttribute.cs" />
+    <Compile Include="Filters\AuthenticateFilter.cs" />
     <Compile Include="Filters\ExceptionHandlingFilterAttribute.cs" />
     <Compile Include="IoC\ApiDependancyResolver.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />

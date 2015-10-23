@@ -6,12 +6,12 @@ namespace Lynex.AspNet.Identity
 
 		public SecurityToken(byte[] data)
 		{
-			this._data = (byte[])data.Clone();
+			_data = (byte[])data.Clone();
 		}
 
 		internal byte[] GetDataNoClone()
 		{
-			return this._data;
+			return _data;
 		}
 	}
 }

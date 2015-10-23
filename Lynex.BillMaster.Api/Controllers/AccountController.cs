@@ -35,19 +35,17 @@ namespace Lynex.BillMaster.Api.Controllers
         private readonly ILog _log;
         private const string LocalLoginProvider = "Local";
         private ApplicationUserManager _userManager;
-        private UserRoleManager _userRoleManager;
 
         public AccountController()
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, UserRoleManager userRoleManager,
+        public AccountController(ApplicationUserManager userManager,
             ISecureDataFormat<AuthenticationTicket> accessTokenFormat,
             ILog log)
         {
             _log = log;
             UserManager = userManager;
-            UserRoleManager = userRoleManager;
             AccessTokenFormat = accessTokenFormat;
         }
 
@@ -60,18 +58,6 @@ namespace Lynex.BillMaster.Api.Controllers
             private set
             {
                 _userManager = value;
-            }
-        }
-
-        public UserRoleManager UserRoleManager
-        {
-            get
-            {
-                return _userRoleManager ?? Request.GetOwinContext().GetUserManager<UserRoleManager>();
-            }
-            private set
-            {
-                _userRoleManager = value;
             }
         }
 
@@ -92,13 +78,7 @@ namespace Lynex.BillMaster.Api.Controllers
             };
         }
 
-        // POST api/Account/Logout
-        [Route("Logout")]
-        public IHttpActionResult Logout()
-        {
-            Authentication.SignOut(CookieAuthenticationDefaults.AuthenticationType);
-            return Ok();
-        }
+        
 
         // GET api/Account/ManageInfo?returnUrl=%2F&generateState=true
         [Route("ManageInfo")]
@@ -149,7 +129,7 @@ namespace Lynex.BillMaster.Api.Controllers
                 return BadRequest(ModelState);
             }
 
-            var result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword,
+            var result = await UserManager.ChangePasswordAsync(HttpContext.Current.User.Identity.GetUserId(), model.OldPassword,
                 model.NewPassword);
             
             if (!result.Succeeded)
@@ -158,35 +138,6 @@ namespace Lynex.BillMaster.Api.Controllers
             }
 
             return Ok();
-        }
-
-
-
-        // POST: /Account/Login
-        [HttpPost]
-        [AllowAnonymous]
-        public async Task<IHttpActionResult> Login(LoginViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                var user = await UserManager.FindAsync(model.Email, model.Password);
-                if (user != null)
-                {
-                    await SignInAsync(user, model.RememberMe);
-                    return Ok(user);
-                }
-                ModelState.AddModelError("", "Invalid username or password.");
-            }
-
-            return Unauthorized();
-        }
-
-
-        private async Task SignInAsync(ApplicationUser user, bool isPersistent)
-        {
-            Authentication.SignOut(DefaultAuthenticationTypes.ExternalCookie);
-            Authentication.SignIn(new AuthenticationProperties { IsPersistent = isPersistent },
-              await user.GenerateUserIdentityAsync(UserManager, OAuthDefaults.AuthenticationType));
         }
 
         // POST api/Account/SetPassword

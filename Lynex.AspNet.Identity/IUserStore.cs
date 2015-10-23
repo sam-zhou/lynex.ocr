@@ -15,7 +15,7 @@ namespace Lynex.AspNet.Identity
 
 		Task<TUser> FindByNameAsync(string userName);
 	}
-	public interface IUserStore<TUser> : IUserStore<TUser, string>, IDisposable where TUser : class, IUser<string>
+	public interface IUserStore<TUser> : IUserStore<TUser, string> where TUser : class, IUser<string>
 	{
 	}
 }

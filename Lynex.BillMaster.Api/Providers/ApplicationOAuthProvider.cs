@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Lynex.AspNet.Identity.Owin;
+using Lynex.BillMaster.Model.Domain.DbModels;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
-using Lynex.BillMaster.Api.Models;
-using Lynex.BillMaster.Model.Domain.DbModels;
 
 namespace Lynex.BillMaster.Api.Providers
 {
@@ -20,7 +18,7 @@ namespace Lynex.BillMaster.Api.Providers
         {
             if (publicClientId == null)
             {
-                throw new ArgumentNullException("publicClientId");
+                throw new ArgumentNullException(nameof(publicClientId));
             }
 
             _publicClientId = publicClientId;

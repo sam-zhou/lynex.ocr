@@ -17,7 +17,7 @@ namespace Lynex.AspNet.Identity
 		{
 			if (manager == null)
 			{
-				throw new ArgumentNullException("manager");
+				throw new ArgumentNullException(nameof(manager));
 			}
 			this.Manager = manager;
 		}
@@ -26,10 +26,10 @@ namespace Lynex.AspNet.Identity
 		{
 			if (item == null)
 			{
-				throw new ArgumentNullException("item");
+				throw new ArgumentNullException(nameof(item));
 			}
 			List<string> list = new List<string>();
-			await this.ValidateRoleName(item, list).WithCurrentCulture();
+			await ValidateRoleName(item, list).WithCurrentCulture();
 			IdentityResult result;
 			if (list.Count > 0)
 			{
@@ -46,20 +46,14 @@ namespace Lynex.AspNet.Identity
 		{
 			if (string.IsNullOrWhiteSpace(role.Name))
 			{
-				errors.Add(string.Format(CultureInfo.CurrentCulture, Resources.PropertyTooShort, new object[]
-				{
-					"Name"
-				}));
+				errors.Add(string.Format(CultureInfo.CurrentCulture, Resources.PropertyTooShort, "Name"));
 			}
 			else
 			{
-				TRole tRole = await this.Manager.FindByNameAsync(role.Name).WithCurrentCulture<TRole>();
+				TRole tRole = await Manager.FindByNameAsync(role.Name).WithCurrentCulture();
 				if (tRole != null && !EqualityComparer<TKey>.Default.Equals(tRole.Id, role.Id))
 				{
-					errors.Add(string.Format(CultureInfo.CurrentCulture, Resources.DuplicateName, new object[]
-					{
-						role.Name
-					}));
+					errors.Add(string.Format(CultureInfo.CurrentCulture, Resources.DuplicateName, role.Name));
 				}
 			}
 		}

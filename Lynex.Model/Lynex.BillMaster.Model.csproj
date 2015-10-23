@@ -56,6 +56,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataContracts\UserProxy.cs" />
     <Compile Include="Domain\DbModels\Address.cs" />
     <Compile Include="Domain\DbModels\Bill.cs" />
     <Compile Include="Domain\DbModels\BillingCompany.cs" />
@@ -75,9 +76,9 @@
     <Compile Include="Enum\Mapable\BillType.cs" />
     <Compile Include="Enum\FormatType.cs" />
     <Compile Include="Enum\DaysOfWeek.cs" />
-    <Compile Include="Enum\NotificationType.cs" />
-    <Compile Include="Enum\UserLoginStatus.cs" />
-    <Compile Include="Enum\UserChallengeStatus.cs" />
+    <Compile Include="Enum\Mapable\NotificationType.cs" />
+    <Compile Include="Enum\Mapable\UserLoginStatus.cs" />
+    <Compile Include="Enum\Mapable\UserChallengeStatus.cs" />
     <Compile Include="Domain\DbModels\Mapping\SettingMap.cs" />
     <Compile Include="Domain\DbModels\Mapping\UserChallengeMap.cs" />
     <Compile Include="Domain\DbModels\Mapping\ApplicationUserMap.cs" />

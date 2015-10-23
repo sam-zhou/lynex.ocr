@@ -83,6 +83,10 @@
       <Project>{43f03cbf-ace3-4a84-9b51-0b3433039377}</Project>
       <Name>Lynex.AspNet.Identity</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Lynex.Common.Model\Lynex.Common.Model.csproj">
+      <Project>{b57351ec-8147-4fc7-b57d-708da025d692}</Project>
+      <Name>Lynex.Common.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

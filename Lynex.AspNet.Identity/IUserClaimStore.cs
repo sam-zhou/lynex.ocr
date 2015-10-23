@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Lynex.AspNet.Identity
 {
-	public interface IUserClaimStore<TUser, in TKey> : IUserStore<TUser, TKey>, IDisposable where TUser : class, IUser<TKey>
+	public interface IUserClaimStore<TUser, in TKey> : IUserStore<TUser, TKey> where TUser : class, IUser<TKey>
 	{
 		Task<IList<Claim>> GetClaimsAsync(TUser user);
 
@@ -13,7 +13,7 @@ namespace Lynex.AspNet.Identity
 
 		Task RemoveClaimAsync(TUser user, Claim claim);
 	}
-	public interface IUserClaimStore<TUser> : IUserClaimStore<TUser, string>, IUserStore<TUser, string>, IDisposable where TUser : class, IUser<string>
+	public interface IUserClaimStore<TUser> : IUserClaimStore<TUser, string> where TUser : class, IUser<string>
 	{
 	}
 }

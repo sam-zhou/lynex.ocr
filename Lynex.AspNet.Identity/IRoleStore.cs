@@ -15,7 +15,7 @@ namespace Lynex.AspNet.Identity
 
 		Task<TRole> FindByNameAsync(string roleName);
 	}
-	public interface IRoleStore<TRole> : IRoleStore<TRole, string>, IDisposable where TRole : IRole<string>
+	public interface IRoleStore<TRole> : IRoleStore<TRole, string> where TRole : IRole<string>
 	{
 	}
 }

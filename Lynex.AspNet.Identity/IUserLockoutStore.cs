@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace Lynex.AspNet.Identity
 {
-	public interface IUserLockoutStore<TUser, in TKey> : IUserStore<TUser, TKey>, IDisposable where TUser : class, IUser<TKey>
+	public interface IUserLockoutStore<TUser, in TKey> : IUserStore<TUser, TKey> where TUser : class, IUser<TKey>
 	{
 		Task<DateTimeOffset> GetLockoutEndDateAsync(TUser user);
 

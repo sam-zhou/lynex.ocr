@@ -11,7 +11,7 @@ namespace Lynex.AspNet.Identity
 		{
 			if (identity == null)
 			{
-				throw new ArgumentNullException("identity");
+				throw new ArgumentNullException(nameof(identity));
 			}
 			ClaimsIdentity claimsIdentity = identity as ClaimsIdentity;
 			if (claimsIdentity != null)
@@ -25,7 +25,7 @@ namespace Lynex.AspNet.Identity
 		{
 			if (identity == null)
 			{
-				throw new ArgumentNullException("identity");
+				throw new ArgumentNullException(nameof(identity));
 			}
 			ClaimsIdentity claimsIdentity = identity as ClaimsIdentity;
 			if (claimsIdentity != null)
@@ -33,7 +33,7 @@ namespace Lynex.AspNet.Identity
 				string text = claimsIdentity.FindFirstValue("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier");
 				if (text != null)
 				{
-					return (T)((object)Convert.ChangeType(text, typeof(T), CultureInfo.InvariantCulture));
+					return (T)Convert.ChangeType(text, typeof(T), CultureInfo.InvariantCulture);
 				}
 			}
 			return default(T);
@@ -43,7 +43,7 @@ namespace Lynex.AspNet.Identity
 		{
 			if (identity == null)
 			{
-				throw new ArgumentNullException("identity");
+				throw new ArgumentNullException(nameof(identity));
 			}
 			ClaimsIdentity claimsIdentity = identity as ClaimsIdentity;
 			if (claimsIdentity != null)
@@ -57,7 +57,7 @@ namespace Lynex.AspNet.Identity
 		{
 			if (identity == null)
 			{
-				throw new ArgumentNullException("identity");
+				throw new ArgumentNullException(nameof(identity));
 			}
 			Claim claim = identity.FindFirst(claimType);
 			if (claim == null)

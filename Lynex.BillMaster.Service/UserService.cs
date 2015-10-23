@@ -8,6 +8,7 @@ using Lynex.BillMaster.Exception;
 using Lynex.BillMaster.Exception.UserException;
 using Lynex.BillMaster.Model.Domain.DbModels;
 using Lynex.BillMaster.Model.Enum;
+using Lynex.BillMaster.Model.Enum.Mapable;
 using Lynex.BillMaster.Repository.BillRepo;
 using Lynex.BillMaster.Repository.UserRepo;
 using Lynex.BillMaster.Service.Interface;

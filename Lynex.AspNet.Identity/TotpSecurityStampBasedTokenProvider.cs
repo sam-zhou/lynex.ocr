@@ -8,22 +8,22 @@ namespace Lynex.AspNet.Identity
 	{
 		public virtual Task NotifyAsync(string token, UserManager<TUser, TKey> manager, TUser user)
 		{
-			return Task.FromResult<int>(0);
+			return Task.FromResult(0);
 		}
 
 		public virtual Task<bool> IsValidProviderForUserAsync(UserManager<TUser, TKey> manager, TUser user)
 		{
 			if (manager == null)
 			{
-				throw new ArgumentNullException("manager");
+				throw new ArgumentNullException(nameof(manager));
 			}
-			return Task.FromResult<bool>(manager.SupportsUserSecurityStamp);
+			return Task.FromResult(manager.SupportsUserSecurityStamp);
 		}
 
 		public virtual async Task<string> GenerateAsync(string purpose, UserManager<TUser, TKey> manager, TUser user)
 		{
-			SecurityToken securityToken = await manager.CreateSecurityTokenAsync(user.Id).WithCurrentCulture<SecurityToken>();
-			string modifier = await this.GetUserModifierAsync(purpose, manager, user).WithCurrentCulture<string>();
+			SecurityToken securityToken = await manager.CreateSecurityTokenAsync(user.Id).WithCurrentCulture();
+			string modifier = await GetUserModifierAsync(purpose, manager, user).WithCurrentCulture();
 			return Rfc6238AuthenticationService.GenerateCode(securityToken, modifier).ToString("D6", CultureInfo.InvariantCulture);
 		}
 
@@ -37,8 +37,8 @@ namespace Lynex.AspNet.Identity
 			}
 			else
 			{
-				SecurityToken securityToken = await manager.CreateSecurityTokenAsync(user.Id).WithCurrentCulture<SecurityToken>();
-				string modifier = await this.GetUserModifierAsync(purpose, manager, user).WithCurrentCulture<string>();
+				SecurityToken securityToken = await manager.CreateSecurityTokenAsync(user.Id).WithCurrentCulture();
+				string modifier = await GetUserModifierAsync(purpose, manager, user).WithCurrentCulture();
 				result = (securityToken != null && Rfc6238AuthenticationService.ValidateCode(securityToken, code, modifier));
 			}
 			return result;
@@ -46,13 +46,7 @@ namespace Lynex.AspNet.Identity
 
 		public virtual Task<string> GetUserModifierAsync(string purpose, UserManager<TUser, TKey> manager, TUser user)
 		{
-			return Task.FromResult<string>(string.Concat(new object[]
-			{
-				"Totp:",
-				purpose,
-				":",
-				user.Id
-			}));
+			return Task.FromResult(string.Concat("Totp:", purpose, ":", user.Id));
 		}
 	}
 }

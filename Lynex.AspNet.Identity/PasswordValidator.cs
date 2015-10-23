@@ -42,40 +42,34 @@ namespace Lynex.AspNet.Identity
 		{
 			if (item == null)
 			{
-				throw new ArgumentNullException("item");
+				throw new ArgumentNullException(nameof(item));
 			}
 			List<string> list = new List<string>();
-			if (string.IsNullOrWhiteSpace(item) || item.Length < this.RequiredLength)
+			if (string.IsNullOrWhiteSpace(item) || item.Length < RequiredLength)
 			{
-				list.Add(string.Format(CultureInfo.CurrentCulture, Resources.PasswordTooShort, new object[]
-				{
-					this.RequiredLength
-				}));
+				list.Add(string.Format(CultureInfo.CurrentCulture, Resources.PasswordTooShort, RequiredLength));
 			}
-			if (this.RequireNonLetterOrDigit && item.All(new Func<char, bool>(this.IsLetterOrDigit)))
+			if (RequireNonLetterOrDigit && item.All(IsLetterOrDigit))
 			{
 				list.Add(Resources.PasswordRequireNonLetterOrDigit);
 			}
-			if (this.RequireDigit && item.All((char c) => !this.IsDigit(c)))
+			if (RequireDigit && item.All(c => !IsDigit(c)))
 			{
 				list.Add(Resources.PasswordRequireDigit);
 			}
-			if (this.RequireLowercase && item.All((char c) => !this.IsLower(c)))
+			if (RequireLowercase && item.All(c => !IsLower(c)))
 			{
 				list.Add(Resources.PasswordRequireLower);
 			}
-			if (this.RequireUppercase && item.All((char c) => !this.IsUpper(c)))
+			if (RequireUppercase && item.All(c => !IsUpper(c)))
 			{
 				list.Add(Resources.PasswordRequireUpper);
 			}
 			if (list.Count == 0)
 			{
-				return Task.FromResult<IdentityResult>(IdentityResult.Success);
+				return Task.FromResult(IdentityResult.Success);
 			}
-			return Task.FromResult<IdentityResult>(IdentityResult.Failed(new string[]
-			{
-				string.Join(" ", list)
-			}));
+			return Task.FromResult(IdentityResult.Failed(string.Join(" ", list)));
 		}
 
 		public virtual bool IsDigit(char c)
@@ -95,7 +89,7 @@ namespace Lynex.AspNet.Identity
 
 		public virtual bool IsLetterOrDigit(char c)
 		{
-			return this.IsUpper(c) || this.IsLower(c) || this.IsDigit(c);
+			return IsUpper(c) || IsLower(c) || IsDigit(c);
 		}
 	}
 }

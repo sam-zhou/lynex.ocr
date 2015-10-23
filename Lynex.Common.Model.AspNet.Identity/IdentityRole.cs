@@ -2,11 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Lynex.AspNet.Identity;
+using Lynex.Common.Model.DbModel.Interface;
 
 
 namespace Lynex.Common.Model.AspNet.Identity
 {
-	public class IdentityRole : IRole
+	public class IdentityRole : IRole, IDbModel
 	{
 		[Key]
 		public virtual string Id

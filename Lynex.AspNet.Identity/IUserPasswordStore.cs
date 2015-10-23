@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace Lynex.AspNet.Identity
 {
-	public interface IUserPasswordStore<TUser, in TKey> : IUserStore<TUser, TKey>, IDisposable where TUser : class, IUser<TKey>
+	public interface IUserPasswordStore<TUser, in TKey> : IUserStore<TUser, TKey> where TUser : class, IUser<TKey>
 	{
 		Task SetPasswordHashAsync(TUser user, string passwordHash);
 
@@ -11,7 +11,7 @@ namespace Lynex.AspNet.Identity
 
 		Task<bool> HasPasswordAsync(TUser user);
 	}
-	public interface IUserPasswordStore<TUser> : IUserPasswordStore<TUser, string>, IUserStore<TUser, string>, IDisposable where TUser : class, IUser<string>
+	public interface IUserPasswordStore<TUser> : IUserPasswordStore<TUser, string> where TUser : class, IUser<string>
 	{
 	}
 }

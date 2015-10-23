@@ -13,22 +13,16 @@ namespace Lynex.AspNet.Identity
 
 		public MinimumLengthValidator(int requiredLength)
 		{
-			this.RequiredLength = requiredLength;
+			RequiredLength = requiredLength;
 		}
 
 		public virtual Task<IdentityResult> ValidateAsync(string item)
 		{
-			if (string.IsNullOrWhiteSpace(item) || item.Length < this.RequiredLength)
+			if (string.IsNullOrWhiteSpace(item) || item.Length < RequiredLength)
 			{
-				return Task.FromResult<IdentityResult>(IdentityResult.Failed(new string[]
-				{
-					string.Format(CultureInfo.CurrentCulture, Resources.PasswordTooShort, new object[]
-					{
-						this.RequiredLength
-					})
-				}));
+				return Task.FromResult(IdentityResult.Failed(string.Format(CultureInfo.CurrentCulture, Resources.PasswordTooShort, RequiredLength)));
 			}
-			return Task.FromResult<IdentityResult>(IdentityResult.Success);
+			return Task.FromResult(IdentityResult.Success);
 		}
 	}
 }

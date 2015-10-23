@@ -47,7 +47,7 @@
     <Compile Include="IdentityMessage.cs" />
     <Compile Include="IdentityResult.cs" />
     <Compile Include="IIdentityMessageService.cs" />
-    <Compile Include="IIdentityMessageServiceExtensions.cs" />
+    <Compile Include="IdentityMessageServiceExtensions.cs" />
     <Compile Include="IIdentityValidator.cs" />
     <Compile Include="IPasswordHasher.cs" />
     <Compile Include="IQueryableRoleStore.cs" />

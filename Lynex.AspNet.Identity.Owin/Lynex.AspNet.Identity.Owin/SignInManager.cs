@@ -40,11 +40,11 @@ namespace Lynex.AspNet.Identity.Owin
 		{
 			if (userManager == null)
 			{
-				throw new ArgumentNullException("userManager");
+				throw new ArgumentNullException(nameof(userManager));
 			}
 			if (authenticationManager == null)
 			{
-				throw new ArgumentNullException("authenticationManager");
+				throw new ArgumentNullException(nameof(authenticationManager));
 			}
 			this.UserManager = userManager;
 			this.AuthenticationManager = authenticationManager;
@@ -75,15 +75,15 @@ namespace Lynex.AspNet.Identity.Owin
 			this.AuthenticationManager.SignOut(new string[]
 			{
 				"ExternalCookie",
-				"TwoFactorCookie"
-			});
+				"TwoFactorCookie",
+                "ApplicationCookie"
+            });
 			if (rememberBrowser)
 			{
-				ClaimsIdentity claimsIdentity2 = this.AuthenticationManager.CreateTwoFactorRememberBrowserIdentity(this.ConvertIdToString(user.Id));
-				IAuthenticationManager arg_12D_0 = this.AuthenticationManager;
+				ClaimsIdentity claimsIdentity2 = AuthenticationManager.CreateTwoFactorRememberBrowserIdentity(this.ConvertIdToString(user.Id));
 				AuthenticationProperties authenticationProperties = new AuthenticationProperties();
 			    authenticationProperties.IsPersistent = isPersistent;
-				arg_12D_0.SignIn(authenticationProperties, new ClaimsIdentity[]
+                AuthenticationManager.SignIn(authenticationProperties, new ClaimsIdentity[]
 				{
 					claimsIdentity,
 					claimsIdentity2
@@ -91,10 +91,9 @@ namespace Lynex.AspNet.Identity.Owin
 			}
 			else
 			{
-				IAuthenticationManager arg_166_0 = this.AuthenticationManager;
 				AuthenticationProperties authenticationProperties2 = new AuthenticationProperties();
 				authenticationProperties2.IsPersistent = isPersistent;
-				arg_166_0.SignIn(authenticationProperties2, new ClaimsIdentity[]
+                AuthenticationManager.SignIn(authenticationProperties2, new ClaimsIdentity[]
 				{
 					claimsIdentity
 				});

@@ -81,6 +81,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApiControllerExtension.cs" />
+    <Compile Include="ApiException.cs" />
     <Compile Include="ApiExceptionActionResult.cs" />
     <Compile Include="LynexException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Lynex.BillMaster.Model.Domain.DbModels;
 using Lynex.BillMaster.Model.Enum;
+using Lynex.BillMaster.Model.Enum.Mapable;
 
 namespace Lynex.BillMaster.Service.Interface
 {

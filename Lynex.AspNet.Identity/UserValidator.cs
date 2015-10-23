@@ -31,23 +31,23 @@ namespace Lynex.AspNet.Identity
 		{
 			if (manager == null)
 			{
-				throw new ArgumentNullException("manager");
+				throw new ArgumentNullException(nameof(manager));
 			}
-			this.AllowOnlyAlphanumericUserNames = true;
-			this.Manager = manager;
+			AllowOnlyAlphanumericUserNames = true;
+			Manager = manager;
 		}
 
 		public virtual async Task<IdentityResult> ValidateAsync(TUser item)
 		{
 			if (item == null)
 			{
-				throw new ArgumentNullException("item");
+				throw new ArgumentNullException(nameof(item));
 			}
 			List<string> list = new List<string>();
-			await this.ValidateUserName(item, list).WithCurrentCulture();
-			if (this.RequireUniqueEmail)
+			await ValidateUserName(item, list).WithCurrentCulture();
+			if (RequireUniqueEmail)
 			{
-				await this.ValidateEmailAsync(item, list).WithCurrentCulture();
+				await ValidateEmailAsync(item, list).WithCurrentCulture();
 			}
 			IdentityResult result;
 			if (list.Count > 0)
@@ -65,62 +65,44 @@ namespace Lynex.AspNet.Identity
 		{
 			if (string.IsNullOrWhiteSpace(user.UserName))
 			{
-				errors.Add(string.Format(CultureInfo.CurrentCulture, Resources.PropertyTooShort, new object[]
-				{
-					"Name"
-				}));
+				errors.Add(string.Format(CultureInfo.CurrentCulture, Resources.PropertyTooShort, "Name"));
 			}
-			else if (this.AllowOnlyAlphanumericUserNames && !Regex.IsMatch(user.UserName, "^[A-Za-z0-9@_\\.]+$"))
+			else if (AllowOnlyAlphanumericUserNames && !Regex.IsMatch(user.UserName, "^[A-Za-z0-9@_\\.]+$"))
 			{
-				errors.Add(string.Format(CultureInfo.CurrentCulture, Resources.InvalidUserName, new object[]
-				{
-					user.UserName
-				}));
+				errors.Add(string.Format(CultureInfo.CurrentCulture, Resources.InvalidUserName, user.UserName));
 			}
 			else
 			{
-				TUser tUser = await this.Manager.FindByNameAsync(user.UserName).WithCurrentCulture<TUser>();
+				TUser tUser = await Manager.FindByNameAsync(user.UserName).WithCurrentCulture();
 				if (tUser != null && !EqualityComparer<TKey>.Default.Equals(tUser.Id, user.Id))
 				{
-					errors.Add(string.Format(CultureInfo.CurrentCulture, Resources.DuplicateName, new object[]
-					{
-						user.UserName
-					}));
+					errors.Add(string.Format(CultureInfo.CurrentCulture, Resources.DuplicateName, user.UserName));
 				}
 			}
 		}
 
 		private async Task ValidateEmailAsync(TUser user, List<string> errors)
 		{
-			string text = await this.Manager.GetEmailStore().GetEmailAsync(user).WithCurrentCulture<string>();
+			string text = await Manager.GetEmailStore().GetEmailAsync(user).WithCurrentCulture();
 			if (string.IsNullOrWhiteSpace(text))
 			{
-				errors.Add(string.Format(CultureInfo.CurrentCulture, Resources.PropertyTooShort, new object[]
-				{
-					"Email"
-				}));
+				errors.Add(string.Format(CultureInfo.CurrentCulture, Resources.PropertyTooShort, "Email"));
 			}
 			else
 			{
 				try
 				{
-					new MailAddress(text);
+                    new MailAddress(text);
 				}
 				catch (FormatException)
 				{
-					errors.Add(string.Format(CultureInfo.CurrentCulture, Resources.InvalidEmail, new object[]
-					{
-						text
-					}));
+					errors.Add(string.Format(CultureInfo.CurrentCulture, Resources.InvalidEmail, text));
 					return;
 				}
-				TUser tUser = await this.Manager.FindByEmailAsync(text).WithCurrentCulture<TUser>();
+				TUser tUser = await Manager.FindByEmailAsync(text).WithCurrentCulture();
 				if (tUser != null && !EqualityComparer<TKey>.Default.Equals(tUser.Id, user.Id))
 				{
-					errors.Add(string.Format(CultureInfo.CurrentCulture, Resources.DuplicateEmail, new object[]
-					{
-						text
-					}));
+					errors.Add(string.Format(CultureInfo.CurrentCulture, Resources.DuplicateEmail, text));
 				}
 			}
 		}

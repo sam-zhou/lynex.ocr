@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Reflection;
+using Lynex.Common.Model.DbModel.Interface;
 using NHibernate;
 
 namespace Lynex.Common.Database.DefaultDataFactory
@@ -10,7 +11,7 @@ namespace Lynex.Common.Database.DefaultDataFactory
     }
 
 
-    public abstract class DefaultDataFactoryBase<TEntity> : IDefaultDataFactory where TEntity : class
+    public abstract class DefaultDataFactoryBase<TEntity> : IDefaultDataFactory where TEntity : IDbModel
     {
         private readonly ISession _session;
         private readonly Assembly _assembly;
@@ -26,7 +27,6 @@ namespace Lynex.Common.Database.DefaultDataFactory
         public void Populate()
         {
             var items = GetData(_assembly);
-
             foreach (var entity in items)
             {
                 _session.Save(entity);

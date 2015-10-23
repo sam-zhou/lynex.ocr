@@ -16,8 +16,8 @@ namespace Lynex.AspNet.Identity
 
 		public UserLoginInfo(string loginProvider, string providerKey)
 		{
-			this.LoginProvider = loginProvider;
-			this.ProviderKey = providerKey;
+			LoginProvider = loginProvider;
+			ProviderKey = providerKey;
 		}
 	}
 }

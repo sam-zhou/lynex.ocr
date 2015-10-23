@@ -9,7 +9,7 @@ namespace Lynex.AspNet.Identity
 	{
 		internal const string IdentityProviderClaimType = "http://schemas.microsoft.com/accesscontrolservice/2010/07/claims/identityprovider";
 
-		internal const string DefaultIdentityProviderClaimValue = "ASP.NET Identity";
+		internal const string DefaultIdentityProviderClaimValue = "Lynex Identity";
 
 		public string RoleClaimType
 		{
@@ -37,41 +37,41 @@ namespace Lynex.AspNet.Identity
 
 		public ClaimsIdentityFactory()
 		{
-			this.RoleClaimType = "http://schemas.microsoft.com/ws/2008/06/identity/claims/role";
-			this.UserIdClaimType = "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier";
-			this.UserNameClaimType = "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name";
-			this.SecurityStampClaimType = "AspNet.Identity.SecurityStamp";
+			RoleClaimType = "http://schemas.microsoft.com/ws/2008/06/identity/claims/role";
+			UserIdClaimType = "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier";
+			UserNameClaimType = "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name";
+			SecurityStampClaimType = "AspNet.Identity.SecurityStamp";
 		}
 
 		public virtual async Task<ClaimsIdentity> CreateAsync(UserManager<TUser, TKey> manager, TUser user, string authenticationType)
 		{
 			if (manager == null)
 			{
-				throw new ArgumentNullException("manager");
+				throw new ArgumentNullException(nameof(manager));
 			}
 			if (user == null)
 			{
-				throw new ArgumentNullException("user");
+				throw new ArgumentNullException(nameof(user));
 			}
-			ClaimsIdentity claimsIdentity = new ClaimsIdentity(authenticationType, this.UserNameClaimType, this.RoleClaimType);
-			claimsIdentity.AddClaim(new Claim(this.UserIdClaimType, this.ConvertIdToString(user.Id), "http://www.w3.org/2001/XMLSchema#string"));
-			claimsIdentity.AddClaim(new Claim(this.UserNameClaimType, user.UserName, "http://www.w3.org/2001/XMLSchema#string"));
-			claimsIdentity.AddClaim(new Claim("http://schemas.microsoft.com/accesscontrolservice/2010/07/claims/identityprovider", "ASP.NET Identity", "http://www.w3.org/2001/XMLSchema#string"));
-			if (manager.SupportsUserSecurityStamp)
+			ClaimsIdentity claimsIdentity = new ClaimsIdentity(authenticationType, UserNameClaimType, RoleClaimType);
+			claimsIdentity.AddClaim(new Claim(UserIdClaimType, ConvertIdToString(user.Id), "http://www.w3.org/2001/XMLSchema#string"));
+			claimsIdentity.AddClaim(new Claim(UserNameClaimType, user.UserName, "http://www.w3.org/2001/XMLSchema#string"));
+			claimsIdentity.AddClaim(new Claim("http://schemas.microsoft.com/accesscontrolservice/2010/07/claims/identityprovider", "Lynex Identity", "http://www.w3.org/2001/XMLSchema#string"));
+            if (manager.SupportsUserSecurityStamp)
 			{
-				claimsIdentity.AddClaim(new Claim(this.SecurityStampClaimType, await manager.GetSecurityStampAsync(user.Id).WithCurrentCulture<string>()));
+				claimsIdentity.AddClaim(new Claim(SecurityStampClaimType, await manager.GetSecurityStampAsync(user.Id).WithCurrentCulture()));
 			}
 			if (manager.SupportsUserRole)
 			{
-				IList<string> list = await manager.GetRolesAsync(user.Id).WithCurrentCulture<IList<string>>();
+				IList<string> list = await manager.GetRolesAsync(user.Id).WithCurrentCulture();
 				foreach (string current in list)
 				{
-					claimsIdentity.AddClaim(new Claim(this.RoleClaimType, current, "http://www.w3.org/2001/XMLSchema#string"));
+					claimsIdentity.AddClaim(new Claim(RoleClaimType, current, "http://www.w3.org/2001/XMLSchema#string"));
 				}
 			}
 			if (manager.SupportsUserClaim)
 			{
-				claimsIdentity.AddClaims(await manager.GetClaimsAsync(user.Id).WithCurrentCulture<IList<Claim>>());
+				claimsIdentity.AddClaims(await manager.GetClaimsAsync(user.Id).WithCurrentCulture());
 			}
 			return claimsIdentity;
 		}
@@ -80,7 +80,7 @@ namespace Lynex.AspNet.Identity
 		{
 			if (key == null)
 			{
-				throw new ArgumentNullException("key");
+				throw new ArgumentNullException(nameof(key));
 			}
 			return key.ToString();
 		}

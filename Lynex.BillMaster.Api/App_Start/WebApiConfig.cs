@@ -6,6 +6,7 @@ using System.Web.Http;
 using Lynex.BillMaster.Api.Filters;
 using Microsoft.Owin.Security.OAuth;
 using Newtonsoft.Json.Serialization;
+using System.Net.Http.Formatting;
 
 namespace Lynex.BillMaster.Api
 {
@@ -16,9 +17,9 @@ namespace Lynex.BillMaster.Api
             // Web API configuration and services
             // Configure Web API to use only bearer token authentication.
             config.SuppressDefaultHostAuthentication();
-            config.Filters.Add(new AuthorizeAttribute());
+            //config.Filters.Add(new AuthorizeAttribute());
             //config.Filters.Add(new ExceptionHandlingFilterAttribute());
-            //config.Filters.Add(new HostAuthenticationFilter(OAuthDefaults.AuthenticationType));
+            config.Filters.Add(new HostAuthenticationFilter(OAuthDefaults.AuthenticationType));
 
 
 
@@ -30,6 +31,8 @@ namespace Lynex.BillMaster.Api
                 routeTemplate: "{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            
         }
     }
 }

@@ -1,12 +1,14 @@
 ﻿using System;
 using System.IO;
 using System.Net;
+using System.Net.Http;
 using System.Text;
 using Lynex.BillMaster.Admin.Service;
 using Lynex.BillMaster.Model.Domain.DbModels;
 using Lynex.BillMaster.Model.Enum.Mapable;
 using Lynex.BillMaster.Service;
 using Lynex.Common.Database;
+using Lynex.Common.Exception;
 using Lynex.Common.Service;
 using Newtonsoft.Json;
 
@@ -125,49 +127,108 @@ namespace Lynex.Common.Console
             var input = string.Empty;
             while (input != null && input.ToLower() != "quit")
             {
+                var isSuccessed = false;
                 try
                 {
-                    var request = (HttpWebRequest)WebRequest.Create("http://api.mylynex.com/account/register");
-                    request.ContentType = "application/json; charset=UTF-8";
-                    request.Method = "POST";
-                    var model = new
+                    using (var client = new HttpClient())
                     {
-                        Email = "samzhou.it@gmail.com",
-                        Password = "Jukfrg!1",
-                        ConfirmPassword = "Jukfrg!1",
-                    };
-                    byte[] byteArray = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(model));
+                        var response =
+                            client.PostAsJsonAsync("http://api.mylynex.com/account/register",
 
-                    request.ContentLength = byteArray.Length;
+                                // Pass in an anonymous object that maps to the expected 
+                                // RegisterUserBindingModel defined as the method parameter 
+                                // for the Register method on the API:
+                                new
+                                {
+                                    Email = "samzhou.it@gmail.com",
+                                    Password = "Jukfrg!1",
+                                    ConfirmPassword = "Jukfrg!1",
+                                }).Result;
 
-                    using (var dataStream = request.GetRequestStream())
-                    {
-                        dataStream.Write(byteArray, 0, byteArray.Length);
-                    }
-                    var response = request.GetResponse();
-
-
-                    using (var dataStream = response.GetResponseStream())
-                    {
-                        if (dataStream != null)
+                        if (!response.IsSuccessStatusCode)
                         {
-                            using (var reader = new StreamReader(dataStream))
-                            {
-                                var responseFromServer = reader.ReadToEnd();
-                                System.Console.WriteLine(responseFromServer);
-                            }
+                            // Unwrap the response and throw as an Api Exception:
+                            var ex = ApiException.CreateApiException(response);
+                            throw ex;
                         }
-                        else
-                        {
-                            System.Console.WriteLine("Empty Response");
-                        }
+
                     }
-                    
+                    isSuccessed = true;
+                    System.Console.WriteLine("Register Successed");
                 }
-                catch (WebException ex)
+                catch (ApiException ex)
                 {
-                    System.Console.WriteLine(((HttpWebResponse)ex.Response).StatusDescription);
+                    System.Console.WriteLine(ex.Response);
+                    foreach (var error in ex.Errors)
+                    {
+                        System.Console.WriteLine(error);
+                    }
                 }
+
+                if (isSuccessed)
+                {
+                    try
+                    {
+                        using (var client = new HttpClient())
+                        {
+                            var response =
+                                client.PostAsJsonAsync("http://api.mylynex.com/authentication/signin",
+
+                                    // Pass in an anonymous object that maps to the expected 
+                                    // RegisterUserBindingModel defined as the method parameter 
+                                    // for the Register method on the API:
+                                    new
+                                    {
+                                        Email = "samzhou.it@gmail.com",
+                                        Password = "Jukfrg!1",
+                                        RememberMe = true,
+                                    }).Result;
+
+                            if (!response.IsSuccessStatusCode)
+                            {
+                                // Unwrap the response and throw as an Api Exception:
+                                var ex = ApiException.CreateApiException(response);
+                                throw ex;
+                            }
+                            System.Console.WriteLine("Login Successed");
+
+                            var response2 =
+                                client.PostAsJsonAsync("http://api.mylynex.com/account/changepassword",
+
+                                    // Pass in an anonymous object that maps to the expected 
+                                    // RegisterUserBindingModel defined as the method parameter 
+                                    // for the Register method on the API:
+                                    new
+                                    {
+                                        OldPassword = "Jukfrg!1",
+                                        NewPassword = "Jukfrg!2",
+                                        ConfirmPassword = "Jukfrg!2",
+                                    }).Result;
+
+                            if (!response2.IsSuccessStatusCode)
+                            {
+                                // Unwrap the response and throw as an Api Exception:
+                                var ex = ApiException.CreateApiException(response2);
+                                throw ex;
+                            }
+                            System.Console.WriteLine("Password Change Successed");
+
+                        }
+                        
+
+                        
+                        
+                    }
+                    catch (ApiException ex)
+                    {
+                        System.Console.WriteLine(ex.Response);
+                        foreach (var error in ex.Errors)
+                        {
+                            System.Console.WriteLine(error);
+                        }
+                    }
+                }
+                
 
 
                 input = System.Console.ReadLine();

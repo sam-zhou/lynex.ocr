@@ -10,11 +10,12 @@ using Lynex.Common.Model;
 using Lynex.Common.Model.AspNet.Identity;
 
 using NHibernate;
-
+using System.Security.Claims;
+using Microsoft.Owin.Security;
 
 namespace Lynex.BillMaster.Api
 {
-    // Configure the application user manager used in this application. UserManager is defined in ASP.NET Identity and is used by the application.
+    // Configure the application user manager used in this application. UserManager is defined in Lynex Identity and is used by the application.
 
     public class ApplicationUserManager : UserManager<ApplicationUser>
     {
@@ -44,25 +45,28 @@ namespace Lynex.BillMaster.Api
             var dataProtectionProvider = options.DataProtectionProvider;
             if (dataProtectionProvider != null)
             {
-                manager.UserTokenProvider = new DataProtectorTokenProvider<ApplicationUser>(dataProtectionProvider.Create("ASP.NET Identity"));
+                manager.UserTokenProvider = new DataProtectorTokenProvider<ApplicationUser>(dataProtectionProvider.Create("Lynex Identity"));
             }
             return manager;
         }
     }
 
-
-    public class UserRoleManager : RoleManager<IdentityRole>
+    // Configure the application sign-in manager which is used in this application.
+    public class ApplicationSignInManager : SignInManager<ApplicationUser, string>
     {
-        public UserRoleManager(IRoleStore<IdentityRole, string> store) : base(store)
+        public ApplicationSignInManager(ApplicationUserManager userManager, IAuthenticationManager authenticationManager)
+            : base(userManager, authenticationManager)
         {
         }
 
-        public static UserRoleManager Create()
+        public override Task<ClaimsIdentity> CreateUserIdentityAsync(ApplicationUser user)
         {
-            var manager = new UserRoleManager(new RoleStore<IdentityRole>(IoCContainer.Container.Resolve<IDatabaseService>().Session));
-            // Configure validation logic for usernames
-            manager.RoleValidator = new RoleValidator<IdentityRole>(manager);
-            return manager;
+            return user.GenerateUserIdentityAsync((ApplicationUserManager)UserManager, DefaultAuthenticationTypes.ApplicationCookie);
+        }
+
+        public static ApplicationSignInManager Create(IdentityFactoryOptions<ApplicationSignInManager> options, IOwinContext context)
+        {
+            return new ApplicationSignInManager(context.GetUserManager<ApplicationUserManager>(), context.Authentication);
         }
     }
 }

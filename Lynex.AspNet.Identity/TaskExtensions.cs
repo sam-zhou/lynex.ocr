@@ -8,7 +8,7 @@ namespace Lynex.AspNet.Identity
 {
 	public static class TaskExtensions
 	{
-		public struct CultureAwaiter<T> : ICriticalNotifyCompletion, INotifyCompletion
+		public struct CultureAwaiter<T> : ICriticalNotifyCompletion
 		{
 			private readonly Task<T> _task;
 
@@ -16,23 +16,23 @@ namespace Lynex.AspNet.Identity
 			{
 				get
 				{
-					return this._task.IsCompleted;
+					return _task.IsCompleted;
 				}
 			}
 
 			public CultureAwaiter(Task<T> task)
 			{
-				this._task = task;
+				_task = task;
 			}
 
-			public TaskExtensions.CultureAwaiter<T> GetAwaiter()
+			public CultureAwaiter<T> GetAwaiter()
 			{
 				return this;
 			}
 
 			public T GetResult()
 			{
-				return this._task.GetAwaiter().GetResult();
+				return _task.GetAwaiter().GetResult();
 			}
 
 			public void OnCompleted(Action continuation)
@@ -44,7 +44,7 @@ namespace Lynex.AspNet.Identity
 			{
 				CultureInfo currentCulture = Thread.CurrentThread.CurrentCulture;
 				CultureInfo currentUiCulture = Thread.CurrentThread.CurrentUICulture;
-				this._task.ConfigureAwait(false).GetAwaiter().UnsafeOnCompleted(delegate
+				_task.ConfigureAwait(false).GetAwaiter().UnsafeOnCompleted(delegate
 				{
 					Thread.CurrentThread.CurrentCulture = currentCulture;
 					Thread.CurrentThread.CurrentUICulture = currentUiCulture;
@@ -61,7 +61,7 @@ namespace Lynex.AspNet.Identity
 			}
 		}
 
-		public struct CultureAwaiter : ICriticalNotifyCompletion, INotifyCompletion
+		public struct CultureAwaiter : ICriticalNotifyCompletion
 		{
 			private readonly Task _task;
 
@@ -69,23 +69,23 @@ namespace Lynex.AspNet.Identity
 			{
 				get
 				{
-					return this._task.IsCompleted;
+					return _task.IsCompleted;
 				}
 			}
 
 			public CultureAwaiter(Task task)
 			{
-				this._task = task;
+				_task = task;
 			}
 
-			public TaskExtensions.CultureAwaiter GetAwaiter()
+			public CultureAwaiter GetAwaiter()
 			{
 				return this;
 			}
 
 			public void GetResult()
 			{
-				this._task.GetAwaiter().GetResult();
+				_task.GetAwaiter().GetResult();
 			}
 
 			public void OnCompleted(Action continuation)
@@ -97,7 +97,7 @@ namespace Lynex.AspNet.Identity
 			{
                 CultureInfo currentCulture = Thread.CurrentThread.CurrentCulture;
                 CultureInfo currentUiCulture = Thread.CurrentThread.CurrentUICulture;
-                this._task.ConfigureAwait(false).GetAwaiter().UnsafeOnCompleted(delegate
+                _task.ConfigureAwait(false).GetAwaiter().UnsafeOnCompleted(delegate
                 {
                     Thread.CurrentThread.CurrentCulture = currentCulture;
                     Thread.CurrentThread.CurrentUICulture = currentUiCulture;
@@ -114,14 +114,14 @@ namespace Lynex.AspNet.Identity
             }
 		}
 
-		public static TaskExtensions.CultureAwaiter<T> WithCurrentCulture<T>(this Task<T> task)
+		public static CultureAwaiter<T> WithCurrentCulture<T>(this Task<T> task)
 		{
-			return new TaskExtensions.CultureAwaiter<T>(task);
+			return new CultureAwaiter<T>(task);
 		}
 
-		public static TaskExtensions.CultureAwaiter WithCurrentCulture(this Task task)
+		public static CultureAwaiter WithCurrentCulture(this Task task)
 		{
-			return new TaskExtensions.CultureAwaiter(task);
+			return new CultureAwaiter(task);
 		}
 	}
 }

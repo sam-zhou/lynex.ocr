@@ -3,14 +3,14 @@ using System.Linq;
 
 namespace Lynex.AspNet.Identity
 {
-	public interface IQueryableRoleStore<TRole, in TKey> : IRoleStore<TRole, TKey>, IDisposable where TRole : IRole<TKey>
+	public interface IQueryableRoleStore<TRole, in TKey> : IRoleStore<TRole, TKey> where TRole : IRole<TKey>
 	{
 		IQueryable<TRole> Roles
 		{
 			get;
 		}
 	}
-	public interface IQueryableRoleStore<TRole> : IQueryableRoleStore<TRole, string>, IRoleStore<TRole, string>, IDisposable where TRole : IRole<string>
+	public interface IQueryableRoleStore<TRole> : IQueryableRoleStore<TRole, string> where TRole : IRole<string>
 	{
 	}
 }

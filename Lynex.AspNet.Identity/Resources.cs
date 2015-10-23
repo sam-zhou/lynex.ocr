@@ -7,24 +7,24 @@ using System.Runtime.CompilerServices;
 
 namespace Lynex.AspNet.Identity
 {
-	[GeneratedCode("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0"), DebuggerNonUserCode, CompilerGenerated]
+	[GeneratedCode("System.Tools.StronglyTypedResourceBuilder", "4.0.0.0"), DebuggerNonUserCode, CompilerGenerated]
 	internal class Resources
 	{
-		private static ResourceManager resourceMan;
+		private static ResourceManager _resourceMan;
 
-		private static CultureInfo resourceCulture;
+		private static CultureInfo _resourceCulture;
 
 		[EditorBrowsable(EditorBrowsableState.Advanced)]
 		internal static ResourceManager ResourceManager
 		{
 			get
 			{
-				if (object.ReferenceEquals(Resources.resourceMan, null))
+				if (ReferenceEquals(_resourceMan, null))
 				{
-					ResourceManager resourceManager = new ResourceManager("Microsoft.AspNet.Identity.Resources", typeof(Resources).Assembly);
-					Resources.resourceMan = resourceManager;
+					ResourceManager resourceManager = new ResourceManager("Lynex.AspNet.Identity.Resources", typeof(Resources).Assembly);
+					_resourceMan = resourceManager;
 				}
-				return Resources.resourceMan;
+				return _resourceMan;
 			}
 		}
 
@@ -33,11 +33,11 @@ namespace Lynex.AspNet.Identity
 		{
 			get
 			{
-				return Resources.resourceCulture;
+				return _resourceCulture;
 			}
 			set
 			{
-				Resources.resourceCulture = value;
+				_resourceCulture = value;
 			}
 		}
 
@@ -45,7 +45,7 @@ namespace Lynex.AspNet.Identity
 		{
 			get
 			{
-				return Resources.ResourceManager.GetString("DefaultError", Resources.resourceCulture);
+				return ResourceManager.GetString("DefaultError", _resourceCulture);
 			}
 		}
 
@@ -53,7 +53,7 @@ namespace Lynex.AspNet.Identity
 		{
 			get
 			{
-				return Resources.ResourceManager.GetString("DuplicateEmail", Resources.resourceCulture);
+				return ResourceManager.GetString("DuplicateEmail", _resourceCulture);
 			}
 		}
 
@@ -61,7 +61,7 @@ namespace Lynex.AspNet.Identity
 		{
 			get
 			{
-				return Resources.ResourceManager.GetString("DuplicateName", Resources.resourceCulture);
+				return ResourceManager.GetString("DuplicateName", _resourceCulture);
 			}
 		}
 
@@ -69,7 +69,7 @@ namespace Lynex.AspNet.Identity
 		{
 			get
 			{
-				return Resources.ResourceManager.GetString("ExternalLoginExists", Resources.resourceCulture);
+				return ResourceManager.GetString("ExternalLoginExists", _resourceCulture);
 			}
 		}
 
@@ -77,7 +77,7 @@ namespace Lynex.AspNet.Identity
 		{
 			get
 			{
-				return Resources.ResourceManager.GetString("InvalidEmail", Resources.resourceCulture);
+				return ResourceManager.GetString("InvalidEmail", _resourceCulture);
 			}
 		}
 
@@ -85,7 +85,7 @@ namespace Lynex.AspNet.Identity
 		{
 			get
 			{
-				return Resources.ResourceManager.GetString("InvalidToken", Resources.resourceCulture);
+				return ResourceManager.GetString("InvalidToken", _resourceCulture);
 			}
 		}
 
@@ -93,7 +93,7 @@ namespace Lynex.AspNet.Identity
 		{
 			get
 			{
-				return Resources.ResourceManager.GetString("InvalidUserName", Resources.resourceCulture);
+				return ResourceManager.GetString("InvalidUserName", _resourceCulture);
 			}
 		}
 
@@ -101,7 +101,7 @@ namespace Lynex.AspNet.Identity
 		{
 			get
 			{
-				return Resources.ResourceManager.GetString("LockoutNotEnabled", Resources.resourceCulture);
+				return ResourceManager.GetString("LockoutNotEnabled", _resourceCulture);
 			}
 		}
 
@@ -109,7 +109,7 @@ namespace Lynex.AspNet.Identity
 		{
 			get
 			{
-				return Resources.ResourceManager.GetString("NoTokenProvider", Resources.resourceCulture);
+				return ResourceManager.GetString("NoTokenProvider", _resourceCulture);
 			}
 		}
 
@@ -117,7 +117,7 @@ namespace Lynex.AspNet.Identity
 		{
 			get
 			{
-				return Resources.ResourceManager.GetString("NoTwoFactorProvider", Resources.resourceCulture);
+				return ResourceManager.GetString("NoTwoFactorProvider", _resourceCulture);
 			}
 		}
 
@@ -125,7 +125,7 @@ namespace Lynex.AspNet.Identity
 		{
 			get
 			{
-				return Resources.ResourceManager.GetString("PasswordMismatch", Resources.resourceCulture);
+				return ResourceManager.GetString("PasswordMismatch", _resourceCulture);
 			}
 		}
 
@@ -133,7 +133,7 @@ namespace Lynex.AspNet.Identity
 		{
 			get
 			{
-				return Resources.ResourceManager.GetString("PasswordRequireDigit", Resources.resourceCulture);
+				return ResourceManager.GetString("PasswordRequireDigit", _resourceCulture);
 			}
 		}
 
@@ -141,7 +141,7 @@ namespace Lynex.AspNet.Identity
 		{
 			get
 			{
-				return Resources.ResourceManager.GetString("PasswordRequireLower", Resources.resourceCulture);
+				return ResourceManager.GetString("PasswordRequireLower", _resourceCulture);
 			}
 		}
 
@@ -149,7 +149,7 @@ namespace Lynex.AspNet.Identity
 		{
 			get
 			{
-				return Resources.ResourceManager.GetString("PasswordRequireNonLetterOrDigit", Resources.resourceCulture);
+				return ResourceManager.GetString("PasswordRequireNonLetterOrDigit", _resourceCulture);
 			}
 		}
 
@@ -157,7 +157,7 @@ namespace Lynex.AspNet.Identity
 		{
 			get
 			{
-				return Resources.ResourceManager.GetString("PasswordRequireUpper", Resources.resourceCulture);
+				return ResourceManager.GetString("PasswordRequireUpper", _resourceCulture);
 			}
 		}
 
@@ -165,7 +165,7 @@ namespace Lynex.AspNet.Identity
 		{
 			get
 			{
-				return Resources.ResourceManager.GetString("PasswordTooShort", Resources.resourceCulture);
+				return ResourceManager.GetString("PasswordTooShort", _resourceCulture);
 			}
 		}
 
@@ -173,7 +173,7 @@ namespace Lynex.AspNet.Identity
 		{
 			get
 			{
-				return Resources.ResourceManager.GetString("PropertyTooShort", Resources.resourceCulture);
+				return ResourceManager.GetString("PropertyTooShort", _resourceCulture);
 			}
 		}
 
@@ -181,7 +181,7 @@ namespace Lynex.AspNet.Identity
 		{
 			get
 			{
-				return Resources.ResourceManager.GetString("RoleNotFound", Resources.resourceCulture);
+				return ResourceManager.GetString("RoleNotFound", _resourceCulture);
 			}
 		}
 
@@ -189,7 +189,7 @@ namespace Lynex.AspNet.Identity
 		{
 			get
 			{
-				return Resources.ResourceManager.GetString("StoreNotIQueryableRoleStore", Resources.resourceCulture);
+				return ResourceManager.GetString("StoreNotIQueryableRoleStore", _resourceCulture);
 			}
 		}
 
@@ -197,7 +197,7 @@ namespace Lynex.AspNet.Identity
 		{
 			get
 			{
-				return Resources.ResourceManager.GetString("StoreNotIQueryableUserStore", Resources.resourceCulture);
+				return ResourceManager.GetString("StoreNotIQueryableUserStore", _resourceCulture);
 			}
 		}
 
@@ -205,7 +205,7 @@ namespace Lynex.AspNet.Identity
 		{
 			get
 			{
-				return Resources.ResourceManager.GetString("StoreNotIUserClaimStore", Resources.resourceCulture);
+				return ResourceManager.GetString("StoreNotIUserClaimStore", _resourceCulture);
 			}
 		}
 
@@ -213,7 +213,7 @@ namespace Lynex.AspNet.Identity
 		{
 			get
 			{
-				return Resources.ResourceManager.GetString("StoreNotIUserConfirmationStore", Resources.resourceCulture);
+				return ResourceManager.GetString("StoreNotIUserConfirmationStore", _resourceCulture);
 			}
 		}
 
@@ -221,7 +221,7 @@ namespace Lynex.AspNet.Identity
 		{
 			get
 			{
-				return Resources.ResourceManager.GetString("StoreNotIUserEmailStore", Resources.resourceCulture);
+				return ResourceManager.GetString("StoreNotIUserEmailStore", _resourceCulture);
 			}
 		}
 
@@ -229,7 +229,7 @@ namespace Lynex.AspNet.Identity
 		{
 			get
 			{
-				return Resources.ResourceManager.GetString("StoreNotIUserLockoutStore", Resources.resourceCulture);
+				return ResourceManager.GetString("StoreNotIUserLockoutStore", _resourceCulture);
 			}
 		}
 
@@ -237,7 +237,7 @@ namespace Lynex.AspNet.Identity
 		{
 			get
 			{
-				return Resources.ResourceManager.GetString("StoreNotIUserLoginStore", Resources.resourceCulture);
+				return ResourceManager.GetString("StoreNotIUserLoginStore", _resourceCulture);
 			}
 		}
 
@@ -245,7 +245,7 @@ namespace Lynex.AspNet.Identity
 		{
 			get
 			{
-				return Resources.ResourceManager.GetString("StoreNotIUserPasswordStore", Resources.resourceCulture);
+				return ResourceManager.GetString("StoreNotIUserPasswordStore", _resourceCulture);
 			}
 		}
 
@@ -253,7 +253,7 @@ namespace Lynex.AspNet.Identity
 		{
 			get
 			{
-				return Resources.ResourceManager.GetString("StoreNotIUserPhoneNumberStore", Resources.resourceCulture);
+				return ResourceManager.GetString("StoreNotIUserPhoneNumberStore", _resourceCulture);
 			}
 		}
 
@@ -261,7 +261,7 @@ namespace Lynex.AspNet.Identity
 		{
 			get
 			{
-				return Resources.ResourceManager.GetString("StoreNotIUserRoleStore", Resources.resourceCulture);
+				return ResourceManager.GetString("StoreNotIUserRoleStore", _resourceCulture);
 			}
 		}
 
@@ -269,7 +269,7 @@ namespace Lynex.AspNet.Identity
 		{
 			get
 			{
-				return Resources.ResourceManager.GetString("StoreNotIUserSecurityStampStore", Resources.resourceCulture);
+				return ResourceManager.GetString("StoreNotIUserSecurityStampStore", _resourceCulture);
 			}
 		}
 
@@ -277,7 +277,7 @@ namespace Lynex.AspNet.Identity
 		{
 			get
 			{
-				return Resources.ResourceManager.GetString("StoreNotIUserTwoFactorStore", Resources.resourceCulture);
+				return ResourceManager.GetString("StoreNotIUserTwoFactorStore", _resourceCulture);
 			}
 		}
 
@@ -285,7 +285,7 @@ namespace Lynex.AspNet.Identity
 		{
 			get
 			{
-				return Resources.ResourceManager.GetString("UserAlreadyHasPassword", Resources.resourceCulture);
+				return ResourceManager.GetString("UserAlreadyHasPassword", _resourceCulture);
 			}
 		}
 
@@ -293,7 +293,7 @@ namespace Lynex.AspNet.Identity
 		{
 			get
 			{
-				return Resources.ResourceManager.GetString("UserAlreadyInRole", Resources.resourceCulture);
+				return ResourceManager.GetString("UserAlreadyInRole", _resourceCulture);
 			}
 		}
 
@@ -301,7 +301,7 @@ namespace Lynex.AspNet.Identity
 		{
 			get
 			{
-				return Resources.ResourceManager.GetString("UserIdNotFound", Resources.resourceCulture);
+				return ResourceManager.GetString("UserIdNotFound", _resourceCulture);
 			}
 		}
 
@@ -309,7 +309,7 @@ namespace Lynex.AspNet.Identity
 		{
 			get
 			{
-				return Resources.ResourceManager.GetString("UserNameNotFound", Resources.resourceCulture);
+				return ResourceManager.GetString("UserNameNotFound", _resourceCulture);
 			}
 		}
 
@@ -317,7 +317,7 @@ namespace Lynex.AspNet.Identity
 		{
 			get
 			{
-				return Resources.ResourceManager.GetString("UserNotInRole", Resources.resourceCulture);
+				return ResourceManager.GetString("UserNotInRole", _resourceCulture);
 			}
 		}
 

@@ -92,6 +92,7 @@ namespace Lynex.Common.Database.FluentNHibernate
         {
             using (var session = sessionFactory.OpenSession())
             {
+                session.Transaction.Begin();
                 var types =
                     Assembly.GetExecutingAssembly().GetTypes().Where(type => typeof(IDefaultDataFactory).IsAssignableFrom(type) && !type.IsAbstract).ToList();
 
@@ -109,6 +110,7 @@ namespace Lynex.Common.Database.FluentNHibernate
                         instance.Populate();
                     }
                 }
+                session.Transaction.Commit();
             }
         }
     }
