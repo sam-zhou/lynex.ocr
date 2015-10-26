@@ -1,40 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Net;
-using System.Net.Http;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
-using System.Web.Http.Filters;
-using System.Web.Http.Results;
 using log4net;
 using Lynex.AspNet.Identity;
-using Lynex.AspNet.Identity.Owin;
-using Lynex.BillMaster.Api.Filters;
 using Lynex.BillMaster.Api.Models;
 using Lynex.BillMaster.Api.Providers;
 using Lynex.BillMaster.Api.Results;
-using Lynex.BillMaster.Exception.UserException;
 using Lynex.BillMaster.Model.Domain.DbModels;
-using Lynex.Common.Exception;
-using Lynex.Common.Model.AspNet.Identity;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
-using NHibernate.Util;
 
 namespace Lynex.BillMaster.Api.Controllers
 {
-    [Authorize]
-    [ExceptionHandlingFilter]
     [RoutePrefix("Account")]
-    public class AccountController : ApiController
+    //[IdentityBasicAuthentication]
+    public class AccountController : BaseApiController
     {
-        private readonly ILog _log;
         private const string LocalLoginProvider = "Local";
-        private ApplicationUserManager _userManager;
 
         public AccountController()
         {
@@ -42,29 +29,14 @@ namespace Lynex.BillMaster.Api.Controllers
 
         public AccountController(ApplicationUserManager userManager,
             ISecureDataFormat<AuthenticationTicket> accessTokenFormat,
-            ILog log)
+            ILog log):base(userManager, accessTokenFormat, log)
         {
-            _log = log;
-            UserManager = userManager;
-            AccessTokenFormat = accessTokenFormat;
+            
         }
 
-        public ApplicationUserManager UserManager
-        {
-            get
-            {
-                return _userManager ?? Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            }
-            private set
-            {
-                _userManager = value;
-            }
-        }
-
-        public ISecureDataFormat<AuthenticationTicket> AccessTokenFormat { get; }
 
         // GET api/Account/UserInfo
-        [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
+        //[HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         [Route("UserInfo")]
         public UserInfoViewModel GetUserInfo()
         {
@@ -228,7 +200,7 @@ namespace Lynex.BillMaster.Api.Controllers
 
         // GET api/Account/ExternalLogin
         [OverrideAuthentication]
-        [HostAuthentication(DefaultAuthenticationTypes.ExternalCookie)]
+        //[HostAuthentication(DefaultAuthenticationTypes.ExternalCookie)]
         [AllowAnonymous]
         [Route("ExternalLogin", Name = "ExternalLogin")]
         public async Task<IHttpActionResult> GetExternalLogin(string provider, string error = null)
@@ -361,7 +333,7 @@ namespace Lynex.BillMaster.Api.Controllers
 
         // POST api/Account/RegisterExternal
         [OverrideAuthentication]
-        [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
+        //[HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         [Route("RegisterExternal")]
         public async Task<IHttpActionResult> RegisterExternal(RegisterExternalBindingModel model)
         {
@@ -392,52 +364,9 @@ namespace Lynex.BillMaster.Api.Controllers
             return Ok();
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && _userManager != null)
-            {
-                _userManager.Dispose();
-                _userManager = null;
-            }
-
-            base.Dispose(disposing);
-        }
-
         #region Helpers
 
-        private IAuthenticationManager Authentication
-        {
-            get { return Request.GetOwinContext().Authentication; }
-        }
-
-        private IHttpActionResult GetErrorResult(IdentityResult result)
-        {
-            if (result == null)
-            {
-                return InternalServerError();
-            }
-
-            if (!result.Succeeded)
-            {
-                if (result.Errors != null)
-                {
-                    foreach (var error in result.Errors)
-                    {
-                        ModelState.AddModelError("", error);
-                    }
-                }
-
-                if (ModelState.IsValid)
-                {
-                    // No ModelState errors are available to send, so just return an empty BadRequest.
-                    return BadRequest();
-                }
-
-                return BadRequest(ModelState);
-            }
-
-            return null;
-        }
+        
 
         private class ExternalLoginData
         {

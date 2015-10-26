@@ -25,17 +25,17 @@ namespace Lynex.AspNet.Identity.Owin
 		{
 			if (protector == null)
 			{
-				throw new ArgumentNullException("protector");
+				throw new ArgumentNullException(nameof(protector));
 			}
-			this.Protector = protector;
-			this.TokenLifespan = TimeSpan.FromDays(1.0);
+			Protector = protector;
+			TokenLifespan = TimeSpan.FromDays(1.0);
 		}
 
 		public async Task<string> GenerateAsync(string purpose, UserManager<TUser, TKey> manager, TUser user)
 		{
 			if (user == null)
 			{
-				throw new ArgumentNullException("user");
+				throw new ArgumentNullException(nameof(user));
 			}
 			MemoryStream memoryStream = new MemoryStream();
 			using (BinaryWriter binaryWriter = memoryStream.CreateWriter())
@@ -46,73 +46,66 @@ namespace Lynex.AspNet.Identity.Owin
 				string text = null;
 				if (manager.SupportsUserSecurityStamp)
 				{
-					text = await manager.GetSecurityStampAsync(user.Id).WithCurrentCulture<string>();
+					text = await manager.GetSecurityStampAsync(user.Id).WithCurrentCulture();
 				}
 				binaryWriter.Write(text ?? "");
 			}
-			byte[] inArray = this.Protector.Protect(memoryStream.ToArray());
+			byte[] inArray = Protector.Protect(memoryStream.ToArray());
 			return Convert.ToBase64String(inArray);
 		}
 
 		public async Task<bool> ValidateAsync(string purpose, string token, UserManager<TUser, TKey> manager, TUser user)
 		{
-			bool result;
-			try
+		    try
 			{
-				byte[] buffer = this.Protector.Unprotect(Convert.FromBase64String(token));
+				byte[] buffer = Protector.Unprotect(Convert.FromBase64String(token));
 				MemoryStream stream = new MemoryStream(buffer);
 				using (BinaryReader binaryReader = stream.CreateReader())
 				{
 					DateTimeOffset dateTimeOffset = binaryReader.ReadDateTimeOffset();
-					DateTimeOffset left = dateTimeOffset + this.TokenLifespan;
+					DateTimeOffset left = dateTimeOffset + TokenLifespan;
 					if (left < DateTimeOffset.UtcNow)
 					{
-						result = false;
-						return result;
+						return false;
 					}
 					string a = binaryReader.ReadString();
 					if (!string.Equals(a, Convert.ToString(user.Id, CultureInfo.InvariantCulture)))
 					{
-						result = false;
-						return result;
+						return false;
 					}
 					string a2 = binaryReader.ReadString();
 					if (!string.Equals(a2, purpose))
 					{
-						result = false;
-						return result;
+						return false;
 					}
 					string a3 = binaryReader.ReadString();
 					if (binaryReader.PeekChar() != -1)
 					{
-						result = false;
-						return result;
+						return false;
 					}
-					if (manager.SupportsUserSecurityStamp)
+				    if (manager.SupportsUserSecurityStamp)
 					{
-						string b = await manager.GetSecurityStampAsync(user.Id).WithCurrentCulture<string>();
-						result = (a3 == b);
-						return result;
+						string b = await manager.GetSecurityStampAsync(user.Id).WithCurrentCulture();
+						return (a3 == b);
 					}
-					result = (a3 == "");
-					return result;
+					return (a3 == "");
 				}
 			}
-			catch
+			catch (Exception)
 			{
+			    // ignored
 			}
-			result = false;
-			return result;
+		    return false;
 		}
 
 		public Task<bool> IsValidProviderForUserAsync(UserManager<TUser, TKey> manager, TUser user)
 		{
-			return Task.FromResult<bool>(true);
+			return Task.FromResult(true);
 		}
 
 		public Task NotifyAsync(string token, UserManager<TUser, TKey> manager, TUser user)
 		{
-			return Task.FromResult<int>(0);
+			return Task.FromResult(0);
 		}
 	}
 	public class DataProtectorTokenProvider<TUser> : DataProtectorTokenProvider<TUser, string> where TUser : class, IUser<string>

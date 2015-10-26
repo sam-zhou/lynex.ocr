@@ -42,15 +42,16 @@ namespace Lynex.BillMaster.Api
             //            regenerateIdentity: (manager, user) => user.GenerateUserIdentityAsync(manager, DefaultAuthenticationTypes.ApplicationCookie))
             //    }
             //});
-
-            //app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
+            app.UseCookieAuthentication(new CookieAuthenticationOptions());
+            app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
 
             // Configure the application for OAuth based flow
 
             OAuthOptions = new OAuthAuthorizationServerOptions
             {
                 TokenEndpointPath = new PathString("/Token"),
-                Provider = new ApplicationOAuthProvider("lynex_local"),
+                ApplicationCanDisplayErrors = true,
+                Provider = new ApplicationOAuthProvider("self"),
                 AuthorizeEndpointPath = new PathString("/Account/ExternalLogin"),
                 AccessTokenExpireTimeSpan = TimeSpan.FromDays(14),
                 // In production mode set AllowInsecureHttp = false

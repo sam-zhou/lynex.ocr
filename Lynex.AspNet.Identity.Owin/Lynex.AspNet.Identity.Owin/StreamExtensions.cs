@@ -10,12 +10,12 @@ namespace Lynex.AspNet.Identity.Owin
 
 		public static BinaryReader CreateReader(this Stream stream)
 		{
-			return new BinaryReader(stream, StreamExtensions.DefaultEncoding, true);
+			return new BinaryReader(stream, DefaultEncoding, true);
 		}
 
 		public static BinaryWriter CreateWriter(this Stream stream)
 		{
-			return new BinaryWriter(stream, StreamExtensions.DefaultEncoding, true);
+			return new BinaryWriter(stream, DefaultEncoding, true);
 		}
 
 		public static DateTimeOffset ReadDateTimeOffset(this BinaryReader reader)

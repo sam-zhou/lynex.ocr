@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Lynex.AspNet.Identity;
 using Lynex.Common.Model.DbModel.Interface;
+using Microsoft.AspNet.Identity;
 
 
 namespace Lynex.Common.Model.AspNet.Identity

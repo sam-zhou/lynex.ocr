@@ -181,10 +181,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\BaseApiController.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
-    <Compile Include="Filters\AuthenticateAttribute.cs" />
-    <Compile Include="Filters\AuthenticateFilter.cs" />
-    <Compile Include="Filters\ExceptionHandlingFilterAttribute.cs" />
     <Compile Include="IoC\ApiDependancyResolver.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -239,6 +237,8 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
+    <Compile Include="Results\AddChallengeOnUnauthorizedResult.cs" />
+    <Compile Include="Results\AuthenticationFailureResult.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="IoC\WindsorServiceLocator.cs" />
@@ -302,6 +302,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Filters\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -375,7 +376,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>64617</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://api.mylynex.com/</IISUrl>
+          <IISUrl>http://api.mylynex.com.au/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

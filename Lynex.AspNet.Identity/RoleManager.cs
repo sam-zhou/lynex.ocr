@@ -20,7 +20,7 @@ namespace Lynex.AspNet.Identity
 		{
 			get
 			{
-				return this._roleValidator;
+				return _roleValidator;
 			}
 			set
 			{

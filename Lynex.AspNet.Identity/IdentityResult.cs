@@ -4,9 +4,7 @@ namespace Lynex.AspNet.Identity
 {
 	public class IdentityResult
 	{
-		private static readonly IdentityResult _success = new IdentityResult(true);
-
-		public bool Succeeded
+	    public bool Succeeded
 		{
 			get;
 			private set;
@@ -18,15 +16,11 @@ namespace Lynex.AspNet.Identity
 			private set;
 		}
 
-		public static IdentityResult Success
-		{
-			get
-			{
-				return IdentityResult._success;
-			}
-		}
 
-		public IdentityResult(params string[] errors) : this((IEnumerable<string>)errors)
+
+		public static IdentityResult Success { get; } = new IdentityResult(true);
+
+	    public IdentityResult(params string[] errors) : this((IEnumerable<string>)errors)
 		{
 		}
 
@@ -34,19 +28,19 @@ namespace Lynex.AspNet.Identity
 		{
 			if (errors == null)
 			{
-				errors = new string[]
+				errors = new[]
 				{
 					Resources.DefaultError
 				};
 			}
-			this.Succeeded = false;
-			this.Errors = errors;
+			Succeeded = false;
+			Errors = errors;
 		}
 
 		protected IdentityResult(bool success)
 		{
-			this.Succeeded = success;
-			this.Errors = new string[0];
+			Succeeded = success;
+			Errors = new string[0];
 		}
 
 		public static IdentityResult Failed(params string[] errors)

@@ -19,7 +19,7 @@ namespace Lynex.AspNet.Identity
 			{
 				throw new ArgumentNullException(nameof(manager));
 			}
-			this.Manager = manager;
+			Manager = manager;
 		}
 
 		public virtual async Task<IdentityResult> ValidateAsync(TRole item)

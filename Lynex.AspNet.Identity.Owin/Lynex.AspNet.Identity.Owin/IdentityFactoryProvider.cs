@@ -19,21 +19,20 @@ namespace Lynex.AspNet.Identity.Owin
 
 		public IdentityFactoryProvider()
 		{
-			this.OnDispose = delegate(IdentityFactoryOptions<T> options, T instance)
-			{
-			};
-			this.OnCreate = ((IdentityFactoryOptions<T> options, IOwinContext context) => default(T));
+			OnDispose = delegate(IdentityFactoryOptions<T> options, T instance)
+			{ if (options == null) throw new ArgumentNullException(nameof(options)); };
+			OnCreate = ((options, context) => default(T));
 		}
 
 		public virtual T Create(IdentityFactoryOptions<T> options, IOwinContext context)
 		{
-			return this.OnCreate(options, context);
+			return OnCreate(options, context);
 		}
 
 
 	    public virtual void Dispose(IdentityFactoryOptions<T> options, T instance)
 		{
-			this.OnDispose(options, instance);
+			OnDispose(options, instance);
 		}
 	}
 }

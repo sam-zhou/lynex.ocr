@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Lynex.AspNet.Identity;
+using Microsoft.AspNet.Identity;
 
 
 namespace Lynex.Common.Model.AspNet.Identity
@@ -53,15 +53,15 @@ namespace Lynex.Common.Model.AspNet.Identity
 
 		public IdentityUser()
 		{
-			this.Id = Guid.NewGuid().ToString();
-			this.Claims = new List<IdentityUserClaim>();
-			this.Roles = new List<IdentityRole>();
-			this.Logins = new List<IdentityUserLogin>();
+			Id = Guid.NewGuid().ToString();
+			Claims = new List<IdentityUserClaim>();
+			Roles = new List<IdentityRole>();
+			Logins = new List<IdentityUserLogin>();
 		}
 
 		public IdentityUser(string userName) : this()
 		{
-			this.UserName = userName;
+			UserName = userName;
 		}
 	}
 }

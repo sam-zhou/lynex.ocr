@@ -1,13 +1,12 @@
+using System;
+using System.Linq;
+using System.Threading.Tasks;
+using Lynex.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.DataProtection;
 using Microsoft.Owin.Security.OAuth;
-using System;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using Lynex.AspNet.Identity.Owin;
 
 namespace Owin
 {
@@ -19,9 +18,9 @@ namespace Owin
 			{
 				if (context == null)
 				{
-					throw new ArgumentNullException("context");
+					throw new ArgumentNullException(nameof(context));
 				}
-				if (context.Ticket.Identity.Claims.Any((Claim c) => c.Issuer != "LOCAL AUTHORITY"))
+				if (context.Ticket.Identity.Claims.Any(c => c.Issuer != "LOCAL AUTHORITY"))
 				{
 					context.Rejected();
 				}
@@ -35,13 +34,13 @@ namespace Owin
 			{
 				if (context == null)
 				{
-					throw new ArgumentNullException("context");
+					throw new ArgumentNullException(nameof(context));
 				}
-				if (context.Ticket.Identity.Claims.Count<Claim>() == 0)
+				if (!context.Ticket.Identity.Claims.Any())
 				{
 					context.Rejected();
 				}
-				else if (context.Ticket.Identity.Claims.All((Claim c) => c.Issuer == "LOCAL AUTHORITY"))
+				else if (context.Ticket.Identity.Claims.All(c => c.Issuer == "LOCAL AUTHORITY"))
 				{
 					context.Rejected();
 				}
@@ -60,7 +59,7 @@ namespace Owin
 		{
 			if (app == null)
 			{
-				throw new ArgumentNullException("app");
+				throw new ArgumentNullException(nameof(app));
 			}
 			return app.CreatePerOwinContext(createCallback, delegate(IdentityFactoryOptions<T> options, T instance)
 			{
@@ -72,27 +71,24 @@ namespace Owin
 		{
 			if (app == null)
 			{
-				throw new ArgumentNullException("app");
+				throw new ArgumentNullException(nameof(app));
 			}
 			if (createCallback == null)
 			{
-				throw new ArgumentNullException("createCallback");
+				throw new ArgumentNullException(nameof(createCallback));
 			}
 			if (disposeCallback == null)
 			{
-				throw new ArgumentNullException("disposeCallback");
+				throw new ArgumentNullException(nameof(disposeCallback));
 			}
-			app.Use(typeof(IdentityFactoryMiddleware<T, IdentityFactoryOptions<T>>), new object[]
+			app.Use(typeof(IdentityFactoryMiddleware<T, IdentityFactoryOptions<T>>), new IdentityFactoryOptions<T>
 			{
-				new IdentityFactoryOptions<T>
-				{
-					DataProtectionProvider = app.GetDataProtectionProvider(),
-					Provider = new IdentityFactoryProvider<T>
-					{
-						OnCreate = createCallback,
-						OnDispose = disposeCallback
-					}
-				}
+			    DataProtectionProvider = app.GetDataProtectionProvider(),
+			    Provider = new IdentityFactoryProvider<T>
+			    {
+			        OnCreate = createCallback,
+			        OnDispose = disposeCallback
+			    }
 			});
 			return app;
 		}
@@ -106,73 +102,83 @@ namespace Owin
 		{
 			if (app == null)
 			{
-				throw new ArgumentNullException("app");
+				throw new ArgumentNullException(nameof(app));
 			}
-			AppBuilderSecurityExtensions.SetDefaultSignInAsAuthenticationType(app, externalAuthenticationType);
-			CookieAuthenticationOptions cookieAuthenticationOptions = new CookieAuthenticationOptions();
-			cookieAuthenticationOptions.AuthenticationType = externalAuthenticationType;
-			cookieAuthenticationOptions.AuthenticationMode = AuthenticationMode.Passive;
-			cookieAuthenticationOptions.CookieName = ".AspNet." + externalAuthenticationType;
-			cookieAuthenticationOptions.ExpireTimeSpan = TimeSpan.FromMinutes(5.0);
-			CookieAuthenticationExtensions.UseCookieAuthentication(app, cookieAuthenticationOptions);
+			app.SetDefaultSignInAsAuthenticationType(externalAuthenticationType);
+		    CookieAuthenticationOptions cookieAuthenticationOptions = new CookieAuthenticationOptions
+		    {
+		        AuthenticationType = externalAuthenticationType,
+		        AuthenticationMode = AuthenticationMode.Passive,
+		        CookieName = CookiePrefix + externalAuthenticationType,
+		        ExpireTimeSpan = TimeSpan.FromMinutes(5.0)
+		    };
+		    app.UseCookieAuthentication(cookieAuthenticationOptions);
 		}
 
 		public static void UseTwoFactorSignInCookie(this IAppBuilder app, string authenticationType, TimeSpan expires)
 		{
 			if (app == null)
 			{
-				throw new ArgumentNullException("app");
+				throw new ArgumentNullException(nameof(app));
 			}
-			CookieAuthenticationOptions cookieAuthenticationOptions = new CookieAuthenticationOptions();
-			cookieAuthenticationOptions.AuthenticationType = authenticationType;
-            cookieAuthenticationOptions.AuthenticationMode = AuthenticationMode.Passive;
-            cookieAuthenticationOptions.CookieName = ".AspNet." + authenticationType;
-			cookieAuthenticationOptions.ExpireTimeSpan = expires;
-			CookieAuthenticationExtensions.UseCookieAuthentication(app, cookieAuthenticationOptions);
+		    CookieAuthenticationOptions cookieAuthenticationOptions = new CookieAuthenticationOptions
+		    {
+		        AuthenticationType = authenticationType,
+		        AuthenticationMode = AuthenticationMode.Passive,
+		        CookieName = CookiePrefix + authenticationType,
+		        ExpireTimeSpan = expires
+		    };
+		    app.UseCookieAuthentication(cookieAuthenticationOptions);
 		}
 
 		public static void UseTwoFactorRememberBrowserCookie(this IAppBuilder app, string authenticationType)
 		{
 			if (app == null)
 			{
-				throw new ArgumentNullException("app");
+				throw new ArgumentNullException(nameof(app));
 			}
-			CookieAuthenticationOptions cookieAuthenticationOptions = new CookieAuthenticationOptions();
-			cookieAuthenticationOptions.AuthenticationType = authenticationType;
-			cookieAuthenticationOptions.AuthenticationMode = AuthenticationMode.Passive;
-			cookieAuthenticationOptions.CookieName = ".AspNet." + authenticationType;
-			CookieAuthenticationExtensions.UseCookieAuthentication(app, cookieAuthenticationOptions);
+		    CookieAuthenticationOptions cookieAuthenticationOptions = new CookieAuthenticationOptions
+		    {
+		        AuthenticationType = authenticationType,
+		        AuthenticationMode = AuthenticationMode.Passive,
+		        CookieName = CookiePrefix + authenticationType
+		    };
+		    app.UseCookieAuthentication(cookieAuthenticationOptions);
 		}
 
 		public static void UseOAuthBearerTokens(this IAppBuilder app, OAuthAuthorizationServerOptions options)
 		{
 			if (app == null)
 			{
-				throw new ArgumentNullException("app");
+				throw new ArgumentNullException(nameof(app));
 			}
 			if (options == null)
 			{
-				throw new ArgumentNullException("options");
+				throw new ArgumentNullException(nameof(options));
 			}
-			OAuthAuthorizationServerExtensions.UseOAuthAuthorizationServer(app, options);
-			OAuthBearerAuthenticationOptions oAuthBearerAuthenticationOptions = new OAuthBearerAuthenticationOptions();
-			oAuthBearerAuthenticationOptions.AccessTokenFormat = options.AccessTokenFormat;
-			oAuthBearerAuthenticationOptions.AccessTokenProvider = options.AccessTokenProvider;
-			oAuthBearerAuthenticationOptions.AuthenticationMode = options.AuthenticationMode;
-			oAuthBearerAuthenticationOptions.AuthenticationType = options.AuthenticationType;
-			oAuthBearerAuthenticationOptions.Description = options.Description;
-			oAuthBearerAuthenticationOptions.Provider = new AppBuilderExtensions.ApplicationOAuthBearerProvider();
-			oAuthBearerAuthenticationOptions.SystemClock = options.SystemClock;
-			OAuthBearerAuthenticationExtensions.UseOAuthBearerAuthentication(app, oAuthBearerAuthenticationOptions);
-			OAuthBearerAuthenticationOptions oAuthBearerAuthenticationOptions2 = new OAuthBearerAuthenticationOptions();
-			oAuthBearerAuthenticationOptions2.AccessTokenFormat = options.AccessTokenFormat;
-			oAuthBearerAuthenticationOptions2.AccessTokenProvider = options.AccessTokenProvider;
-			oAuthBearerAuthenticationOptions2.AuthenticationMode = AuthenticationMode.Passive;
-			oAuthBearerAuthenticationOptions2.AuthenticationType = "ExternalBearer";
-			oAuthBearerAuthenticationOptions2.Description = options.Description;
-			oAuthBearerAuthenticationOptions2.Provider = new AppBuilderExtensions.ExternalOAuthBearerProvider();
-			oAuthBearerAuthenticationOptions2.SystemClock = options.SystemClock;
-			OAuthBearerAuthenticationExtensions.UseOAuthBearerAuthentication(app, oAuthBearerAuthenticationOptions2);
+			app.UseOAuthAuthorizationServer(options);
+		    OAuthBearerAuthenticationOptions oAuthBearerAuthenticationOptions = new OAuthBearerAuthenticationOptions
+		    {
+		        AccessTokenFormat = options.AccessTokenFormat,
+		        AccessTokenProvider = options.AccessTokenProvider,
+		        AuthenticationMode = options.AuthenticationMode,
+		        AuthenticationType = options.AuthenticationType,
+		        Description = options.Description,
+		        Provider = new ApplicationOAuthBearerProvider(),
+		        SystemClock = options.SystemClock
+		    };
+		    app.UseOAuthBearerAuthentication(oAuthBearerAuthenticationOptions);
+		    OAuthBearerAuthenticationOptions oAuthBearerAuthenticationOptions2 = new OAuthBearerAuthenticationOptions
+		    {
+		        AccessTokenFormat = options.AccessTokenFormat,
+		        AccessTokenProvider = options.AccessTokenProvider,
+		        AuthenticationMode = AuthenticationMode.Passive,
+		        AuthenticationType = "ExternalBearer",
+		        Description = options.Description,
+		        Provider = new ExternalOAuthBearerProvider(),
+		        SystemClock = options.SystemClock
+		    };
+		    app.UseOAuthBearerAuthentication(oAuthBearerAuthenticationOptions2);
 		}
 	}
 }

@@ -1,6 +1,5 @@
 using System;
 using System.Security.Claims;
-using Lynex.AspNet.Identity;
 
 namespace Lynex.AspNet.Identity.Owin
 {
@@ -10,9 +9,9 @@ namespace Lynex.AspNet.Identity.Owin
 		{
 			if (manager == null)
 			{
-				throw new ArgumentNullException("manager");
+				throw new ArgumentNullException(nameof(manager));
 			}
-			return AsyncHelper.RunSync<ClaimsIdentity>(() => manager.CreateUserIdentityAsync(user));
+			return AsyncHelper.RunSync(() => manager.CreateUserIdentityAsync(user));
 		}
 
 		public static void SignIn<TUser, TKey>(this SignInManager<TUser, TKey> manager, TUser user, bool isPersistent, bool rememberBrowser) where TUser : class, IUser<TKey> where TKey : IEquatable<TKey>
@@ -28,54 +27,54 @@ namespace Lynex.AspNet.Identity.Owin
 		{
 			if (manager == null)
 			{
-				throw new ArgumentNullException("manager");
+				throw new ArgumentNullException(nameof(manager));
 			}
-			return AsyncHelper.RunSync<bool>(() => manager.SendTwoFactorCodeAsync(provider));
+			return AsyncHelper.RunSync(() => manager.SendTwoFactorCodeAsync(provider));
 		}
 
 		public static TKey GetVerifiedUserId<TUser, TKey>(this SignInManager<TUser, TKey> manager) where TUser : class, IUser<TKey> where TKey : IEquatable<TKey>
 		{
 			if (manager == null)
 			{
-				throw new ArgumentNullException("manager");
+				throw new ArgumentNullException(nameof(manager));
 			}
-			return AsyncHelper.RunSync<TKey>(() => manager.GetVerifiedUserIdAsync());
+			return AsyncHelper.RunSync(manager.GetVerifiedUserIdAsync);
 		}
 
 		public static bool HasBeenVerified<TUser, TKey>(this SignInManager<TUser, TKey> manager) where TUser : class, IUser<TKey> where TKey : IEquatable<TKey>
 		{
 			if (manager == null)
 			{
-				throw new ArgumentNullException("manager");
+				throw new ArgumentNullException(nameof(manager));
 			}
-			return AsyncHelper.RunSync<bool>(() => manager.HasBeenVerifiedAsync());
+			return AsyncHelper.RunSync(manager.HasBeenVerifiedAsync);
 		}
 
 		public static SignInStatus TwoFactorSignIn<TUser, TKey>(this SignInManager<TUser, TKey> manager, string provider, string code, bool isPersistent, bool rememberBrowser) where TUser : class, IUser<TKey> where TKey : IEquatable<TKey>
 		{
 			if (manager == null)
 			{
-				throw new ArgumentNullException("manager");
+				throw new ArgumentNullException(nameof(manager));
 			}
-			return AsyncHelper.RunSync<SignInStatus>(() => manager.TwoFactorSignInAsync(provider, code, isPersistent, rememberBrowser));
+			return AsyncHelper.RunSync(() => manager.TwoFactorSignInAsync(provider, code, isPersistent, rememberBrowser));
 		}
 
 		public static SignInStatus ExternalSignIn<TUser, TKey>(this SignInManager<TUser, TKey> manager, ExternalLoginInfo loginInfo, bool isPersistent) where TUser : class, IUser<TKey> where TKey : IEquatable<TKey>
 		{
 			if (manager == null)
 			{
-				throw new ArgumentNullException("manager");
+				throw new ArgumentNullException(nameof(manager));
 			}
-			return AsyncHelper.RunSync<SignInStatus>(() => manager.ExternalSignInAsync(loginInfo, isPersistent));
+			return AsyncHelper.RunSync(() => manager.ExternalSignInAsync(loginInfo, isPersistent));
 		}
 
 		public static SignInStatus PasswordSignIn<TUser, TKey>(this SignInManager<TUser, TKey> manager, string userName, string password, bool isPersistent, bool shouldLockout) where TUser : class, IUser<TKey> where TKey : IEquatable<TKey>
 		{
 			if (manager == null)
 			{
-				throw new ArgumentNullException("manager");
+				throw new ArgumentNullException(nameof(manager));
 			}
-			return AsyncHelper.RunSync<SignInStatus>(() => manager.PasswordSignInAsync(userName, password, isPersistent, shouldLockout));
+			return AsyncHelper.RunSync(() => manager.PasswordSignInAsync(userName, password, isPersistent, shouldLockout));
 		}
 	}
 }

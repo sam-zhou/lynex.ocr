@@ -1,9 +1,7 @@
 using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using Lynex.AspNet.Identity;
 using Microsoft.Owin.Security;
 
 namespace Lynex.AspNet.Identity.Owin
@@ -16,11 +14,11 @@ namespace Lynex.AspNet.Identity.Owin
 		{
 			get
 			{
-				return this._authType ?? "ApplicationCookie";
+				return _authType ?? "ApplicationCookie";
 			}
 			set
 			{
-				this._authType = value;
+				_authType = value;
 			}
 		}
 
@@ -46,13 +44,13 @@ namespace Lynex.AspNet.Identity.Owin
 			{
 				throw new ArgumentNullException(nameof(authenticationManager));
 			}
-			this.UserManager = userManager;
-			this.AuthenticationManager = authenticationManager;
+			UserManager = userManager;
+			AuthenticationManager = authenticationManager;
 		}
 
 		public virtual Task<ClaimsIdentity> CreateUserIdentityAsync(TUser user)
 		{
-			return this.UserManager.CreateIdentityAsync(user, this.AuthenticationType);
+			return UserManager.CreateIdentityAsync(user, AuthenticationType);
 		}
 
 		public virtual string ConvertIdToString(TKey id)
@@ -66,43 +64,29 @@ namespace Lynex.AspNet.Identity.Owin
 			{
 				return default(TKey);
 			}
-			return (TKey)((object)Convert.ChangeType(id, typeof(TKey), CultureInfo.InvariantCulture));
+			return (TKey)Convert.ChangeType(id, typeof(TKey), CultureInfo.InvariantCulture);
 		}
 
 		public virtual async Task SignInAsync(TUser user, bool isPersistent, bool rememberBrowser)
 		{
-			ClaimsIdentity claimsIdentity = await this.CreateUserIdentityAsync(user).WithCurrentCulture<ClaimsIdentity>();
-			this.AuthenticationManager.SignOut(new string[]
-			{
-				"ExternalCookie",
-				"TwoFactorCookie",
-                "ApplicationCookie"
-            });
+			ClaimsIdentity claimsIdentity = await CreateUserIdentityAsync(user).WithCurrentCulture();
+			AuthenticationManager.SignOut("ExternalCookie", "TwoFactorCookie", "ApplicationCookie");
 			if (rememberBrowser)
 			{
-				ClaimsIdentity claimsIdentity2 = AuthenticationManager.CreateTwoFactorRememberBrowserIdentity(this.ConvertIdToString(user.Id));
-				AuthenticationProperties authenticationProperties = new AuthenticationProperties();
-			    authenticationProperties.IsPersistent = isPersistent;
-                AuthenticationManager.SignIn(authenticationProperties, new ClaimsIdentity[]
-				{
-					claimsIdentity,
-					claimsIdentity2
-				});
+				ClaimsIdentity claimsIdentity2 = AuthenticationManager.CreateTwoFactorRememberBrowserIdentity(ConvertIdToString(user.Id));
+			    AuthenticationProperties authenticationProperties = new AuthenticationProperties {IsPersistent = isPersistent};
+			    AuthenticationManager.SignIn(authenticationProperties, claimsIdentity, claimsIdentity2);
 			}
 			else
 			{
-				AuthenticationProperties authenticationProperties2 = new AuthenticationProperties();
-				authenticationProperties2.IsPersistent = isPersistent;
-                AuthenticationManager.SignIn(authenticationProperties2, new ClaimsIdentity[]
-				{
-					claimsIdentity
-				});
+			    AuthenticationProperties authenticationProperties2 = new AuthenticationProperties {IsPersistent = isPersistent};
+			    AuthenticationManager.SignIn(authenticationProperties2, claimsIdentity);
 			}
 		}
 
 		public virtual async Task<bool> SendTwoFactorCodeAsync(string provider)
 		{
-			TKey tKey = await this.GetVerifiedUserIdAsync().WithCurrentCulture<TKey>();
+			TKey tKey = await GetVerifiedUserIdAsync().WithCurrentCulture();
 			bool result;
 			if (tKey == null)
 			{
@@ -110,8 +94,8 @@ namespace Lynex.AspNet.Identity.Owin
 			}
 			else
 			{
-				string token = await this.UserManager.GenerateTwoFactorTokenAsync(tKey, provider).WithCurrentCulture<string>();
-				await this.UserManager.NotifyTwoFactorTokenAsync(tKey, provider, token).WithCurrentCulture<IdentityResult>();
+				string token = await UserManager.GenerateTwoFactorTokenAsync(tKey, provider).WithCurrentCulture();
+				await UserManager.NotifyTwoFactorTokenAsync(tKey, provider, token).WithCurrentCulture();
 				result = true;
 			}
 			return result;
@@ -119,11 +103,11 @@ namespace Lynex.AspNet.Identity.Owin
 
 		public async Task<TKey> GetVerifiedUserIdAsync()
 		{
-			AuthenticateResult authenticateResult = await this.AuthenticationManager.AuthenticateAsync("TwoFactorCookie").WithCurrentCulture<AuthenticateResult>();
+			AuthenticateResult authenticateResult = await AuthenticationManager.AuthenticateAsync("TwoFactorCookie").WithCurrentCulture();
 			TKey result;
 			if (authenticateResult != null && authenticateResult.Identity != null && !string.IsNullOrEmpty(authenticateResult.Identity.GetUserId()))
 			{
-				result = this.ConvertIdFromString(authenticateResult.Identity.GetUserId());
+				result = ConvertIdFromString(authenticateResult.Identity.GetUserId());
 			}
 			else
 			{
@@ -134,12 +118,12 @@ namespace Lynex.AspNet.Identity.Owin
 
 		public async Task<bool> HasBeenVerifiedAsync()
 		{
-			return await this.GetVerifiedUserIdAsync().WithCurrentCulture<TKey>() != null;
+			return await GetVerifiedUserIdAsync().WithCurrentCulture() != null;
 		}
 
 		public virtual async Task<SignInStatus> TwoFactorSignInAsync(string provider, string code, bool isPersistent, bool rememberBrowser)
 		{
-			TKey tKey = await this.GetVerifiedUserIdAsync().WithCurrentCulture<TKey>();
+			TKey tKey = await GetVerifiedUserIdAsync().WithCurrentCulture();
 			SignInStatus result;
 			if (tKey == null)
 			{
@@ -147,24 +131,24 @@ namespace Lynex.AspNet.Identity.Owin
 			}
 			else
 			{
-				TUser tUser = await this.UserManager.FindByIdAsync(tKey).WithCurrentCulture<TUser>();
+				TUser tUser = await UserManager.FindByIdAsync(tKey).WithCurrentCulture();
 				if (tUser == null)
 				{
 					result = SignInStatus.Failure;
 				}
-				else if (await this.UserManager.IsLockedOutAsync(tUser.Id).WithCurrentCulture<bool>())
+				else if (await UserManager.IsLockedOutAsync(tUser.Id).WithCurrentCulture())
 				{
 					result = SignInStatus.LockedOut;
 				}
-				else if (await this.UserManager.VerifyTwoFactorTokenAsync(tUser.Id, provider, code).WithCurrentCulture<bool>())
+				else if (await UserManager.VerifyTwoFactorTokenAsync(tUser.Id, provider, code).WithCurrentCulture())
 				{
-					await this.UserManager.ResetAccessFailedCountAsync(tUser.Id).WithCurrentCulture<IdentityResult>();
-					await this.SignInAsync(tUser, isPersistent, rememberBrowser).WithCurrentCulture();
+					await UserManager.ResetAccessFailedCountAsync(tUser.Id).WithCurrentCulture();
+					await SignInAsync(tUser, isPersistent, rememberBrowser).WithCurrentCulture();
 					result = SignInStatus.Success;
 				}
 				else
 				{
-					await this.UserManager.AccessFailedAsync(tUser.Id).WithCurrentCulture<IdentityResult>();
+					await UserManager.AccessFailedAsync(tUser.Id).WithCurrentCulture();
 					result = SignInStatus.Failure;
 				}
 			}
@@ -173,19 +157,19 @@ namespace Lynex.AspNet.Identity.Owin
 
 		public async Task<SignInStatus> ExternalSignInAsync(ExternalLoginInfo loginInfo, bool isPersistent)
 		{
-			TUser tUser = await this.UserManager.FindAsync(loginInfo.Login).WithCurrentCulture<TUser>();
+			TUser tUser = await UserManager.FindAsync(loginInfo.Login).WithCurrentCulture();
 			SignInStatus result;
 			if (tUser == null)
 			{
 				result = SignInStatus.Failure;
 			}
-			else if (await this.UserManager.IsLockedOutAsync(tUser.Id).WithCurrentCulture<bool>())
+			else if (await UserManager.IsLockedOutAsync(tUser.Id).WithCurrentCulture())
 			{
 				result = SignInStatus.LockedOut;
 			}
 			else
 			{
-				result = await this.SignInOrTwoFactor(tUser, isPersistent).WithCurrentCulture<SignInStatus>();
+				result = await SignInOrTwoFactor(tUser, isPersistent).WithCurrentCulture();
 			}
 			return result;
 		}
@@ -194,19 +178,16 @@ namespace Lynex.AspNet.Identity.Owin
 		{
 			string text = Convert.ToString(user.Id);
 			SignInStatus result;
-			if (await this.UserManager.GetTwoFactorEnabledAsync(user.Id).WithCurrentCulture<bool>() && (await this.UserManager.GetValidTwoFactorProvidersAsync(user.Id).WithCurrentCulture<IList<string>>()).Count > 0 && !(await this.AuthenticationManager.TwoFactorBrowserRememberedAsync(text).WithCurrentCulture<bool>()))
+			if (await UserManager.GetTwoFactorEnabledAsync(user.Id).WithCurrentCulture() && (await UserManager.GetValidTwoFactorProvidersAsync(user.Id).WithCurrentCulture()).Count > 0 && !(await AuthenticationManager.TwoFactorBrowserRememberedAsync(text).WithCurrentCulture()))
 			{
 				ClaimsIdentity claimsIdentity = new ClaimsIdentity("TwoFactorCookie");
 				claimsIdentity.AddClaim(new Claim("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier", text));
-				this.AuthenticationManager.SignIn(new ClaimsIdentity[]
-				{
-					claimsIdentity
-				});
+				AuthenticationManager.SignIn(claimsIdentity);
 				result = SignInStatus.RequiresVerification;
 			}
 			else
 			{
-				await this.SignInAsync(user, isPersistent, false).WithCurrentCulture();
+				await SignInAsync(user, isPersistent, false).WithCurrentCulture();
 				result = SignInStatus.Success;
 			}
 			return result;
@@ -215,32 +196,32 @@ namespace Lynex.AspNet.Identity.Owin
 		public virtual async Task<SignInStatus> PasswordSignInAsync(string userName, string password, bool isPersistent, bool shouldLockout)
 		{
 			SignInStatus result;
-			if (this.UserManager == null)
+			if (UserManager == null)
 			{
 				result = SignInStatus.Failure;
 			}
 			else
 			{
-				TUser tUser = await this.UserManager.FindByNameAsync(userName).WithCurrentCulture<TUser>();
+				TUser tUser = await UserManager.FindByNameAsync(userName).WithCurrentCulture();
 				if (tUser == null)
 				{
 					result = SignInStatus.Failure;
 				}
-				else if (await this.UserManager.IsLockedOutAsync(tUser.Id).WithCurrentCulture<bool>())
+				else if (await UserManager.IsLockedOutAsync(tUser.Id).WithCurrentCulture())
 				{
 					result = SignInStatus.LockedOut;
 				}
-				else if (await this.UserManager.CheckPasswordAsync(tUser, password).WithCurrentCulture<bool>())
+				else if (await UserManager.CheckPasswordAsync(tUser, password).WithCurrentCulture())
 				{
-					await this.UserManager.ResetAccessFailedCountAsync(tUser.Id).WithCurrentCulture<IdentityResult>();
-					result = await this.SignInOrTwoFactor(tUser, isPersistent).WithCurrentCulture<SignInStatus>();
+					await UserManager.ResetAccessFailedCountAsync(tUser.Id).WithCurrentCulture();
+					result = await SignInOrTwoFactor(tUser, isPersistent).WithCurrentCulture();
 				}
 				else
 				{
 					if (shouldLockout)
 					{
-						await this.UserManager.AccessFailedAsync(tUser.Id).WithCurrentCulture<IdentityResult>();
-						if (await this.UserManager.IsLockedOutAsync(tUser.Id).WithCurrentCulture<bool>())
+						await UserManager.AccessFailedAsync(tUser.Id).WithCurrentCulture();
+						if (await UserManager.IsLockedOutAsync(tUser.Id).WithCurrentCulture())
 						{
 							result = SignInStatus.LockedOut;
 							return result;
@@ -254,7 +235,7 @@ namespace Lynex.AspNet.Identity.Owin
 
 		public void Dispose()
 		{
-			this.Dispose(true);
+			Dispose(true);
 			GC.SuppressFinalize(this);
 		}
 

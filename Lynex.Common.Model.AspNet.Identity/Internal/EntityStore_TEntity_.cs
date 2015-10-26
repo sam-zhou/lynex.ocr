@@ -15,25 +15,25 @@ namespace Lynex.Common.Model.AspNet.Identity.Internal
 
 		public EntityStore(ISession session)
 		{
-			this._session = session;
+			_session = session;
 		}
 
 		public async Task Delete(TEntity item)
 		{
 			await Task.Run(() => {
-				this._session.Delete(item);
-				this._session.Flush();
+				_session.Delete(item);
+				_session.Flush();
 			});
 		}
 
 		public async Task Delete(IEnumerable<TEntity> items)
 		{
 			await Task.Run(() => {
-				using (ITransaction transaction = this._session.BeginTransaction())
+				using (ITransaction transaction = _session.BeginTransaction())
 				{
 					foreach (TEntity item in items)
 					{
-						this._session.Delete(item);
+						_session.Delete(item);
 					}
 					transaction.Commit();
 				}
@@ -42,28 +42,28 @@ namespace Lynex.Common.Model.AspNet.Identity.Internal
 
 		public async Task<IQueryable<TEntity>> Records()
 		{
-			IQueryable<TEntity> tEntities = await Task.Run<IQueryable<TEntity>>(() => LinqExtensionMethods.Query<TEntity>(this._session).AsQueryable<TEntity>());
+			IQueryable<TEntity> tEntities = await Task.Run(() => _session.Query<TEntity>().AsQueryable());
 			return tEntities;
 		}
 
 		public async Task Save(TEntity item)
 		{
 			await Task.Run(() => {
-				this._session.Clear();
-				this._session.SaveOrUpdate(item);
-				this._session.Flush();
+				_session.Clear();
+				_session.SaveOrUpdate(item);
+				_session.Flush();
 			});
 		}
 
 		public async Task Save(IEnumerable<TEntity> items)
 		{
 			await Task.Run(() => {
-				this._session.Clear();
-				using (ITransaction transaction = this._session.BeginTransaction())
+				_session.Clear();
+				using (ITransaction transaction = _session.BeginTransaction())
 				{
 					foreach (TEntity item in items)
 					{
-						this._session.SaveOrUpdate(item);
+						_session.SaveOrUpdate(item);
 					}
 					transaction.Commit();
 				}

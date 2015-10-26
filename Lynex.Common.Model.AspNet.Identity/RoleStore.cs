@@ -1,8 +1,8 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Lynex.AspNet.Identity;
 using Lynex.Common.Model.AspNet.Identity.Internal;
+using Microsoft.AspNet.Identity;
 using NHibernate;
 
 namespace Lynex.Common.Model.AspNet.Identity

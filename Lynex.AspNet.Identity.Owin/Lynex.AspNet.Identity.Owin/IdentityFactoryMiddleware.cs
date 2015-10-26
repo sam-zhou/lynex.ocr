@@ -16,31 +16,30 @@ namespace Lynex.AspNet.Identity.Owin
 		{
 			if (options == null)
 			{
-				throw new ArgumentNullException("options");
+				throw new ArgumentNullException(nameof(options));
 			}
 			if (options.Provider == null)
 			{
-				throw new ArgumentNullException("options.Provider");
+				throw new ArgumentNullException(nameof(options.Provider));
 			}
-			this.Options = options;
+			Options = options;
 		}
 
 		public override async Task Invoke(IOwinContext context)
 		{
-			TOptions options = this.Options;
-			TResult tResult = options.Provider.Create(this.Options, context);
+			TOptions options = Options;
+			TResult tResult = options.Provider.Create(Options, context);
 			try
 			{
 				context.Set(tResult);
-				if (base.Next != null)
+				if (Next != null)
 				{
-					await base.Next.Invoke(context);
+					await Next.Invoke(context);
 				}
 			}
 			finally
 			{
-				TOptions var_7_FB = this.Options;
-				var_7_FB.Provider.Dispose(this.Options, tResult);
+                Options.Provider.Dispose(Options, tResult);
 			}
 		}
 	}

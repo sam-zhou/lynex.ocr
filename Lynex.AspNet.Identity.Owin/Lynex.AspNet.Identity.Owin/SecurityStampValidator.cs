@@ -10,14 +10,14 @@ namespace Lynex.AspNet.Identity.Owin
 	{
 		public static Func<CookieValidateIdentityContext, Task> OnValidateIdentity<TManager, TUser>(TimeSpan validateInterval, Func<TManager, TUser, Task<ClaimsIdentity>> regenerateIdentity) where TManager : UserManager<TUser, string> where TUser : class, IUser<string>
 		{
-			return SecurityStampValidator.OnValidateIdentity<TManager, TUser, string>(validateInterval, regenerateIdentity, (ClaimsIdentity id) => id.GetUserId());
+			return OnValidateIdentity(validateInterval, regenerateIdentity, id => id.GetUserId());
 		}
 
 		public static Func<CookieValidateIdentityContext, Task> OnValidateIdentity<TManager, TUser, TKey>(TimeSpan validateInterval, Func<TManager, TUser, Task<ClaimsIdentity>> regenerateIdentityCallback, Func<ClaimsIdentity, TKey> getUserIdCallback) where TManager : UserManager<TUser, TKey> where TUser : class, IUser<TKey> where TKey : IEquatable<TKey>
 		{
 			if (getUserIdCallback == null)
 			{
-				throw new ArgumentNullException("getUserIdCallback");
+				throw new ArgumentNullException(nameof(getUserIdCallback));
 			}
 			return async delegate(CookieValidateIdentityContext context)
 			{
@@ -39,25 +39,22 @@ namespace Lynex.AspNet.Identity.Owin
 					TKey tKey = getUserIdCallback(context.Identity);
 					if (userManager != null && tKey != null)
 					{
-						TUser tUser = await userManager.FindByIdAsync(tKey).WithCurrentCulture<TUser>();
+						TUser tUser = await userManager.FindByIdAsync(tKey).WithCurrentCulture();
 						bool flag2 = true;
 						if (tUser != null && userManager.SupportsUserSecurityStamp)
 						{
 							string a = context.Identity.FindFirstValue("AspNet.Identity.SecurityStamp");
-							if (a == await userManager.GetSecurityStampAsync(tKey).WithCurrentCulture<string>())
+							if (a == await userManager.GetSecurityStampAsync(tKey).WithCurrentCulture())
 							{
 								flag2 = false;
 								if (regenerateIdentityCallback != null)
 								{
-									ClaimsIdentity claimsIdentity = await regenerateIdentityCallback(userManager, tUser).WithCurrentCulture<ClaimsIdentity>();
+									ClaimsIdentity claimsIdentity = await regenerateIdentityCallback(userManager, tUser).WithCurrentCulture();
 									if (claimsIdentity != null)
 									{
 										context.Properties.IssuedUtc = null;
 										context.Properties.ExpiresUtc = null;
-										context.OwinContext.Authentication.SignIn(context.Properties, new ClaimsIdentity[]
-										{
-											claimsIdentity
-										});
+										context.OwinContext.Authentication.SignIn(context.Properties, claimsIdentity);
 									}
 								}
 							}
@@ -65,10 +62,7 @@ namespace Lynex.AspNet.Identity.Owin
 						if (flag2)
 						{
 							context.RejectIdentity();
-							context.OwinContext.Authentication.SignOut(new string[]
-							{
-								context.Options.AuthenticationType
-							});
+							context.OwinContext.Authentication.SignOut(context.Options.AuthenticationType);
 						}
 					}
 				}

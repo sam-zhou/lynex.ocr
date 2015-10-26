@@ -6,8 +6,8 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using Lynex.AspNet.Identity;
 using Lynex.Common.Model.AspNet.Identity.Internal;
+using Microsoft.AspNet.Identity;
 using NHibernate;
 
 namespace Lynex.Common.Model.AspNet.Identity

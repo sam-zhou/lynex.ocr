@@ -8,7 +8,6 @@ using System.Web.Http;
 using log4net;
 using Lynex.AspNet.Identity;
 using Lynex.AspNet.Identity.Owin;
-using Lynex.BillMaster.Api.Filters;
 using Lynex.BillMaster.Api.Models;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
@@ -16,45 +15,21 @@ using Microsoft.Owin.Security.OAuth;
 
 namespace Lynex.BillMaster.Api.Controllers
 {
-    [ExceptionHandlingFilter]
     [RoutePrefix("Authentication")]
-    [Authorize]
-    public class AuthenticationController : ApiController
+    //[IdentityBasicAuthentication] // Enable authentication via an ASP.NET Identity user name and password
+    public class AuthenticationController : BaseApiController
     {
-        private ApplicationUserManager _userManager;
-        private readonly ILog _log;
-
         public AuthenticationController()
         {
         }
 
         public AuthenticationController(ApplicationUserManager userManager,
             ISecureDataFormat<AuthenticationTicket> accessTokenFormat,
-            ILog log)
+            ILog log):base(userManager, accessTokenFormat, log)
         {
-            _userManager = userManager;
-            AccessTokenFormat = accessTokenFormat;
-            _log = log;
+            
         }
 
-        public ISecureDataFormat<AuthenticationTicket> AccessTokenFormat { get; }
-
-        public ApplicationUserManager UserManager
-        {
-            get
-            {
-                return _userManager ?? Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            }
-            private set
-            {
-                _userManager = value;
-            }
-        }
-
-        private IAuthenticationManager Authentication
-        {
-            get { return Request.GetOwinContext().Authentication; }
-        }
 
         [HttpPost]
         [AllowAnonymous]

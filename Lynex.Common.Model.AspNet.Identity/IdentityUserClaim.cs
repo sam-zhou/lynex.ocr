@@ -32,7 +32,7 @@ namespace Lynex.Common.Model.AspNet.Identity
 
 		public IdentityUserClaim()
 		{
-			this.Id = Guid.NewGuid().ToString();
+			Id = Guid.NewGuid().ToString();
 		}
 	}
 }
