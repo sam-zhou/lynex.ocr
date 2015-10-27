@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{CFF938C4-4B9C-459E-B659-C9505DEEABA4}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Lynex.BillMaster.Service</RootNamespace>
+    <AssemblyName>Lynex.BillMaster.Service</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NHibernate, Version=4.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <HintPath>..\packages\NHibernate.4.0.4.4000\lib\net40\NHibernate.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AddressService.cs" />
+    <Compile Include="Interface\IAddressService.cs" />
+    <Compile Include="Interface\IUserService.cs" />
+    <Compile Include="UserService.cs" />
+    <Compile Include="BillService.cs" />
+    <Compile Include="Interface\IBillService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Lynex.BillMaster.Exception\Lynex.BillMaster.Exception.csproj">
+      <Project>{9a45d4ac-c923-4d0f-82e9-d8eb40fdf916}</Project>
+      <Name>Lynex.BillMaster.Exception</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lynex.BillMaster.Extension\Lynex.BillMaster.Extension.csproj">
+      <Project>{7666726f-e1ed-417a-a1c7-1ec6dc067c2d}</Project>
+      <Name>Lynex.BillMaster.Extension</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lynex.BillMaster.Repository\Lynex.BillMaster.Repository.csproj">
+      <Project>{c21179cb-f4e9-4401-adc3-45751de80e67}</Project>
+      <Name>Lynex.BillMaster.Repository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Common\Lynex.Common.Exception\Lynex.Common.Exception.csproj">
+      <Project>{7a8862da-1520-4d76-9149-5af87277394e}</Project>
+      <Name>Lynex.Common.Exception</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Common\Lynex.Common.Model.AspNet.Identity\Lynex.Common.Model.AspNet.Identity.csproj">
+      <Project>{3de566d9-f5bb-40ca-be01-9722016ad0c7}</Project>
+      <Name>Lynex.Common.Model.AspNet.Identity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Common\Lynex.Common.Model\Lynex.Common.Model.csproj">
+      <Project>{b57351ec-8147-4fc7-b57d-708da025d692}</Project>
+      <Name>Lynex.Common.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Common\Lynex.Common.Extension\Lynex.Common.Extension.csproj">
+      <Project>{dc5a98a7-e6de-41dc-aaf8-ff08e24827b1}</Project>
+      <Name>Lynex.Common.Extension</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Common\Lynex.Common.Database\Lynex.Common.Database.csproj">
+      <Project>{54371d7e-5d3a-4a58-91cf-2d497f891fc1}</Project>
+      <Name>Lynex.Common.Database</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lynex.BillMaster.Model\Lynex.BillMaster.Model.csproj">
+      <Project>{618ef8c4-376f-4d94-ac92-d336c2041c58}</Project>
+      <Name>Lynex.BillMaster.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Common\Lynex.Common.Service\Lynex.Common.Service.csproj">
+      <Project>{4bbea9bc-0a40-4e3a-bbd6-a0718fca9d18}</Project>
+      <Name>Lynex.Common.Service</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

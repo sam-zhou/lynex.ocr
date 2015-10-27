@@ -1,6 +1,0 @@
-namespace Lynex.BillMaster.Api.Areas.HelpPage.ModelDescriptions
-{
-    public class SimpleTypeModelDescription : ModelDescription
-    {
-    }
-}
