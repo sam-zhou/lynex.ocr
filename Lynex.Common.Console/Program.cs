@@ -2,14 +2,17 @@
 using System.IO;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using Lynex.BillMaster.Admin.Service;
 using Lynex.BillMaster.Model.Domain.DbModels;
 using Lynex.BillMaster.Model.Enum.Mapable;
 using Lynex.BillMaster.Service;
+using Lynex.Common.ClientService;
 using Lynex.Common.Database;
 using Lynex.Common.Exception;
 using Lynex.Common.Service;
+using Lynex.Common.Extension;
 using Newtonsoft.Json;
 
 namespace Lynex.Common.Console
@@ -127,7 +130,7 @@ namespace Lynex.Common.Console
             var input = string.Empty;
             while (input != null && input.ToLower() != "quit")
             {
-                var isSuccessed = true;
+                var isSuccessed = false;
                 HttpResponseMessage response = null;
                 try
                 {
@@ -165,61 +168,70 @@ namespace Lynex.Common.Console
                     }
                 }
 
-                try
+                if (isSuccessed)
                 {
-                    using (var client = new HttpClient())
+                    try
                     {
-                        //var response =
-                        //    client.PostAsJsonAsync("http://api.mylynex.com.au/account/signin",
+                        var token = Authentication.GetAccessToken("http://api.mylynex.com.au/token",
+                            "samzhou.it@gmail.com", "Jukfrg!1", "clientId", "clientSecret");
 
-                        //        // Pass in an anonymous object that maps to the expected 
-                        //        // RegisterUserBindingModel defined as the method parameter 
-                        //        // for the Register method on the API:
-                        //        new
-                        //        {
-                        //            Email = "samzhou.it@gmail.com",
-                        //            Password = "Jukfrg!1",
-                        //            RememberMe = true,
-                        //        }).Result;
+                        System.Console.WriteLine("Token: " + token.access_token);
+                        System.Console.WriteLine("Refresh Token: " + token.refresh_token);
+                        System.Console.WriteLine("Expires In: " + token.expires_in);
 
-                        //if (!response.IsSuccessStatusCode)
-                        //{
-                        //    // Unwrap the response and throw as an Api Exception:
-                        //    var ex = ApiException.CreateApiException(response);
-                        //    throw ex;
-                        //}
-                        //System.Console.WriteLine("Login Successed");
 
-                        var response2 =
-                            client.PostAsJsonAsync("http://api.mylynex.com.au/account/changepassword",
 
-                                // Pass in an anonymous object that maps to the expected 
-                                // RegisterUserBindingModel defined as the method parameter 
-                                // for the Register method on the API:
-                                new
-                                {
-                                    OldPassword = "Jukfrg!1",
-                                    NewPassword = "Jukfrg!2",
-                                    ConfirmPassword = "Jukfrg!2",
-                                }).Result;
+                        token = Authentication.RefreshAccessToken("http://api.mylynex.com.au/token",
+                            token.refresh_token, "clientId", "clientSecret");
 
-                        if (!response2.IsSuccessStatusCode)
+                        System.Console.WriteLine("Token: " + token.access_token);
+                        System.Console.WriteLine("Refresh Token: " + token.refresh_token);
+                        System.Console.WriteLine("Expires In: " + token.expires_in);
+
+                        System.Console.ReadLine();
+                        using (var client = new HttpClient())
                         {
-                            // Unwrap the response and throw as an Api Exception:
-                            var ex = ApiException.CreateApiException(response2);
-                            throw ex;
+
+
+
+                            System.Console.WriteLine("Login Successed");
+
+                            client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token.access_token);
+
+                            var response2 =
+                                client.PostAsJsonAsync("http://api.mylynex.com.au/account/changepassword",
+
+                                    // Pass in an anonymous object that maps to the expected 
+                                    // RegisterUserBindingModel defined as the method parameter 
+                                    // for the Register method on the API:
+                                    new
+                                    {
+                                        OldPassword = "Jukfrg!1",
+                                        NewPassword = "Jukfrg!2",
+                                        ConfirmPassword = "Jukfrg!2",
+                                    }).Result;
+
+                            if (!response2.IsSuccessStatusCode)
+                            {
+                                // Unwrap the response and throw as an Api Exception:
+                                var ex = ApiException.CreateApiException(response2);
+                                throw ex;
+                            }
+                            System.Console.WriteLine("Password Change Successed");
                         }
-                        System.Console.WriteLine("Password Change Successed");
                     }
-                }
-                catch (ApiException ex)
-                {
-                    System.Console.WriteLine(ex.Response);
-                    foreach (var error in ex.Errors)
+                    catch (ApiException ex)
                     {
-                        System.Console.WriteLine(error);
+                        System.Console.WriteLine(ex.Response);
+                        foreach (var error in ex.Errors)
+                        {
+                            System.Console.WriteLine(error);
+                        }
                     }
                 }
+
+
+                
 
 
                 input = System.Console.ReadLine();

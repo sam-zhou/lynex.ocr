@@ -44,7 +44,7 @@ namespace Lynex.BillMaster.Web.Api.Providers
             ClaimsIdentity cookiesIdentity = await user.GenerateUserIdentityAsync(userManager,
                 CookieAuthenticationDefaults.AuthenticationType);
 
-            AuthenticationProperties properties = CreateProperties(user.UserName);
+            AuthenticationProperties properties = CreateProperties(user.UserName, context.ClientId);
             AuthenticationTicket ticket = new AuthenticationTicket(oAuthIdentity, properties);
             context.Validated(ticket);
             context.Request.Context.Authentication.SignIn(cookiesIdentity);
@@ -62,13 +62,38 @@ namespace Lynex.BillMaster.Web.Api.Providers
 
         public override Task ValidateClientAuthentication(OAuthValidateClientAuthenticationContext context)
         {
-            // Resource owner password credentials does not provide a client ID.
-            if (context.ClientId == null)
+            string id, secret;
+            if (context.TryGetFormCredentials(out id, out secret))
             {
-                context.Validated();
+                if (ValidateClient(id, secret))
+                {
+                    context.OwinContext.Set("as:client_id", id);
+                    context.Validated();
+                }
+            }
+            return Task.FromResult<object>(null);
+        }
+
+        private bool ValidateClient(string id, string secret)
+        {
+            return true;
+        }
+
+        public override Task GrantRefreshToken(OAuthGrantRefreshTokenContext context)
+        {
+            var originalClient = context.Ticket.Properties.Dictionary["as:client_id"];
+            var currentClient = context.OwinContext.Get<string>("as:client_id");
+
+            if (originalClient != currentClient)
+            {
+                context.Rejected();
             }
 
-            return Task.FromResult<object>(null);
+            var newId = new ClaimsIdentity(context.Ticket.Identity);
+            var newTicket = new AuthenticationTicket(newId, context.Ticket.Properties);
+            context.Validated(newTicket);
+            
+            return Task.FromResult<object>(null); ;
         }
 
         public override Task ValidateClientRedirectUri(OAuthValidateClientRedirectUriContext context)
@@ -86,11 +111,12 @@ namespace Lynex.BillMaster.Web.Api.Providers
             return Task.FromResult<object>(null);
         }
 
-        public static AuthenticationProperties CreateProperties(string userName)
+        public static AuthenticationProperties CreateProperties(string userName, string clientId)
         {
             IDictionary<string, string> data = new Dictionary<string, string>
             {
-                { "userName", userName }
+                { "userName", userName },
+                { "as:client_id", clientId }
             };
             return new AuthenticationProperties(data);
         }

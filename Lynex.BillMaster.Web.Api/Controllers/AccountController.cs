@@ -265,7 +265,7 @@ namespace Lynex.BillMaster.Web.Api.Controllers
                 ClaimsIdentity cookieIdentity = await user.GenerateUserIdentityAsync(UserManager,
                     CookieAuthenticationDefaults.AuthenticationType);
 
-                AuthenticationProperties properties = ApplicationOAuthProvider.CreateProperties(user.UserName);
+                AuthenticationProperties properties = ApplicationOAuthProvider.CreateProperties(user.UserName, "");
                 Authentication.SignIn(properties, oAuthIdentity, cookieIdentity);
             }
             else
@@ -329,16 +329,36 @@ namespace Lynex.BillMaster.Web.Api.Controllers
                 return BadRequest(ModelState);
             }
 
-            var user = new ApplicationUser() { UserName = model.Email };
-
-            IdentityResult result = await UserManager.CreateAsync(user, model.Password);
-
-            if (!result.Succeeded)
+            var exist = await UserManager.FindByNameAsync(model.Email);
+            if (exist == null)
             {
-                return GetErrorResult(result);
+                var user = new ApplicationUser
+                {
+                    UserName = model.Email,
+                    Wallet = new Wallet(),
+                    UserChallenge = new UserChallenge("asd"),
+                };
+
+                IdentityResult result = await UserManager.CreateAsync(user, model.Password);
+
+                if (!result.Succeeded)
+                {
+                    return GetErrorResult(result);
+                }
+
+                result = await UserManager.AddToRoleAsync(user.Id, IdentityRole.User.Name);
+
+                if (!result.Succeeded)
+                {
+                    return GetErrorResult(result);
+                }
+
+                return Ok();
             }
 
-            return Ok();
+
+            return BadRequest("User already exist");
+
         }
 
         // POST api/Account/RegisterExternal

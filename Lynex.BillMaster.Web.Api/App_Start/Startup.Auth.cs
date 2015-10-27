@@ -9,6 +9,7 @@ using Lynex.BillMaster.Web.Api.Providers;
 using Lynex.BillMaster.Web.Api.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security.Infrastructure;
 using Owin;
 
 namespace Lynex.BillMaster.Web.Api
@@ -37,9 +38,10 @@ namespace Lynex.BillMaster.Web.Api
                 TokenEndpointPath = new PathString("/Token"),
                 Provider = new ApplicationOAuthProvider(PublicClientId),
                 AuthorizeEndpointPath = new PathString("/Account/ExternalLogin"),
-                AccessTokenExpireTimeSpan = TimeSpan.FromDays(14),
+                AccessTokenExpireTimeSpan = TimeSpan.FromSeconds(120),
                 // In production mode set AllowInsecureHttp = false
-                AllowInsecureHttp = true
+                AllowInsecureHttp = true,
+                RefreshTokenProvider = new ApplicationRefreshTokenProvider()
             };
 
             // Enable the application to use bearer tokens to authenticate users

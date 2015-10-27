@@ -23,7 +23,11 @@ namespace Lynex.BillMaster.Service
 
         public Address CreateAddress(Address newaddress)
         {
-            var address = new Address
+            return SingleTransactionOperation(x =>
+            {
+                DatabaseService.Save(x);
+                return x;
+            }, new Address
             {
                 AddressLine1 = newaddress.AddressLine1,
                 AddressLine2 = newaddress.AddressLine2,
@@ -32,9 +36,8 @@ namespace Lynex.BillMaster.Service
                 PostCode = newaddress.PostCode,
                 State = newaddress.State,
                 Suburb = newaddress.Suburb
-            };
-            DatabaseService.Save(address);
-            return address;
+            });
+            
         }
     }
 }
