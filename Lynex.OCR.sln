@@ -3,43 +3,43 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lynex.BillMaster.Mobile.View", "BillMaster\Mobile\Lynex.BillMaster.Mobile.View\Lynex.BillMaster.Mobile.View.csproj", "{67F9D3A8-F71E-4428-913F-C37AE82CDB24}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lynex.BillMaster.Mobile.View", "Lynex.BillMaster.Mobile.View\Lynex.BillMaster.Mobile.View.csproj", "{67F9D3A8-F71E-4428-913F-C37AE82CDB24}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lynex.BillMaster.Mobile.Portable.App", "BillMaster\Mobile\Lynex.BillMaster.Mobile.App\Lynex.BillMaster.Mobile.Portable.App.csproj", "{BA01D1D6-6A95-4548-852E-A48BAEE2DFF3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lynex.BillMaster.Mobile.Portable.App", "Lynex.BillMaster.Mobile.App\Lynex.BillMaster.Mobile.Portable.App.csproj", "{BA01D1D6-6A95-4548-852E-A48BAEE2DFF3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lynex.BillMaster.Mobile.Portable.App.iOS", "BillMaster\Mobile\Lynex.BillMaster.Mobile.App.iOS\Lynex.BillMaster.Mobile.Portable.App.iOS.csproj", "{0DA5EED7-BD8F-4801-9E90-49C2C0D6473A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lynex.BillMaster.Mobile.Portable.App.iOS", "Lynex.BillMaster.Mobile.App.iOS\Lynex.BillMaster.Mobile.Portable.App.iOS.csproj", "{0DA5EED7-BD8F-4801-9E90-49C2C0D6473A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lynex.BillMaster.Mobile.Portable.App.Droid", "BillMaster\Mobile\Lynex.BillMaster.Mobile.App.Droid\Lynex.BillMaster.Mobile.Portable.App.Droid.csproj", "{7CB64AFC-1A65-4B64-8B1E-99882A07E4FB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lynex.BillMaster.Mobile.Portable.App.Droid", "Lynex.BillMaster.Mobile.App.Droid\Lynex.BillMaster.Mobile.Portable.App.Droid.csproj", "{7CB64AFC-1A65-4B64-8B1E-99882A07E4FB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lynex.BillMaster.Mobile.ViewModel", "BillMaster\Mobile\Lynex.BillMaster.Mobile.ViewModel\Lynex.BillMaster.Mobile.ViewModel.csproj", "{5899C287-867E-4CB9-AF85-DC41AA303710}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lynex.BillMaster.Mobile.ViewModel", "Lynex.BillMaster.Mobile.ViewModel\Lynex.BillMaster.Mobile.ViewModel.csproj", "{5899C287-867E-4CB9-AF85-DC41AA303710}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lynex.BillMaster.Mobile.Service", "BillMaster\Mobile\Lynex.BillMaster.Mobile.Service\Lynex.BillMaster.Mobile.Service.csproj", "{7B4C58EC-7824-48B0-BBD5-71C7FF4F9B1A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lynex.BillMaster.Mobile.Service", "Lynex.BillMaster.Mobile.Service\Lynex.BillMaster.Mobile.Service.csproj", "{7B4C58EC-7824-48B0-BBD5-71C7FF4F9B1A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{EFB0F607-EA54-4913-83AC-659253EEE7F8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Notification", "Notification", "{6EAAE9C0-D2A2-473E-9A06-62C3064AA9AA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lynex.Notification.Common", "Notification\Lynex.Notification.Common\Lynex.Notification.Common.csproj", "{E9BAE4D8-FCBD-43B0-A4BE-5DD762FBB659}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lynex.Notification.Common", "Lynex.Notification.Common\Lynex.Notification.Common.csproj", "{E9BAE4D8-FCBD-43B0-A4BE-5DD762FBB659}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lynex.Notification.Email", "Notification\Lynex.Notification.Email\Lynex.Notification.Email.csproj", "{F36F3D6F-A168-44B7-8BD3-67CDF3ECC1D4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lynex.Notification.Email", "Lynex.Notification.Email\Lynex.Notification.Email.csproj", "{F36F3D6F-A168-44B7-8BD3-67CDF3ECC1D4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lynex.Notification.SMS", "Notification\Lynex.Notification.SMS\Lynex.Notification.SMS.csproj", "{C466DA70-9FA4-4537-A9AE-5453282DD156}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lynex.Notification.SMS", "Lynex.Notification.SMS\Lynex.Notification.SMS.csproj", "{C466DA70-9FA4-4537-A9AE-5453282DD156}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lynex.Common.Database", "Common\Lynex.Common.Database\Lynex.Common.Database.csproj", "{54371D7E-5D3A-4A58-91CF-2D497F891FC1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lynex.Common.Database", "Lynex.Common.Database\Lynex.Common.Database.csproj", "{54371D7E-5D3A-4A58-91CF-2D497F891FC1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lynex.Common.Service", "Common\Lynex.Common.Service\Lynex.Common.Service.csproj", "{4BBEA9BC-0A40-4E3A-BBD6-A0718FCA9D18}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lynex.Common.Service", "Lynex.Common.Service\Lynex.Common.Service.csproj", "{4BBEA9BC-0A40-4E3A-BBD6-A0718FCA9D18}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lynex.Common.Console", "Common\Lynex.Common.Console\Lynex.Common.Console.csproj", "{CBB544EB-7F8F-4220-8B1E-27833E7F2499}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lynex.Common.Console", "Lynex.Common.Console\Lynex.Common.Console.csproj", "{CBB544EB-7F8F-4220-8B1E-27833E7F2499}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lynex.Common.Extension", "Common\Lynex.Common.Extension\Lynex.Common.Extension.csproj", "{DC5A98A7-E6DE-41DC-AAF8-FF08E24827B1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lynex.Common.Extension", "Lynex.Common.Extension\Lynex.Common.Extension.csproj", "{DC5A98A7-E6DE-41DC-AAF8-FF08E24827B1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lynex.Common.Model", "Common\Lynex.Common.Model\Lynex.Common.Model.csproj", "{B57351EC-8147-4FC7-B57D-708DA025D692}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lynex.Common.Model", "Lynex.Common.Model\Lynex.Common.Model.csproj", "{B57351EC-8147-4FC7-B57D-708DA025D692}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lynex.Common.Exception", "Common\Lynex.Common.Exception\Lynex.Common.Exception.csproj", "{7A8862DA-1520-4D76-9149-5AF87277394E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lynex.Common.Exception", "Lynex.Common.Exception\Lynex.Common.Exception.csproj", "{7A8862DA-1520-4D76-9149-5AF87277394E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lynex.Common.Model.AspNet.Identity", "Common\Lynex.Common.Model.AspNet.Identity\Lynex.Common.Model.AspNet.Identity.csproj", "{3DE566D9-F5BB-40CA-BE01-9722016AD0C7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lynex.Common.Model.AspNet.Identity", "Lynex.Common.Model.AspNet.Identity\Lynex.Common.Model.AspNet.Identity.csproj", "{3DE566D9-F5BB-40CA-BE01-9722016AD0C7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lynex.Common.Mobile.Forms", "Common\Lynex.Common.Mobile.Forms\Lynex.Common.Mobile.Forms.csproj", "{D1AA1965-50C4-43C0-B132-33D3D1E37F83}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lynex.Common.Mobile.Forms", "Lynex.Common.Mobile.Forms\Lynex.Common.Mobile.Forms.csproj", "{D1AA1965-50C4-43C0-B132-33D3D1E37F83}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{77813152-3648-481D-B9B4-FD62B2826474}"
 EndProject
@@ -49,23 +49,23 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Mobile", "Mobile", "{BC5F28
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Mobile", "Mobile", "{A3860CF9-6D27-4FEA-98F3-4F084D5FF955}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lynex.BillMaster.Exception", "BillMaster\Lynex.BillMaster.Exception\Lynex.BillMaster.Exception.csproj", "{9A45D4AC-C923-4D0F-82E9-D8EB40FDF916}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lynex.BillMaster.Exception", "Lynex.BillMaster.Exception\Lynex.BillMaster.Exception.csproj", "{9A45D4AC-C923-4D0F-82E9-D8EB40FDF916}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lynex.BillMaster.Admin.Repository", "BillMaster\Admin\Lynex.BillMaster.Admin.Repository\Lynex.BillMaster.Admin.Repository.csproj", "{E31290EE-C76B-447F-BE7D-1E8C9822211E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lynex.BillMaster.Admin.Repository", "Lynex.BillMaster.Admin.Repository\Lynex.BillMaster.Admin.Repository.csproj", "{E31290EE-C76B-447F-BE7D-1E8C9822211E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lynex.BillMaster.Admin.Service", "BillMaster\Admin\Lynex.BillMaster.Admin.Service\Lynex.BillMaster.Admin.Service.csproj", "{8F8ECD46-B8F1-42E4-BF9D-2041100B2936}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lynex.BillMaster.Admin.Service", "Lynex.BillMaster.Admin.Service\Lynex.BillMaster.Admin.Service.csproj", "{8F8ECD46-B8F1-42E4-BF9D-2041100B2936}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lynex.BillMaster.Database", "BillMaster\Lynex.BillMaster.Database\Lynex.BillMaster.Database.csproj", "{3508B0A7-DCEA-4A9C-9BF7-07FF92C7C160}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lynex.BillMaster.Database", "Lynex.BillMaster.Database\Lynex.BillMaster.Database.csproj", "{3508B0A7-DCEA-4A9C-9BF7-07FF92C7C160}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lynex.BillMaster.Model", "BillMaster\Lynex.BillMaster.Model\Lynex.BillMaster.Model.csproj", "{618EF8C4-376F-4D94-AC92-D336C2041C58}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lynex.BillMaster.Model", "Lynex.BillMaster.Model\Lynex.BillMaster.Model.csproj", "{618EF8C4-376F-4D94-AC92-D336C2041C58}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lynex.BillMaster.Service", "BillMaster\Lynex.BillMaster.Service\Lynex.BillMaster.Service.csproj", "{CFF938C4-4B9C-459E-B659-C9505DEEABA4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lynex.BillMaster.Service", "Lynex.BillMaster.Service\Lynex.BillMaster.Service.csproj", "{CFF938C4-4B9C-459E-B659-C9505DEEABA4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lynex.BillMaster.Repository", "BillMaster\Lynex.BillMaster.Repository\Lynex.BillMaster.Repository.csproj", "{C21179CB-F4E9-4401-ADC3-45751DE80E67}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lynex.BillMaster.Repository", "Lynex.BillMaster.Repository\Lynex.BillMaster.Repository.csproj", "{C21179CB-F4E9-4401-ADC3-45751DE80E67}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lynex.BillMaster.Extension", "BillMaster\Lynex.BillMaster.Extension\Lynex.BillMaster.Extension.csproj", "{7666726F-E1ED-417A-A1C7-1EC6DC067C2D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lynex.BillMaster.Extension", "Lynex.BillMaster.Extension\Lynex.BillMaster.Extension.csproj", "{7666726F-E1ED-417A-A1C7-1EC6DC067C2D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lynex.BillMaster.Web.Api", "BillMaster\Web\Lynex.BillMaster.Web.Api\Lynex.BillMaster.Web.Api.csproj", "{56E53596-5CDF-449D-A4DA-39CA5AF8FD5F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lynex.BillMaster.Web.Api", "Lynex.BillMaster.Web.Api\Lynex.BillMaster.Web.Api.csproj", "{56E53596-5CDF-449D-A4DA-39CA5AF8FD5F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
