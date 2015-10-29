@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
 using Lynex.BillMaster.Model.Domain.DbModels;
+using Lynex.Common.Model.DbModel;
 
 namespace Lynex.BillMaster.Model.Domain
 {

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Lynex.BillMaster.Model.Domain.DbModels;
 using Lynex.Common.Database;
+using Lynex.Common.Model.DbModel;
 using NHibernate;
 using NHibernate.Linq;
 

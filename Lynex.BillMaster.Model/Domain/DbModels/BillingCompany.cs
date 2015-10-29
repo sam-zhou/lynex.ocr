@@ -1,6 +1,6 @@
-﻿using Lynex.BillMaster.Model.Domain.DbModels.Interface;
-using Lynex.BillMaster.Model.Enum.Mapable;
+﻿using Lynex.BillMaster.Model.Enum.Mapable;
 using Lynex.Common.Model.DbModel;
+using Lynex.Common.Model.DbModel.Interface;
 
 namespace Lynex.BillMaster.Model.Domain.DbModels
 {

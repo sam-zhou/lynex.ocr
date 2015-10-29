@@ -1,4 +1,4 @@
-﻿namespace Lynex.BillMaster.Model.Enum.Mapable
+﻿namespace Lynex.Common.Model.Enum.Mapable
 {
     public enum UserLoginStatus
     {

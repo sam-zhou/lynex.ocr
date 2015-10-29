@@ -1,7 +1,6 @@
 ﻿using System;
-using Lynex.BillMaster.Model.Domain.DbModels;
-using Lynex.BillMaster.Model.Domain.DbModels.Interface;
-using Lynex.BillMaster.Model.Enum;
+using Lynex.Common.Model.DbModel.Interface;
+using Lynex.Common.Model.Enum;
 using Lynex.Notification.Common.Model;
 
 namespace Lynex.Notification.Common

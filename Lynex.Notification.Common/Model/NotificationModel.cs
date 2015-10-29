@@ -1,5 +1,4 @@
-﻿using Lynex.BillMaster.Model.Domain.DbModels;
-using Lynex.BillMaster.Model.Domain.DbModels.Interface;
+﻿using Lynex.Common.Model.DbModel.Interface;
 
 namespace Lynex.Notification.Common.Model
 {

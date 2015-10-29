@@ -2,9 +2,8 @@
 using System.Net;
 using System.Net.Mail;
 using System.Text;
-using Lynex.BillMaster.Model.Domain.DbModels;
-using Lynex.BillMaster.Model.Domain.DbModels.Interface;
-using Lynex.BillMaster.Model.Settings.Interface;
+using Lynex.Common.Model.DbModel.Interface;
+using Lynex.Common.Model.Settings.Interface;
 using Lynex.Notification.Common;
 using Lynex.Notification.Email.Model;
 
@@ -19,7 +18,7 @@ namespace Lynex.Notification.Email
     {
         private readonly IEmailNotificationSettings _setting;
 
-        public EmailNotificationService(ILynexSettings setting)
+        public EmailNotificationService(IEmailNotificationSettings setting)
             : base(setting.EmailFormatType)
         {
             _setting = setting;

@@ -8,6 +8,10 @@ using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
+using Lynex.Common.Exception;
+using Lynex.Common.Extension.Json;
+using Lynex.Common.Model.DataContracts;
+using Newtonsoft.Json;
 
 namespace Lynex.Common.ClientService
 {
@@ -37,22 +41,37 @@ namespace Lynex.Common.ClientService
 
             Stream requestStream = req.GetRequestStream();
             requestStream.Write(postDataEncoded, 0, postDataEncoded.Length);
-
-            WebResponse res = req.GetResponse();
-
-            using (var rs = res.GetResponseStream())
+            try
             {
-                if (rs != null)
+                WebResponse res = req.GetResponse();
+
+                using (var rs = res.GetResponseStream())
                 {
-                    DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(Token));
-                    //Get deserialized object from JSON stream
-                    var token = (Token)serializer.ReadObject(rs);
-                    return token;
+                    
 
-                    // Process FORM POST.
+                    if (rs != null)
+                    {
+                        using (var d = new StreamReader(rs))
+                        {
+                            var response = d.ReadToEnd();
+                            var settings = new JsonSerializerSettings();
 
+                            settings.ContractResolver = new SnakeCaseContractResolver();
+                            settings.NullValueHandling = NullValueHandling.Ignore;
+                            return JsonConvert.DeserializeObject<Token>(response, settings);
+                            
+                        }
+                    }
                 }
             }
+            catch (WebException ex)
+            {
+                var apiEx = ApiException.CreateApiException(ex);
+                throw apiEx;
+            }
+            
+
+            
 
 
             return null;

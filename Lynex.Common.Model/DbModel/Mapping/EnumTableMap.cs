@@ -3,7 +3,7 @@ using FluentNHibernate.Mapping;
 
 namespace Lynex.Common.Model.DbModel.Mapping
 {
-    public abstract class EnumTableMap<T> : ClassMap<EnumTable<T>> where T: struct , IConvertible
+    public class EnumTableMap<T> : ClassMap<EnumTable<T>> where T: struct , IConvertible
     {
         protected EnumTableMap()
         {

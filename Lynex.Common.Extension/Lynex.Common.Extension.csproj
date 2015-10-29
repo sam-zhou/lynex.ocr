@@ -46,7 +46,9 @@
   <ItemGroup>
     <Compile Include="AssemblyHelper.cs" />
     <Compile Include="DynamicClassHelper.cs" />
+    <Compile Include="EnumHelper.cs" />
     <Compile Include="Filter.cs" />
+    <Compile Include="Json\SnakeCaseContractResolver.cs" />
     <Compile Include="StringHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

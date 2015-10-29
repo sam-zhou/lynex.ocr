@@ -5,10 +5,15 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 
 using Lynex.BillMaster.Model.Domain.DbModels;
+using Lynex.BillMaster.Web.Api.IoC;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
 using Lynex.BillMaster.Web.Api.Models;
+using Lynex.Common.Extension;
+using Lynex.Common.Model.DbModel;
+using Lynex.Common.Model.Status;
+using Lynex.Common.Service.Interface;
 using Microsoft.AspNet.Identity.Owin;
 
 namespace Lynex.BillMaster.Web.Api.Providers
@@ -17,25 +22,49 @@ namespace Lynex.BillMaster.Web.Api.Providers
     {
         private readonly string _publicClientId;
 
+        private IAuthenticationService _authenticationService;
+
+        private IAuthenticationService AuthenticationService
+        {
+            get
+            {
+                if (_authenticationService == null)
+                {
+                    _authenticationService = IoCContainer.Resolve<IAuthenticationService>();
+                }
+                return _authenticationService;
+            }
+        }
+
         public ApplicationOAuthProvider(string publicClientId)
         {
             if (publicClientId == null)
             {
-                throw new ArgumentNullException("publicClientId");
+                throw new ArgumentNullException(nameof(publicClientId));
             }
 
             _publicClientId = publicClientId;
         }
 
+
         public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
+            var allowedOrigin = context.OwinContext.Get<string>("as:clientAllowedOrigin");
+
+            if (allowedOrigin == null)
+            {
+                allowedOrigin = "*";
+            }
+
+            context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { allowedOrigin });
+
             var userManager = context.OwinContext.GetUserManager<ApplicationUserManager>();
 
             ApplicationUser user = await userManager.FindAsync(context.UserName, context.Password);
 
             if (user == null)
             {
-                context.SetError("invalid_grant", "The user name or password is incorrect.");
+                context.SetError("invalid_grant", TokenStatus.Invalid.ToString());
                 return;
             }
 
@@ -62,36 +91,56 @@ namespace Lynex.BillMaster.Web.Api.Providers
 
         public override Task ValidateClientAuthentication(OAuthValidateClientAuthenticationContext context)
         {
-            string id, secret;
-            if (context.TryGetFormCredentials(out id, out secret))
+            string clientId, secret;
+            if (context.TryGetFormCredentials(out clientId, out secret))
             {
-                if (ValidateClient(id, secret))
+                var client = AuthenticationService.FindClient(clientId);
+                if (client == null)
                 {
-                    context.OwinContext.Set("as:client_id", id);
-                    context.Validated();
+                    context.SetError("invalid_grant", TokenStatus.InvalidClientId.ToString());
+                }
+                else
+                {
+                    if (string.IsNullOrWhiteSpace(secret))
+                    {
+                        context.SetError("invalid_grant", TokenStatus.MissingClientSecret.ToString());
+                    }
+                    else if(client.Secret != StringHelper.GetHash(secret))
+                    {
+                        context.SetError("invalid_grant", TokenStatus.InvalidClientSecret.ToString());
+                    }
+                    else if (!client.Active)
+                    {
+                        context.SetError("invalid_grant", TokenStatus.DisabledClient.ToString());
+                    }
+                    else
+                    {
+                        context.OwinContext.Set("as:clientAllowedOrigin", client.AllowedOrigin);
+                        context.OwinContext.Set("as:clientRefreshTokenLifeTime", client.RefreshTokenLifeTime.ToString());
+                        context.Validated();
+                    }
                 }
             }
             return Task.FromResult<object>(null);
         }
 
-        private bool ValidateClient(string id, string secret)
-        {
-            return true;
-        }
-
         public override Task GrantRefreshToken(OAuthGrantRefreshTokenContext context)
         {
             var originalClient = context.Ticket.Properties.Dictionary["as:client_id"];
-            var currentClient = context.OwinContext.Get<string>("as:client_id");
 
-            if (originalClient != currentClient)
+            if (originalClient != context.ClientId)
             {
-                context.Rejected();
+                context.SetError("invalid_grant", TokenStatus.InvalidClientId.ToString());
+                
+            }
+            else
+            {
+                var newId = new ClaimsIdentity(context.Ticket.Identity);
+                var newTicket = new AuthenticationTicket(newId, context.Ticket.Properties);
+                context.Validated(newTicket);
             }
 
-            var newId = new ClaimsIdentity(context.Ticket.Identity);
-            var newTicket = new AuthenticationTicket(newId, context.Ticket.Properties);
-            context.Validated(newTicket);
+            
             
             return Task.FromResult<object>(null); ;
         }

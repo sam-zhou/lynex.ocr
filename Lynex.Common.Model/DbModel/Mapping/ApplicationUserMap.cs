@@ -1,8 +1,6 @@
 ﻿using Lynex.Common.Model.AspNet.Identity.Internal.Mapping;
-using Lynex.Common.Model.DbModel.Mapping;
-using NHibernate.Type;
 
-namespace Lynex.BillMaster.Model.Domain.DbModels.Mapping
+namespace Lynex.Common.Model.DbModel.Mapping
 {
     public class ApplicationUserMap : IdentityUserMap<ApplicationUser>
     {
@@ -23,7 +21,7 @@ namespace Lynex.BillMaster.Model.Domain.DbModels.Mapping
             //Map(q => q.LastLogin).CustomType<UtcDateTimeType>().Nullable();
             //Map(q => q.LastFailedLogin).CustomType<UtcDateTimeType>().Nullable();
             //HasMany(q => q.Notifications).KeyColumn("UserId").ForeignKeyConstraintName("Notification_User_Id");
-            References(q => q.Wallet).ForeignKey("User_Wallet_Id").Column("WalletId").Cascade.All();
+            //References(q => q.Wallet).ForeignKey("User_Wallet_Id").Column("WalletId").Cascade.All();
             References(q => q.UserChallenge).ForeignKey("User_UserChallenge_Id").Column("UserChallengeId").Cascade.All();
             //HasMany<IdentityUserClaim>((T x) => x.Claims).KeyColumn("User_id").Cascade.All();
             References(q => q.Address).ForeignKey("User_Address_Id").Column("AddressId").Cascade.All();

@@ -14,6 +14,8 @@ using Lynex.BillMaster.Repository.UserRepo;
 using Lynex.BillMaster.Service.Interface;
 using Lynex.Common.Database;
 using Lynex.Common.Extension;
+using Lynex.Common.Model.DbModel;
+using Lynex.Common.Model.Enum.Mapable;
 using Lynex.Common.Service;
 
 namespace Lynex.BillMaster.Service
@@ -58,9 +60,10 @@ namespace Lynex.BillMaster.Service
                 user.UserChallenge = challenge;
 
                 var wallet = new Wallet();
-                user.Wallet = wallet;
-
                 DatabaseService.Save(user);
+                wallet.User = user;
+                DatabaseService.Save(wallet);
+
                 DatabaseService.CommitTransaction();
                 return user;
             }

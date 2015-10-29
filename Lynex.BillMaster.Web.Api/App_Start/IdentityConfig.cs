@@ -5,6 +5,7 @@ using Microsoft.Owin;
 using Lynex.BillMaster.Web.Api.Models;
 using Lynex.Common.Database;
 using Lynex.Common.Model.AspNet.Identity;
+using Lynex.Common.Model.DbModel;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 

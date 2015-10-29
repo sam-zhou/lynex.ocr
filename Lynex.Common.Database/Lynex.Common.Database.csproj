@@ -78,10 +78,6 @@
       <Project>{dc5a98a7-e6de-41dc-aaf8-ff08e24827b1}</Project>
       <Name>Lynex.Common.Extension</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Lynex.BillMaster.Model\Lynex.BillMaster.Model.csproj">
-      <Project>{618ef8c4-376f-4d94-ac92-d336c2041c58}</Project>
-      <Name>Lynex.BillMaster.Model</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

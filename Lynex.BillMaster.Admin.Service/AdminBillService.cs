@@ -12,6 +12,7 @@ using Lynex.BillMaster.Repository.BillRepo;
 using Lynex.BillMaster.Service;
 using Lynex.BillMaster.Service.Interface;
 using Lynex.Common.Database;
+using Lynex.Common.Model.DbModel;
 using Lynex.Common.Service;
 
 namespace Lynex.BillMaster.Admin.Service

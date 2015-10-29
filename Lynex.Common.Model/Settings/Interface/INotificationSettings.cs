@@ -1,4 +1,4 @@
-﻿namespace Lynex.BillMaster.Model.Settings.Interface
+﻿namespace Lynex.Common.Model.Settings.Interface
 {
     public interface INotificationSettings
     {

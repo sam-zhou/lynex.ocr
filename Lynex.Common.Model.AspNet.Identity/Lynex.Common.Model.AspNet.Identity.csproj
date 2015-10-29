@@ -82,12 +82,6 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Lynex.Common.Model\Lynex.Common.Model.csproj">
-      <Project>{b57351ec-8147-4fc7-b57d-708da025d692}</Project>
-      <Name>Lynex.Common.Model</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

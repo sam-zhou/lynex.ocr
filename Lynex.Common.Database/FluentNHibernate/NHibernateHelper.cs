@@ -26,7 +26,7 @@ namespace Lynex.Common.Database.FluentNHibernate
             }
             catch (Exception)
             {
-
+                //ignore
             }
 
             var configuration = BuildConfiguration(connectionStringKey, modelAssembly);
@@ -37,7 +37,7 @@ namespace Lynex.Common.Database.FluentNHibernate
 
             var sessionFactory = configuration.BuildSessionFactory();
 
-            if (createNew)
+            if (createNew && databaseAssembly != null)
             {
                 PopulateDefaultData(sessionFactory, modelAssembly, databaseAssembly);
             }
@@ -54,6 +54,7 @@ namespace Lynex.Common.Database.FluentNHibernate
                 .Mappings(m =>
                     m.FluentMappings
                     .AddFromAssembly(assembly)
+                    .AddFromAssembly(Assembly.Load("Lynex.Common.Model"))
                     .AddFromAssembly(Assembly.Load("Lynex.Common.Model.AspNet.Identity"))
                     .AddFromAssembly(CreateGenericClassMappingAssembly(assembly)));
 #if DEBUG || TRACE

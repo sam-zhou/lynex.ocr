@@ -232,6 +232,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Extension\ConfigurationManagerHelper.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -323,6 +324,14 @@
     <ProjectReference Include="..\Lynex.BillMaster.Service\Lynex.BillMaster.Service.csproj">
       <Project>{cff938c4-4b9c-459e-b659-c9505deeaba4}</Project>
       <Name>Lynex.BillMaster.Service</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lynex.Common.Exception\Lynex.Common.Exception.csproj">
+      <Project>{7a8862da-1520-4d76-9149-5af87277394e}</Project>
+      <Name>Lynex.Common.Exception</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lynex.Common.Extension\Lynex.Common.Extension.csproj">
+      <Project>{dc5a98a7-e6de-41dc-aaf8-ff08e24827b1}</Project>
+      <Name>Lynex.Common.Extension</Name>
     </ProjectReference>
     <ProjectReference Include="..\Lynex.Common.Model.AspNet.Identity\Lynex.Common.Model.AspNet.Identity.csproj">
       <Project>{3de566d9-f5bb-40ca-be01-9722016ad0c7}</Project>

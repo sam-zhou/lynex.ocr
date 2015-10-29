@@ -30,8 +30,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Iesi.Collections, Version=4.0.0.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Iesi.Collections.4.0.0.4000\lib\net40\Iesi.Collections.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NHibernate, Version=4.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <HintPath>..\packages\NHibernate.4.0.4.4000\lib\net40\NHibernate.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -45,14 +53,27 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseService.cs" />
+    <Compile Include="ChallengeProvider.cs" />
+    <Compile Include="Interface\IChallengeProvider.cs" />
+    <Compile Include="Interface\IAuthenticationService.cs" />
     <Compile Include="Interface\ISystemService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="AuthenticationService.cs" />
+    <Compile Include="Query\IsRefreshTokenExist.cs" />
     <Compile Include="SystemService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Lynex.Common.Database\Lynex.Common.Database.csproj">
       <Project>{54371d7e-5d3a-4a58-91cf-2d497f891fc1}</Project>
       <Name>Lynex.Common.Database</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lynex.Common.Extension\Lynex.Common.Extension.csproj">
+      <Project>{dc5a98a7-e6de-41dc-aaf8-ff08e24827b1}</Project>
+      <Name>Lynex.Common.Extension</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lynex.Common.Model\Lynex.Common.Model.csproj">
+      <Project>{b57351ec-8147-4fc7-b57d-708da025d692}</Project>
+      <Name>Lynex.Common.Model</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

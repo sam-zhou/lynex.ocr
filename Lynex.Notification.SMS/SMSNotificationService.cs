@@ -1,6 +1,5 @@
-﻿using Lynex.BillMaster.Model.Domain.DbModels;
-using Lynex.BillMaster.Model.Domain.DbModels.Interface;
-using Lynex.BillMaster.Model.Settings.Interface;
+﻿using Lynex.Common.Model.DbModel.Interface;
+using Lynex.Common.Model.Settings.Interface;
 using Lynex.Notification.Common;
 using Lynex.Notification.SMS.Model;
 

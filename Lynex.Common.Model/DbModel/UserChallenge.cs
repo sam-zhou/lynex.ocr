@@ -1,7 +1,7 @@
 ﻿using System;
-using Lynex.Common.Model.DbModel;
+using Lynex.Common.Model.Enum.Mapable;
 
-namespace Lynex.BillMaster.Model.Domain.DbModels
+namespace Lynex.Common.Model.DbModel
 {
     public class UserChallenge : BaseEntity
     {
@@ -12,6 +12,8 @@ namespace Lynex.BillMaster.Model.Domain.DbModels
         public virtual DateTime? VerifiedAt { get; set; }
 
         public virtual int TryCount { get; set; }
+
+        public virtual UserChallengeStatus Status { get; set; }
 
         public virtual DateTime LocalCreatedAt
         {

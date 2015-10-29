@@ -6,5 +6,7 @@ namespace Lynex.BillMaster.Model.Domain.DbModels
     public class Wallet : BaseEntity
     {
         public virtual double Balance { get; set; }
+
+        public virtual ApplicationUser User { get; set; }
     }
 }

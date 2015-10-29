@@ -2,16 +2,13 @@
 using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
-
-using Lynex.BillMaster.Model.Domain.DbModels.Interface;
 using Lynex.Common.Model.AspNet.Identity;
-using Lynex.Common.Model.DbModel;
 using Lynex.Common.Model.DbModel.Interface;
 using Microsoft.AspNet.Identity;
 using IUser = Microsoft.AspNet.Identity.IUser;
 
 
-namespace Lynex.BillMaster.Model.Domain.DbModels
+namespace Lynex.Common.Model.DbModel
 {
     public class ApplicationUser : IdentityUser, IAddressable, IDbModel, IUser
     {
@@ -19,7 +16,11 @@ namespace Lynex.BillMaster.Model.Domain.DbModels
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
             var userIdentity = await manager.CreateIdentityAsync(this, authenticationType);
-            // Add custom user claims here
+            userIdentity.AddClaim(new Claim(ClaimTypes.Name, UserName));
+            foreach (var identityRole in Roles)
+            {
+                userIdentity.AddClaim(new Claim(ClaimTypes.Role, identityRole.Name));
+            }
             return userIdentity;
         }
 
@@ -64,7 +65,7 @@ namespace Lynex.BillMaster.Model.Domain.DbModels
 
         public virtual Address Address { get; set; }
 
-        public virtual Wallet Wallet { get; set; }
+        //public virtual Wallet Wallet { get; set; }
 
         //public virtual DateTime CreatedAt { get; set; }
 

@@ -1,4 +1,4 @@
-﻿namespace Lynex.BillMaster.Model.Enum
+﻿namespace Lynex.Common.Model.Enum
 {
     public enum FormatType
     {

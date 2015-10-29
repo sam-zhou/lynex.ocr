@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Net.Http;
 using System.Security.Claims;
 using System.Security.Cryptography;
@@ -8,6 +9,7 @@ using System.Web;
 using System.Web.Http;
 using System.Web.Http.ModelBinding;
 using Lynex.BillMaster.Model.Domain.DbModels;
+using Lynex.BillMaster.Web.Api.Extension;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
@@ -15,8 +17,12 @@ using Lynex.BillMaster.Web.Api.Models;
 using Lynex.BillMaster.Web.Api.Providers;
 using Lynex.BillMaster.Web.Api.Results;
 using Lynex.Common.Model.AspNet.Identity;
+using Lynex.Common.Model.DbModel;
+using Lynex.Common.Service.Interface;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
+using NHibernate.Util;
+using StringHelper = Lynex.Common.Extension.StringHelper;
 
 namespace Lynex.BillMaster.Web.Api.Controllers
 {
@@ -335,8 +341,8 @@ namespace Lynex.BillMaster.Web.Api.Controllers
                 var user = new ApplicationUser
                 {
                     UserName = model.Email,
-                    Wallet = new Wallet(),
-                    UserChallenge = new UserChallenge("asd"),
+                    
+                    UserChallenge = new UserChallenge(StringHelper.GetRandomString(ConfigurationManagerHelper.GetIntSetting("UserChallengeLength"))),
                 };
 
                 IdentityResult result = await UserManager.CreateAsync(user, model.Password);

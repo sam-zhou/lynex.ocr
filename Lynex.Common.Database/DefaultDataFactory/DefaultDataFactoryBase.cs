@@ -11,7 +11,7 @@ namespace Lynex.Common.Database.DefaultDataFactory
     }
 
 
-    public abstract class DefaultDataFactoryBase<TEntity> : IDefaultDataFactory where TEntity : IDbModel
+    public abstract class DefaultDataFactoryBase<TEntity> : IDefaultDataFactory
     {
         private readonly ISession _session;
         private readonly Assembly _assembly;

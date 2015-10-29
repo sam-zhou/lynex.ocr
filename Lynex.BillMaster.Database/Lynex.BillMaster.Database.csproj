@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DefaultDataFactory\DevelopmentDataFactory.cs" />
+    <Compile Include="DefaultDataFactory\ClientDataFactory.cs" />
     <Compile Include="DefaultDataFactory\IdentityRoleFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

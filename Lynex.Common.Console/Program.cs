@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Configuration;
 using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
+using System.Threading;
 using Lynex.BillMaster.Admin.Service;
 using Lynex.BillMaster.Model.Domain.DbModels;
 using Lynex.BillMaster.Model.Enum.Mapable;
@@ -13,6 +15,7 @@ using Lynex.Common.Database;
 using Lynex.Common.Exception;
 using Lynex.Common.Service;
 using Lynex.Common.Extension;
+using Lynex.Common.Model.DataContracts;
 using Newtonsoft.Json;
 
 namespace Lynex.Common.Console
@@ -131,6 +134,7 @@ namespace Lynex.Common.Console
             while (input != null && input.ToLower() != "quit")
             {
                 var isSuccessed = false;
+                Token token = null;
                 HttpResponseMessage response = null;
                 try
                 {
@@ -158,6 +162,14 @@ namespace Lynex.Common.Console
                     }
                     isSuccessed = true;
                     System.Console.WriteLine("Register Successed");
+
+
+                    token = Authentication.GetAccessToken("http://api.mylynex.com.au/token",
+                            "samzhou.it@gmail.com", "Jukfrg!1", ConfigurationManager.AppSettings["ClientId"], ConfigurationManager.AppSettings["ClientSecret"]);
+
+                    System.Console.WriteLine("Token: " + token.AccessToken.Substring(0, 10));
+                    System.Console.WriteLine("Refresh Token: " + token.RefreshToken.Substring(0, 10));
+                    System.Console.WriteLine("Expires In: " + token.ExpiresIn);
                 }
                 catch (ApiException ex)
                 {
@@ -167,36 +179,26 @@ namespace Lynex.Common.Console
                         System.Console.WriteLine(error);
                     }
                 }
+                var oldPassword = "Jukfrg!1";
+                var newPassword = "Jukfrg!2";
 
-                if (isSuccessed)
+                while (isSuccessed && token != null)
                 {
+                    Thread.Sleep(15000);
+                    
                     try
                     {
-                        var token = Authentication.GetAccessToken("http://api.mylynex.com.au/token",
-                            "samzhou.it@gmail.com", "Jukfrg!1", "clientId", "clientSecret");
+                        System.Console.WriteLine("********************************************" + token.ExpiresIn);
+                        token = Authentication.RefreshAccessToken("http://api.mylynex.com.au/token", token.RefreshToken, ConfigurationManager.AppSettings["ClientId"], ConfigurationManager.AppSettings["ClientSecret"]);
+                        System.Console.WriteLine("Token: " + token.AccessToken.Substring(0, 10));
+                        System.Console.WriteLine("Refresh Token: " + token.RefreshToken.Substring(0, 10));
+                        System.Console.WriteLine("Expires In: " + token.ExpiresIn);
+                        
 
-                        System.Console.WriteLine("Token: " + token.access_token);
-                        System.Console.WriteLine("Refresh Token: " + token.refresh_token);
-                        System.Console.WriteLine("Expires In: " + token.expires_in);
-
-
-
-                        token = Authentication.RefreshAccessToken("http://api.mylynex.com.au/token",
-                            token.refresh_token, "clientId", "clientSecret");
-
-                        System.Console.WriteLine("Token: " + token.access_token);
-                        System.Console.WriteLine("Refresh Token: " + token.refresh_token);
-                        System.Console.WriteLine("Expires In: " + token.expires_in);
-
-                        System.Console.ReadLine();
                         using (var client = new HttpClient())
                         {
 
-
-
-                            System.Console.WriteLine("Login Successed");
-
-                            client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token.access_token);
+                            client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token.AccessToken);
 
                             var response2 =
                                 client.PostAsJsonAsync("http://api.mylynex.com.au/account/changepassword",
@@ -206,9 +208,9 @@ namespace Lynex.Common.Console
                                     // for the Register method on the API:
                                     new
                                     {
-                                        OldPassword = "Jukfrg!1",
-                                        NewPassword = "Jukfrg!2",
-                                        ConfirmPassword = "Jukfrg!2",
+                                        OldPassword = oldPassword,
+                                        NewPassword = newPassword,
+                                        ConfirmPassword = newPassword,
                                     }).Result;
 
                             if (!response2.IsSuccessStatusCode)
@@ -217,8 +219,12 @@ namespace Lynex.Common.Console
                                 var ex = ApiException.CreateApiException(response2);
                                 throw ex;
                             }
+                            
                             System.Console.WriteLine("Password Change Successed");
                         }
+                        var temp = oldPassword;
+                        oldPassword = newPassword;
+                        newPassword = temp;
                     }
                     catch (ApiException ex)
                     {
@@ -228,6 +234,7 @@ namespace Lynex.Common.Console
                             System.Console.WriteLine(error);
                         }
                     }
+                    
                 }
 
 

@@ -55,6 +55,17 @@ namespace Lynex.Common.Extension
             return salt;
         }
 
+        public static string GetHash(string input)
+        {
+            HashAlgorithm hashAlgorithm = new SHA256CryptoServiceProvider();
+
+            byte[] byteValue = Encoding.UTF8.GetBytes(input);
+
+            byte[] byteHash = hashAlgorithm.ComputeHash(byteValue);
+
+            return Convert.ToBase64String(byteHash);
+        }
+
         public static string GetHash(string clearData, string saltValue, HashAlgorithm hash)
         {
             var encoding = new UnicodeEncoding();

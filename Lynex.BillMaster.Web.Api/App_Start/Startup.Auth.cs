@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
+using Lynex.BillMaster.Web.Api.Extension;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
@@ -35,10 +37,10 @@ namespace Lynex.BillMaster.Web.Api
             PublicClientId = "self";
             OAuthOptions = new OAuthAuthorizationServerOptions
             {
-                TokenEndpointPath = new PathString("/Token"),
+                TokenEndpointPath = new PathString(ConfigurationManager.AppSettings["TokenEndpointPath"]),
                 Provider = new ApplicationOAuthProvider(PublicClientId),
-                AuthorizeEndpointPath = new PathString("/Account/ExternalLogin"),
-                AccessTokenExpireTimeSpan = TimeSpan.FromSeconds(120),
+                AuthorizeEndpointPath = new PathString(ConfigurationManager.AppSettings["AuthorizeEndpointPath"]),
+                AccessTokenExpireTimeSpan = TimeSpan.FromSeconds(ConfigurationManagerHelper.GetIntSetting("TokenExpire")),
                 // In production mode set AllowInsecureHttp = false
                 AllowInsecureHttp = true,
                 RefreshTokenProvider = new ApplicationRefreshTokenProvider()

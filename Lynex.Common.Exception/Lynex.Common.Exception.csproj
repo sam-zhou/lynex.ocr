@@ -44,6 +44,7 @@
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
       <Private>True</Private>
@@ -89,6 +90,16 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Lynex.Common.Extension\Lynex.Common.Extension.csproj">
+      <Project>{dc5a98a7-e6de-41dc-aaf8-ff08e24827b1}</Project>
+      <Name>Lynex.Common.Extension</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lynex.Common.Model\Lynex.Common.Model.csproj">
+      <Project>{b57351ec-8147-4fc7-b57d-708da025d692}</Project>
+      <Name>Lynex.Common.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

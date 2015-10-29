@@ -1,6 +1,6 @@
-﻿using Lynex.BillMaster.Model.Enum;
+﻿using Lynex.Common.Model.Enum;
 
-namespace Lynex.BillMaster.Model.Settings.Interface
+namespace Lynex.Common.Model.Settings.Interface
 {
     public interface ISMSNotificationSettings : INotificationSettings
     {

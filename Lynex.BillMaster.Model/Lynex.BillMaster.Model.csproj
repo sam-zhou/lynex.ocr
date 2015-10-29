@@ -61,43 +61,28 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataContracts\UserProxy.cs" />
-    <Compile Include="Domain\DbModels\Address.cs" />
     <Compile Include="Domain\DbModels\Bill.cs" />
     <Compile Include="Domain\DbModels\BillingCompany.cs" />
-    <Compile Include="Domain\DbModels\Interface\IUser.cs" />
-    <Compile Include="Domain\DbModels\Interface\IAddressable.cs" />
     <Compile Include="Domain\DbModels\Mapping\BillMap.cs" />
     <Compile Include="Domain\DbModels\Mapping\BillingCompanyMap.cs" />
-    <Compile Include="Domain\DbModels\Mapping\AddressMap.cs" />
     <Compile Include="Domain\DbModels\Mapping\WalletMap.cs" />
-    <Compile Include="Domain\DbModels\Setting.cs" />
     <Compile Include="Domain\DbModels\Wallet.cs" />
     <Compile Include="Domain\SystemSetting.cs" />
-    <Compile Include="Domain\DbModels\UserChallenge.cs" />
-    <Compile Include="Domain\DbModels\ApplicationUser.cs" />
     <Compile Include="Domain\DbModels\Notification.cs" />
     <Compile Include="Enum\Mapable\PaymentMethod.cs" />
     <Compile Include="Enum\Mapable\BillType.cs" />
-    <Compile Include="Enum\FormatType.cs" />
-    <Compile Include="Enum\DaysOfWeek.cs" />
     <Compile Include="Enum\Mapable\NotificationType.cs" />
-    <Compile Include="Enum\Mapable\UserLoginStatus.cs" />
-    <Compile Include="Enum\Mapable\UserChallengeStatus.cs" />
-    <Compile Include="Domain\DbModels\Mapping\SettingMap.cs" />
-    <Compile Include="Domain\DbModels\Mapping\UserChallengeMap.cs" />
-    <Compile Include="Domain\DbModels\Mapping\ApplicationUserMap.cs" />
     <Compile Include="Domain\DbModels\Mapping\NotificationMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Settings\Interface\INotificationSettings.cs" />
-    <Compile Include="Settings\Interface\ISMSNotificationSettings.cs" />
-    <Compile Include="Settings\Interface\IEmailNotificationSettings.cs" />
     <Compile Include="Settings\Interface\ILynexSettings.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Domain\DbModels\Interface\" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Lynex.Common.Model.AspNet.Identity\Lynex.Common.Model.AspNet.Identity.csproj">
       <Project>{3de566d9-f5bb-40ca-be01-9722016ad0c7}</Project>

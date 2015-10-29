@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Lynex.BillMaster.Model.Domain.DbModels.Interface
+namespace Lynex.Common.Model.DbModel.Interface
 {
-    public interface IAddressable
+    public interface IUser
     {
-        Address Address { get; set; }
     }
 }

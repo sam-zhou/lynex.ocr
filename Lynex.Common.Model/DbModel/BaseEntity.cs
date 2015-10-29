@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using Lynex.Common.Model.DbModel.Interface;
 
 namespace Lynex.Common.Model.DbModel
 {
     public abstract class BaseEntity : IBaseEntity
     {
+        [Key]
         public virtual long Id { get; set; }
 
         protected BaseEntity()

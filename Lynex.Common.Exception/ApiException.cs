@@ -1,8 +1,13 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Runtime.Serialization.Json;
+using Lynex.Common.Extension.Json;
+using Lynex.Common.Model.DataContracts;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace Lynex.Common.Exception
 {
@@ -12,6 +17,11 @@ namespace Lynex.Common.Exception
         public ApiException(HttpResponseMessage response)
         {
             Response = response;
+        }
+
+        public ApiException()
+        {
+            
         }
 
         public HttpStatusCode StatusCode
@@ -29,6 +39,31 @@ namespace Lynex.Common.Exception
             {
                 return Data.Values.Cast<string>().ToList();
             }
+        }
+
+        public static ApiException CreateApiException(WebException ex)
+        {
+            var message = new HttpResponseMessage(((HttpWebResponse)ex.Response).StatusCode);
+            var exception = new ApiException(message);
+            if (ex.Response != null)
+            {
+                var rs = ex.Response.GetResponseStream();
+                if (rs != null)
+                {
+                    using (var d = new StreamReader(rs))
+                    {
+                        var response = d.ReadToEnd();
+                        var settings = new JsonSerializerSettings();
+
+                        settings.ContractResolver = new SnakeCaseContractResolver();
+                        settings.NullValueHandling = NullValueHandling.Ignore;
+                        var error = JsonConvert.DeserializeObject<TokenError>(response, settings);
+                        exception.Data.Add(0, error.ErrorDescription.ToString());
+                    }
+                }
+                
+            }
+            return exception;
         }
 
         public static ApiException CreateApiException(HttpResponseMessage response)

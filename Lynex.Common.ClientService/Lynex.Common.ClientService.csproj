@@ -30,6 +30,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
@@ -44,7 +48,24 @@
   <ItemGroup>
     <Compile Include="Authentication.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Token.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Lynex.Common.Exception\Lynex.Common.Exception.csproj">
+      <Project>{7a8862da-1520-4d76-9149-5af87277394e}</Project>
+      <Name>Lynex.Common.Exception</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lynex.Common.Extension\Lynex.Common.Extension.csproj">
+      <Project>{dc5a98a7-e6de-41dc-aaf8-ff08e24827b1}</Project>
+      <Name>Lynex.Common.Extension</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lynex.Common.Model\Lynex.Common.Model.csproj">
+      <Project>{b57351ec-8147-4fc7-b57d-708da025d692}</Project>
+      <Name>Lynex.Common.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Lynex.BillMaster.Model.Domain.DbModels;
 using Lynex.BillMaster.Service.Interface;
 using Lynex.Common.Database;
+using Lynex.Common.Model.DbModel;
 using Lynex.Common.Service;
 
 namespace Lynex.BillMaster.Service
