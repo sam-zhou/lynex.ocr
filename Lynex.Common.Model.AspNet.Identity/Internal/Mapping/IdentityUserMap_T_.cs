@@ -11,7 +11,7 @@ namespace Lynex.Common.Model.AspNet.Identity.Internal.Mapping
 			Map(x => x.UserName);
 			Map(x => x.PasswordHash);
 			Map(x => x.SecurityStamp);
-			HasManyToMany(x => x.Roles).Table("UserRoles").ParentKeyColumn("UserId").ChildKeyColumn("RoleId").Cascade.All();
+			HasManyToMany(x => x.Roles).Table("UserRole").ParentKeyColumn("UserId").ChildKeyColumn("RoleId").Cascade.All();
 			HasMany(x => x.Claims).KeyColumn("UserId").Cascade.All();
 			HasMany(x => x.Logins).KeyColumn("UserId").Cascade.All();
 			Table("Users");

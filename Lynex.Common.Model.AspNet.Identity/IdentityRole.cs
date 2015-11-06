@@ -52,7 +52,7 @@ namespace Lynex.Common.Model.AspNet.Identity
             {
                 if (!Roles.ContainsKey("User"))
                 {
-                    Roles.Add("User", new IdentityRole("User", "1"));
+                    Roles.Add("User", new IdentityRole("User", "3"));
                 }
                 return Roles["User"];
             }
@@ -70,6 +70,16 @@ namespace Lynex.Common.Model.AspNet.Identity
             }
         }
 
-
+        public static IdentityRole Guest
+        {
+            get
+            {
+                if (!Roles.ContainsKey("Guest"))
+                {
+                    Roles.Add("Guest", new IdentityRole("Guest", "1"));
+                }
+                return Roles["Guest"];
+            }
+        }
     }
 }

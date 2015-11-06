@@ -1,4 +1,6 @@
-﻿using Lynex.BillMaster.Mobile.View;
+﻿using System.Net.Http;
+using System.Text;
+using Lynex.BillMaster.Mobile.View;
 using Lynex.BillMaster.Mobile.View.UserViews;
 using Lynex.BillMaster.Mobile.ViewModel;
 using Lynex.BillMaster.Mobile.ViewModel.UserViewModels;
@@ -26,7 +28,30 @@ namespace Lynex.BillMaster.Mobile.Portable.App
 
         private void LoginClicked(object obj)
         {
-            Xamarin.Forms.MessagingCenter.Send(this, "Hahahah");
+            using (var client = new HttpClient())
+            {
+                var response = client.PostAsync("http://api.mylynex.com.au/account/register",
+
+                        // Pass in an anonymous object that maps to the expected 
+                        // RegisterUserBindingModel defined as the method parameter 
+                        // for the Register method on the API:
+                        new StringContent((new
+                        {
+                            Email = "samzhou.it@gmail.com",
+                            Password = "Jukfrg!1",
+                            ConfirmPassword = "Jukfrg!1",
+                        }).ToString(), Encoding.UTF8, "application/json")).Result;
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    // Unwrap the response and throw as an Api Exception:
+                    //var ex = ApiException.CreateApiException(response);
+                    //throw ex;
+                    Xamarin.Forms.MessagingCenter.Send(this, "Failed");
+                }
+
+            }
+            Xamarin.Forms.MessagingCenter.Send(this, "Successed");
         }
 
         protected override void OnStart()

@@ -25,7 +25,7 @@ namespace Lynex.BillMaster.Database.DefaultDataFactory
                 AllowedOrigin = "*",
                 ApplicationType = ApplicationTypes.ConsoleApp,
                 Name = "Lynex.Common.Console",
-                RefreshTokenLifeTime = 20,
+                RefreshTokenLifeTime = 1200,
                 Secret = StringHelper.GetHash("91AE616A66D6E530C6D519C07D29F12C0D8939523DE35FCC921E1508C72A60CE")
             };
             

@@ -63,7 +63,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataContracts\TokenError.cs" />
-    <Compile Include="DataContracts\Identity.cs" />
     <Compile Include="DataContracts\Token.cs" />
     <Compile Include="DbModel\ApplicationUser.cs" />
     <Compile Include="DbModel\Client.cs" />
